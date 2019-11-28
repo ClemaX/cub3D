@@ -1,4 +1,4 @@
-NAME	= libftprintf.a
+NAME	= cub3d
 LIBFT	= libft
 LIBMLX	= minilibx
 X11		= /usr/X11
@@ -32,7 +32,7 @@ clean:
 
 fclean: 		clean
 	make -C $(LIBFT) $@
-	make -C $(LIBMLX) $@
+	make -C $(LIBMLX) clean
 	/bin/rm -f $(NAME)
 
 re: fclean all
