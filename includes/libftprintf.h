@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
+/*   libftprintf.h                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/11/27 02:51:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/29 08:39:48 by chamada     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/11/22 16:51:21 by chamada      #+#   ##    ##    #+#       */
+/*   Updated: 2019/11/24 21:55:51 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <cub3d.h>
-#include <stdlib.h>
-#include <mlx.h>
-#include <X.h>
-#include <environment.h>
-#include <hooks.h>
+#ifndef LIBFTPRINTF_H
+# define LIBFTPRINTF_H
 
-int	main(int ac, char **av)
-{
-	t_env	env;
+int		ft_printf(const char *fmt, ...) __attribute__((format(printf,1,0)));
 
-	setup(&env, ac, av);
-	return (0);
-}
+#endif

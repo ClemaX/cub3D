@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
+/*   hooks.h                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/11/27 02:51:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/29 08:39:48 by chamada     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/11/29 08:20:01 by chamada      #+#   ##    ##    #+#       */
+/*   Updated: 2019/11/29 08:27:16 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <cub3d.h>
-#include <stdlib.h>
-#include <mlx.h>
-#include <X.h>
-#include <environment.h>
-#include <hooks.h>
+#ifndef HOOKS_H
+# define HOOKS_H
 
-int	main(int ac, char **av)
-{
-	t_env	env;
+# include <environment.h>
 
-	setup(&env, ac, av);
-	return (0);
-}
+int	mouse_hook(int button, int x, int y, void *param);
+int	key_hook(int key, t_env *param);
+int	destroy_hook(void *param);
+
+#endif

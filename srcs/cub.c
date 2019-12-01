@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:40:14 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/28 04:03:20 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/01 20:56:12 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -39,18 +39,20 @@ int	parse_imgs(t_settings *settings, char **parts)
 
 	if (!*parts || !parts[1])
 		return (0);
-	if (!settings->tex_no && ft_strncmp(*parts, "NO", 3) == 0)
-		dest = &settings->tex_no;
-	else if (!settings->tex_so && ft_strncmp(*parts, "SO", 3) == 0)
-		dest = &settings->tex_so;
-	else if (!settings->tex_we && ft_strncmp(*parts, "WE", 3) == 0)
-		dest = &settings->tex_we;
-	else if (!settings->tex_ea && ft_strncmp(*parts, "EA", 3) == 0)
-		dest = &settings->tex_ea;
-	else if (!settings->tex_s && ft_strncmp(*parts, "S", 3) == 0)
-		dest = &settings->tex_s;
+	if (ft_strncmp(*parts, "NO", 3) == 0)
+		dest = (!settings->tex.no) ? &settings->tex.no : NULL;
+	else if (ft_strncmp(*parts, "SO", 3) == 0)
+		dest = (!settings->tex.so) ? &settings->tex.so : NULL;
+	else if (ft_strncmp(*parts, "WE", 3) == 0)
+		dest = (!settings->tex.we) ? &settings->tex.we : NULL;
+	else if (ft_strncmp(*parts, "EA", 3) == 0)
+		dest = (!settings->tex.ea) ? &settings->tex.ea : NULL;
+	else if (ft_strncmp(*parts, "S", 3) == 0)
+		dest = (!settings->tex.s) ? &settings->tex.s : NULL;
 	else
 		return (0);
+	if (!dest)
+		return (-1);
 	printf("Image: [%-2s] %s\n", parts[0], parts[1]);
 	*dest = ft_strdup(parts[1]);
 	return (1);
@@ -58,7 +60,7 @@ int	parse_imgs(t_settings *settings, char **parts)
 
 int	parse_colors(t_settings *settings, char **parts)
 {
-	char	**values;
+	char	**rgb;
 	t_color	*color;
 
 	if (!*parts || !parts[1])
@@ -69,38 +71,29 @@ int	parse_colors(t_settings *settings, char **parts)
 		color = &settings->color_c;
 	else
 		return (0);
-	values = ft_split(parts[1], ',');
-	if (values[0] && values[1] && values[2])
-	{
-		color->r = ft_atoi(values[0]);
-		color->g = ft_atoi(values[1]);
-		color->b = ft_atoi(values[2]);
-		printf("Color: [%s] %#x\n", *parts, settings->color_f.r);
-	}
-	else
+	rgb = ft_split(parts[1], ',');
+	if (!(rgb[0] && rgb[1] && rgb[2]))
 		return (-1);
-	ft_strsclr(values);
+	set_color(color, ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]));
+	printf("Color: [%s] %#x\n", *parts, color->c);
+	ft_strsclr(rgb);
 	return (1);
 }
 
-int	parse_settings(t_env *env, int fd)
+int	parse_settings(t_settings *settings, int fd)
 {
 	int			ret;
 	char		*line;
 	char		**parts;
 
-	env->settings.tex_no = NULL;
-	env->settings.tex_so= NULL;
-	env->settings.tex_we = NULL;
-	env->settings.tex_ea = NULL;
-	env->settings.tex_s = NULL;
+	clear_settings(settings);
 	while ((ret = get_next_line(fd, &line)) > 0 && *line != '1')
 	{
 		if (!(parts = ft_split(line, ' ')))
 			return (0);
-		if (*parts && !(parse_res(&env->settings, parts)
-		|| parse_imgs(&env->settings, parts)
-		|| parse_colors(&env->settings, parts)))
+		if (*parts && !(parse_res(settings, parts)
+		|| parse_imgs(settings, parts)
+		|| parse_colors(settings, parts)))
 			printf("%s\n", line);
 		ft_strsclr(parts);
 		free(line);
@@ -108,13 +101,13 @@ int	parse_settings(t_env *env, int fd)
 	return (1);
 }
 
-int	parse_cub(t_env *env, const char *path)
+int	parse_cub(t_settings *settings, const char *path)
 {
 	const int	fd = open(path, O_RDONLY);
 
 	if (fd == -1)
 		return (0);
-	parse_settings(env, fd);
+	parse_settings(settings, fd);
 	close(fd);
 	return (1);
 }

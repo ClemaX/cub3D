@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/28 03:57:48 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/29 11:09:22 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,8 +14,9 @@
 #ifndef ENVIRONMENT_H
 # define ENVIRONMENT_H
 
-#include <stdbool.h>
-#include <color.h>
+# include <stdbool.h>
+# include <color.h>
+
 typedef struct	s_image
 {
 	void		*img;
@@ -27,11 +28,14 @@ typedef struct	s_settings
 {
 	unsigned	width;
 	unsigned	height;
-	char		*tex_no;
-	char		*tex_so;
-	char		*tex_we;
-	char		*tex_ea;
-	char		*tex_s;
+	struct		s_textures
+	{
+		char		*no;
+		char		*so;
+		char		*we;
+		char		*ea;
+		char		*s;
+	}			tex;
 	t_color		color_f;
 	t_color		color_c;
 
@@ -72,6 +76,8 @@ typedef struct	s_env
 	t_settings	settings;
 }				t_env;
 
-int				parse_cub(t_env *env, const char *path);
+void			setup(t_env *env, int ac, char **av);
+int				parse_cub(t_settings *settings, const char *path);
+void			clear_settings(t_settings *settings);
 
 #endif

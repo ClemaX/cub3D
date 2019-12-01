@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:21:00 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/27 06:05:02 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/29 08:30:58 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,8 +15,6 @@
 # define CUB3D_H
 
 # define TITLE	"cub3d"
-# define WIDTH	2000
-# define HEIGHT	1000
 # define ESCAPE	53
 
 #endif
