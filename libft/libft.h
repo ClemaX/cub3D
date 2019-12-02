@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/14 23:24:01 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/28 02:32:00 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/01 21:53:00 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -49,6 +49,7 @@ int						ft_isalnum(int c);
 int						ft_isspace(int c);
 int						ft_isascii(int c);
 int						ft_isprint(int c);
+int						ft_issign(int c);
 int						ft_atoi(const char *str);
 int						ft_toupper(int c);
 int						ft_tolower(int c);

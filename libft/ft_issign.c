@@ -1,31 +1,17 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   color.h                                          .::    .:/ .      .::   */
+/*   ft_issign.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/11/27 06:51:12 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/01 21:46:12 by chamada     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/11/30 19:53:49 by chamada      #+#   ##    ##    #+#       */
+/*   Updated: 2019/11/30 19:54:27 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
-
-typedef union	u_color
+int	ft_issign(char c)
 {
-	unsigned int      c;
-	struct	s_rgb
-	{
-		unsigned char	b;
-		unsigned char	g;
-		unsigned char	r;
-		char			set;
-	}		rgb;
-}				t_color;
-
-int	set_color(t_color *color, unsigned r, unsigned g, unsigned b);
-
-#endif
+	return (c == '+' || c == '-');
+}
