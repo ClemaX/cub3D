@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
+/*   cell.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/11/27 02:51:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/29 08:39:48 by chamada     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/12/02 21:55:40 by chamada      #+#   ##    ##    #+#       */
+/*   Updated: 2019/12/02 22:03:18 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <cub3d.h>
-#include <stdlib.h>
-#include <mlx.h>
-#include <X.h>
-#include <environment.h>
-#include <hooks.h>
+#include <map.h>
 
-int	main(int ac, char **av)
+inline void	set_cell(t_map *map, unsigned x, unsigned y, t_cell value)
 {
-	t_env	env;
-
-	setup(&env, ac, av);
-	return (0);
+	map->cells[y * map->size_x + x] = value;
 }

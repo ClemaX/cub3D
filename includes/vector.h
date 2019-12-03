@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   cub3d.h                                          .::    .:/ .      .::   */
+/*   vector.h                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/11/27 05:21:00 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/02 13:35:21 by chamada     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/12/02 13:22:33 by chamada      #+#   ##    ##    #+#       */
+/*   Updated: 2019/12/02 13:23:09 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef VECTOR_H
+# define VECTOR_H
 
-# define TITLE	"cub3d"
-# define ESCAPE	53
+typedef struct	s_vector
+{
+	double		x;
+	double		y;
+	double		z;
+}				t_vector;
 
 #endif

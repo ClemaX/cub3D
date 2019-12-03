@@ -19,15 +19,14 @@ SRCS	=	ft_memset.c ft_bzero.c ft_calloc.c \
 			ft_numlen.c ft_pow.c \
 			ft_atoi.c ft_itoa.c \
 			ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c \
-			ft_split.c ft_strjoin.c
-BNSS	=	ft_lstnew_bonus.c \
+			ft_split.c ft_strjoin.c \
+			ft_lstnew_bonus.c \
 			ft_lstsize_bonus.c \
 			ft_lstlast_bonus.c \
 			ft_lstadd_back_bonus.c ft_lstadd_front_bonus.c \
 			ft_lstclear_bonus.c ft_lstdelone_bonus.c \
 			ft_lstiter_bonus.c ft_lstmap_bonus.c
 OBJS	=	$(patsubst %.c,%.o,$(SRCS))
-BNSO	=	$(patsubst %.c,%.o,$(BNSS))
 
 all:		$(NAME)
 
@@ -38,14 +37,14 @@ $(NAME):	$(OBJS)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
-	$(RM) -f $(OBJS) $(BNSO)
+	$(RM) -f $(OBJS)
 
 fclean:		clean
 	$(RM) -f $(NAME)
 
 re:			fclean all
 
-bonus: 		$(OBJS) $(BNSO)
-	$(AR) $(AFLAGS) $(NAME) $(OBJS) $(BNSO)
+bonus: 		$(OBJS)
+	$(AR) $(AFLAGS) $(NAME) $(OBJS)
 
 .PHONY	=	all clean fclean re bonus

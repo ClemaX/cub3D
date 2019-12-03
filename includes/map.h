@@ -1,20 +1,36 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   cub3d.h                                          .::    .:/ .      .::   */
+/*   map.h                                            .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/11/27 05:21:00 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/02 13:35:21 by chamada     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/12/02 13:21:22 by chamada      #+#   ##    ##    #+#       */
+/*   Updated: 2019/12/02 21:47:54 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
 
-# define TITLE	"cub3d"
-# define ESCAPE	53
+#ifndef MAP_H
+# define MAP_H
+
+# include <stdbool.h>
+# include <cell.h>
+
+typedef struct	s_line
+{
+	char	*content;
+	t_line	*next;
+}				t_line;
+
+typedef struct	s_map
+{
+	unsigned	size_x;
+	unsigned	size_y;
+	t_cell		*cells;
+}				t_map;
+
+int				read_map(t_map *map, char *line);
 
 #endif
