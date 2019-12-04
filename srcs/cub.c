@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:40:14 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/02 18:02:45 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/04 17:20:31 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,8 +24,7 @@ int	parse_cub(t_env *env, const char *path)
 	int		ret;
 	char	*line;
 
-	ext = ft_strrchr(path, '.');
-	if (!ext || ft_strncmp(ext, ".cub", 4))
+	if (!(ext = ft_strrchr(path, '.')) || ft_strncmp(ext, ".cub", 4))
 		return (0);
 	if ((fd = open(path, O_RDONLY)) == -1)
 		return (0);

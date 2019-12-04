@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 13:21:22 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/02 21:47:54 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/04 13:37:17 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,15 +20,22 @@
 
 typedef struct	s_line
 {
-	char	*content;
-	t_line	*next;
+	char			*content;
+	struct s_line	*next;
 }				t_line;
+
+typedef struct	s_player
+{
+	t_vector	pos;
+	t_vector	dir;
+}				t_player;
 
 typedef struct	s_map
 {
 	unsigned	size_x;
 	unsigned	size_y;
 	t_cell		*cells;
+	t_player	player;
 }				t_map;
 
 int				read_map(t_map *map, char *line);
