@@ -9,7 +9,7 @@ CFLAGS	= -Wall -Wextra -Werror
 IFLAGS	= -I$(INCDIR) -I$(LIBFT) -I$(LIBMLX) -I$(X11)/include/X11
 LFLAGS	= -L$(LIBFT) -L$(LIBMLX) -L$(X11)/lib -L. -lft -lmlx -lXext -lX11 -lz -lftscanf
 FFLAGS	= -framework CoreFoundation -framework AppKit -framework OpenGL
-SRCS	= $(addprefix $(SRCDIR)/, cub3d.c environment.c color.c map.c vector.c cub.c settings.c hooks.c get_next_line.c get_next_line_utils.c)
+SRCS	= $(addprefix $(SRCDIR)/, cub3d.c environment.c image.c color.c map.c vector.c cub.c settings.c hooks.c get_next_line.c get_next_line_utils.c)
 HDRS	= $(addprefix $(INCDIR)/, cub3d.h environment.h color.h map.h vector.h cub.h hooks.h get_next_line.h)
 
 all:			libft $(NAME)

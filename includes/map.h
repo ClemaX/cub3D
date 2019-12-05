@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 13:21:22 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/04 13:37:17 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/05 16:10:54 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,6 +28,7 @@ typedef struct	s_player
 {
 	t_vector	pos;
 	t_vector	dir;
+	t_vector	plane;
 }				t_player;
 
 typedef struct	s_map

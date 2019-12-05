@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 13:22:33 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/04 13:38:17 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/05 19:04:51 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,7 +14,8 @@
 #ifndef VECTOR_H
 # define VECTOR_H
 
-# define CARDINALS "NSWE"
+# define CARDINALS	"NSWE"
+# define PLANES		"EWNS"
 
 typedef enum	e_cardinal
 {

@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/04 18:16:08 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/05 15:35:23 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,7 +35,17 @@ void	print_map(t_map map)
 	}
 }
 
-void	setup(t_env *env, int ac, char **av)
+void	destroy_env(t_env *env)
+{
+	free(env->map.cells);
+	free(env->settings.tex.ea);
+	free(env->settings.tex.no);
+	free(env->settings.tex.s);
+	free(env->settings.tex.so);
+	free(env->settings.tex.we);
+}
+
+void	setup_env(t_env *env, int ac, char **av)
 {
 	if (ac != 2)
 		exit(1);
@@ -47,8 +57,8 @@ void	setup(t_env *env, int ac, char **av)
 	mlx_new_window(env->mlx, env->settings.width, env->settings.height, TITLE);
 	if (!env->win)
 		exit(1);
-	mlx_hook(env->win, DestroyNotify, NoEventMask, &destroy_hook, NULL);
+	mlx_hook(env->win, DestroyNotify, NoEventMask, &destroy_hook, env);
 	mlx_key_hook(env->win, &key_hook, env);
 	mlx_mouse_hook(env->win, &mouse_hook, env);
-//	mlx_loop(env->mlx);
+	init_canvas(env);
 }

@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 11:06:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/05 00:20:45 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/05 19:08:32 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -43,6 +43,7 @@ int	parse_line(t_map *map, t_line *line, unsigned row)
 			map->cells[row * map->size_x + count++].type = SPACE;
 			map->player.pos = vector(count + 0.5, row + 0.5);
 			map->player.dir = cardinal(pos);
+			map->player.plane = cardinal(ft_strpos(CARDINALS, PLANES[pos]));
 		}
 		else if (!ft_isspace(*s))
 			return (0);

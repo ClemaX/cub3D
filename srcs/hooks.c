@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:19:11 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/02 08:46:57 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/05 13:42:01 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,13 +32,14 @@ int	key_hook(int key, t_env *env)
 	if (key == ESCAPE)
 	{
 		mlx_destroy_window(env->mlx, env->win);
+		destroy_env(env);
 		exit(0);
 	}
 	return (0);
 }
 
-int	destroy_hook(void *param)
+int	destroy_hook(t_env *env)
 {
-	(void)param;
+	destroy_env(env);
 	exit(0);
 }
