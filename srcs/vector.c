@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/04 12:49:55 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/05 18:26:16 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/07 18:23:18 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,4 +34,18 @@ t_vector	cardinal(t_cardinal direction)
 		return (vector(-1, 0));
 	else
 		return (vector(0, 0));
+}
+
+t_ivector	ivector(int x, int y)
+{
+	t_ivector	ivector;
+
+	ivector.x = x;
+	ivector.y = y;
+	return (ivector);
+}
+
+t_ivector	vtoiv(t_vector vector)
+{
+	return (ivector((int)vector.x, (int)vector.y));
 }
