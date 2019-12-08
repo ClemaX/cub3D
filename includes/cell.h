@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 21:20:12 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/04 13:38:03 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/08 19:48:17 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,8 +32,6 @@ typedef enum	e_cell_type
 typedef struct	s_cell
 {
 	t_cell_type	type;
-	bool		has_edge[4];
-	t_edge		*edge[4];
 }				t_cell;
 
 #endif

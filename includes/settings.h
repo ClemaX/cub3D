@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 13:27:24 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/02 13:29:37 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/08 19:59:15 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,8 +18,8 @@
 
 typedef struct	s_settings
 {
-	unsigned	width;
-	unsigned	height;
+	int			width;
+	int			height;
 	struct		s_textures
 	{
 		char	*no;
