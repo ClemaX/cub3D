@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/08 20:22:52 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 00:45:05 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,22 +17,16 @@
 #include <stdlib.h>
 #include <mlx.h>
 #include <X.h>
-
 #include <stdio.h>
+#include <strings.h>
+#include <errno.h>
+#include <libft.h>
 
-void	print_map(t_map map)
+void	error()
 {
-	unsigned i;
-
-	i = 0;
-	setvbuf(stdout, NULL, _IONBF, 0);
-	printf("%lf, %lf\n", map.player.pos.x, map.player.pos.y);
-	while (i < map.size_y * map.size_x)
-	{
-		printf("%d ", map.cells[i++].type);
-		if (i % map.size_x == 0)
-			printf("\n");
-	}
+	ft_putendl_fd("Error", 2);
+	ft_putendl_fd(strerror(errno), 2);
+	exit(1);
 }
 
 void	destroy_env(t_env *env)
@@ -48,17 +42,21 @@ void	destroy_env(t_env *env)
 void	setup_env(t_env *env, int ac, char **av)
 {
 	if (ac != 2)
-		exit(1);
+	{
+		errno = EINVAL;
+		error();
+	}
 	if (!(env->mlx = mlx_init()))
-		exit(1);
-	parse_cub(env, av[1]);
-	print_map(env->map);
+		error();
+	if (!parse_cub(env, av[1]))
+		error();
 	env->win =
 	mlx_new_window(env->mlx, env->settings.width, env->settings.height, TITLE);
 	if (!env->win)
-		exit(1);
+		error();
 	mlx_hook(env->win, DestroyNotify, NoEventMask, &destroy_hook, env);
 	mlx_hook(env->win, KeyPress, KeyPressMask, &key_hook, env);
 	mlx_mouse_hook(env->win, &mouse_hook, env);
-	init_canvas(env);
+	if (!init_canvas(env))
+		error();
 }

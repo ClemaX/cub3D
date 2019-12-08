@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:19:11 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/08 20:01:24 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 00:08:25 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,7 +24,6 @@ int	mouse_hook(int button, int x, int y, void *param)
 	(void)x;
 	(void)y;
 	(void)param;
-//	ft_printf("%4d, %4d: %d\n", x, y, button);
 	return (0);
 }
 

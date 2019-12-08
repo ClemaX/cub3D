@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 07:56:47 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/02 13:47:41 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 00:38:08 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,6 +14,7 @@
 #include <settings.h>
 #include <stdlib.h>
 #include <ft_sscanf.h>
+#include <errno.h>
 
 static int	parse_res(t_settings *settings, char *line)
 {
@@ -69,6 +70,7 @@ int			parse_settings(t_settings *settings, char *line)
 	|| parse_colors(settings, line)))
 	{
 		free(line);
+		errno = EFTYPE;
 		return (0);
 	}
 	free(line);

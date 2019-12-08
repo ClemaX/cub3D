@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 02:51:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/08 20:25:57 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 00:07:20 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,7 +26,6 @@ void	refresh(t_env *env)
 	t_color	c;
 
 	x = 0;
-	clear_canvas(env);
 	while (x < env->settings.width)
 	{
 		double t = cast_ray(env, x);

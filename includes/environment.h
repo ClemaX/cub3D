@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/08 17:32:02 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/08 23:57:57 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -41,8 +41,7 @@ void			setup_env(t_env *env, int ac, char **av);
 void			destroy_env(t_env *env);
 int				parse_cub(t_env *env, const char *path);
 void			clear_settings(t_settings *settings);
-void			init_canvas(t_env *env);
+int				init_canvas(t_env *env);
 void			put_canvas(t_env *env, int x, int y, unsigned int color);
-void			clear_canvas(t_env *env);
 
 #endif
