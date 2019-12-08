@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/05 15:35:23 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/08 20:22:52 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -58,7 +58,7 @@ void	setup_env(t_env *env, int ac, char **av)
 	if (!env->win)
 		exit(1);
 	mlx_hook(env->win, DestroyNotify, NoEventMask, &destroy_hook, env);
-	mlx_key_hook(env->win, &key_hook, env);
+	mlx_hook(env->win, KeyPress, KeyPressMask, &key_hook, env);
 	mlx_mouse_hook(env->win, &mouse_hook, env);
 	init_canvas(env);
 }
