@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:19:11 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/08 18:35:15 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/08 20:01:24 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -56,6 +56,8 @@ int	key_hook(int key, t_env *env)
 		vrotate(&env->map.player.dir, 0.1);
 		vrotate(&env->map.player.plane, 0.1);
 	}
+	else
+		return (0);
 	refresh(env);
 	return (0);
 }
