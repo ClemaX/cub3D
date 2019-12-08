@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 02:51:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/08 20:05:33 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/08 20:25:57 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -62,6 +62,7 @@ int		main(int ac, char **av)
 
 	setup_env(&env, ac, av);
 	refresh(&env);
+	mlx_do_key_autorepeaton(env.mlx);
 	mlx_loop(env.mlx);
 	return (0);
 }
