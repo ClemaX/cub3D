@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:19:11 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/05 13:42:01 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/08 18:35:15 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,6 +16,7 @@
 #include <environment.h>
 #include <stdlib.h>
 #include <libftprintf.h>
+#include <math.h>
 
 int	mouse_hook(int button, int x, int y, void *param)
 {
@@ -35,6 +36,27 @@ int	key_hook(int key, t_env *env)
 		destroy_env(env);
 		exit(0);
 	}
+	else if (key == UP)
+	{
+		env->map.player.pos.x += env->map.player.dir.x * 0.25;
+		env->map.player.pos.y += env->map.player.dir.y * 0.25;
+	}
+	else if (key == DOWN)
+	{
+		env->map.player.pos.x -= env->map.player.dir.x * 0.25;
+		env->map.player.pos.y -= env->map.player.dir.y * 0.25;
+	}
+	else if (key == LEFT)
+	{
+		vrotate(&env->map.player.dir, -0.1);
+		vrotate(&env->map.player.plane, -0.1);
+	}
+	else if (key == RIGHT)
+	{
+		vrotate(&env->map.player.dir, 0.1);
+		vrotate(&env->map.player.plane, 0.1);
+	}
+	refresh(env);
 	return (0);
 }
 

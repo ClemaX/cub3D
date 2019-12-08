@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/05 15:04:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/05 15:40:18 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/08 18:22:34 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,6 +23,17 @@ void	init_canvas(t_env *env)
 		&env->canvas.bpp, &env->canvas.ls, &env->canvas.e);
 	env->canvas.width = env->settings.width;
 	env->canvas.height = env->settings.height;
+}
+
+void	clear_canvas(t_env *env)
+{
+	t_color c;
+
+	c.rgb.set = 0;
+	c.rgb.r = 0;
+	c.rgb.g = 0;
+	c.rgb.b = 0;
+	ft_memset(env->canvas.data, c.c, (env->canvas.bpp /  8) * env->canvas.width);
 }
 
 void	put_canvas(t_env *env, int x, int y, unsigned int color)

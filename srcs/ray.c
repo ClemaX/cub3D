@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/07 15:56:06 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/07 18:35:13 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/08 16:56:31 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,7 +18,7 @@
 
 static t_vector		ray_dir(t_env *env, unsigned x)
 {
-	const double	camera_x = 2 * x / (double) - 1;
+	const double	camera_x = 2 * x / (double)env->settings.width - 1;
 	t_vector		dir;
 
 	dir.x = env->map.player.dir.x + env->map.player.plane.x * camera_x;

@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 02:51:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/07 18:36:50 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/08 18:42:52 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,37 +16,53 @@
 #include <ray.h>
 #include <stdio.h>
 
-int	main(int ac, char **av)
+void	refresh(t_env *env)
 {
-	t_env		env;
 	unsigned	x;
 	unsigned	wall_height;
 	int			start;
 	unsigned	end;
+	unsigned	y;
+	t_color		c;
 
-	setup_env(&env, ac, av);
-	t_color c = color(255, 255, 255);
 	x = 0;
-	while (x < env.settings.width)
+	clear_canvas(env);
+	while (x < env->settings.width)
 	{
-		double t = cast_ray(&env, x);
-		printf("%lf ", t);
-		wall_height = (int) env.settings.height / t;
-		start = -wall_height / 2 + env.settings.height / 2;
-		end = wall_height / 2 + env.settings.height / 2;
+		double t = cast_ray(env, x);
+		if (t < 1)
+			t = 1;
+		wall_height = (int) env->settings.height / t;
+		start = -wall_height / 2 + env->settings.height / 2;
+		end = wall_height / 2 + env->settings.height / 2;
 		if (start < 0)
 			start = 0;
-		if (end >= env.settings.height)
-			end = env.settings.height - 1;
-		//printf("%d: %d %u ", wall_height, start, end);
+		if (end >= env->settings.height)
+			end = env->settings.height - 1;
+		printf("%d: %d %u ", wall_height, start, end);
+		y = 0;
+		while (y < env->settings.height && y <= start)
+			put_canvas(env, x, y++, 0);
 		while ((unsigned) start <= end)
 		{
-			put_canvas(&env, x, start, c.c);
-			start++;
+			c = color(255 / t, 255 / t, 255 / t);
+			put_canvas(env, x, start++, c.c);
 		}
+		y = end + 1;
+		while (y < env->settings.height)
+			put_canvas(env, x, y++, 0);
 		x++;
 	}
-	mlx_put_image_to_window(env.mlx, env.win, env.canvas.img, 0, 0);
+	mlx_put_image_to_window(env->mlx, env->win, env->canvas.img, 0, 0);
+}
+
+int		main(int ac, char **av)
+{
+	t_env		env;
+
+	setup_env(&env, ac, av);
+	refresh(&env);
+	mlx_do_key_autorepeaton(env.mlx);
 	mlx_loop(env.mlx);
 	return (0);
 }
