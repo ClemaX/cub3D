@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/05 15:40:23 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/06 19:13:05 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,6 +35,7 @@ typedef struct	s_env
 	t_image		canvas;
 	t_settings	settings;
 	t_map		map;
+	t_player	player;
 }				t_env;
 
 void			setup_env(t_env *env, int ac, char **av);

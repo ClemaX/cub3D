@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:40:14 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/04 17:20:31 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/06 19:11:09 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,7 +31,7 @@ int	parse_cub(t_env *env, const char *path)
 	clear_settings(&env->settings);
 	while ((ret = get_next_line(fd, &line)) > 0 && *line != '1')
 		parse_settings(&env->settings, line);
-	while (ret != -1 && read_map(&env->map, line))
+	while (ret != -1 && read_map(&env, line))
 		if ((ret = get_next_line(fd, &line)) == -1)
 			return (0);
 	close(fd);

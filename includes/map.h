@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 13:21:22 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/05 16:10:54 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/06 19:13:34 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -36,9 +36,8 @@ typedef struct	s_map
 	unsigned	size_x;
 	unsigned	size_y;
 	t_cell		*cells;
-	t_player	player;
 }				t_map;
 
-int				read_map(t_map *map, char *line);
+int				read_map(t_env *env, char *line);
 
 #endif
