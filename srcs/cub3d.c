@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 02:51:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 00:07:20 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 13:30:25 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,7 +38,6 @@ void	refresh(t_env *env)
 			start = 0;
 		if (end >= env->settings.height)
 			end = env->settings.height - 1;
-		printf("%d: %d %u ", wall_height, start, end);
 		y = 0;
 		while (y < env->settings.height && y <= start)
 			put_canvas(env, x, y++, 0);
