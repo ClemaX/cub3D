@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 22:15:12 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 00:24:53 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,14 +18,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-static void	error()
-{
-	ft_putendl_fd("Error", 2);
-	ft_putendl_fd(strerror(errno), 2);
-	exit(1);
-}
 
-static int	parse_cub(t_env *env, const char *path)
+static int	parse_cub(t_env *env, char *path)
 {
 	int		fd;
 	char	*ext;
@@ -50,6 +44,43 @@ static int	parse_cub(t_env *env, const char *path)
 	return (1);
 }
 
+static int	load_image(t_env *env, t_image *img, char *path)
+{
+	const char *ext;
+
+	if ((ext = ft_strrchr(path, '.')))
+	{
+		if (!ft_strncmp(ext, ".png", 4))
+		{
+			img->img =
+			mlx_png_file_to_image(env->mlx, path, &img->width, &img->height);
+		}
+		else if (!ft_strncmp(ext, ".xpm", 4))
+		{
+			img->img =
+			mlx_xpm_file_to_image(env->mlx, path, &img->width, &img->height);
+		}
+		else
+			return (0);
+	}
+	else
+		return (0);
+	return (1);
+}
+
+static int	load_images(t_env *env)
+{
+	if (!(load_image(env, &env->tex.no, env->settings.tex.no)
+	&& load_image(env, &env->tex.so, env->settings.tex.so)
+	&& load_image(env, &env->tex.we, env->settings.tex.we)
+	&& load_image(env, &env->tex.ea, env->settings.tex.ea)))
+	{
+		errno = EFTYPE;
+		return (0);
+	}
+	return (1);
+}
+
 void	setup_env(t_env *env, int ac, char **av)
 {
 	if (ac != 2)
@@ -57,9 +88,7 @@ void	setup_env(t_env *env, int ac, char **av)
 		errno = EINVAL;
 		error();
 	}
-	if (!(env->mlx = mlx_init()))
-		error();
-	if (!parse_cub(env, av[1]))
+	if (!((env->mlx = mlx_init()) && parse_cub(env, av[1]) && load_images(env)))
 		error();
 	env->player.input = 0;
 	env->win =

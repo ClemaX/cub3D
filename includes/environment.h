@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 23:13:14 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 00:11:53 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -74,6 +74,14 @@ typedef struct		s_env
 	t_settings	settings;
 	t_map		map;
 	t_player	player;
+	struct		s_tex
+	{
+		t_image	no;
+		t_image	so;
+		t_image	we;
+		t_image	ea;
+		t_image	s;
+	}			tex;
 }					t_env;
 
 typedef struct	s_obstacle
@@ -97,5 +105,6 @@ int					key_disable(int key, t_env *env);
 int					loop_hook(t_env *env);
 int					destroy_hook(t_env *param);
 void				move_player(t_env *env, double factor);
+void				error();
 
 #endif
