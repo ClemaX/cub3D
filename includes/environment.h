@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 22:36:00 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 23:13:14 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -76,11 +76,20 @@ typedef struct		s_env
 	t_player	player;
 }					t_env;
 
+typedef struct	s_obstacle
+{
+	t_cell		*cell;
+	t_cardinal	face;
+	double		offset;
+	double		distance;
+}				t_obstacle;
+
 void				setup_env(t_env *env, int ac, char **av);
 void				destroy_env(t_env *env);
 int					read_map(t_env *env, char *line);
 int					init_canvas(t_env *env);
 void				put_canvas(t_env *env, int x, int y, unsigned int color);
+void				draw_column(t_env *env, int x, t_obstacle obs);
 void				refresh(t_env *env);
 int					mouse_hook(int button, int x, int y, t_env *param);
 int					key_enable(int key, t_env *env);

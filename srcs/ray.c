@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/07 15:56:06 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 18:23:34 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 23:40:13 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,11 +25,10 @@ static t_vector		ray_dir(t_env *env, unsigned x)
 	return (dir);
 }
 
-static double		distance(t_env *env, t_ray *ray)
+static t_obstacle	get_obstacle(t_env *env, t_ray *ray)
 {
-	double	dist;
-	int		hit;
-	int		side;
+	t_obstacle	obs;
+	int			hit;
 
 	hit = 0;
 	while (!hit)
@@ -38,25 +37,24 @@ static double		distance(t_env *env, t_ray *ray)
 		{
 			ray->side_dist.x += ray->step_dist.x;
 			ray->pos.x += ray->step_dir.x;
-			side = 0;
+			obs.face = (ray->dir.x < 0) ? WEST : EAST;
 		}
 		else
 		{
 			ray->side_dist.y += ray->step_dist.y;
 			ray->pos.y += ray->step_dir.y;
-			side = 1;
+			obs.face = (ray->dir.y < 0) ? NORTH : SOUTH;
 		}
 		if (env->map.cells[ray->pos.y * env->map.size_x + ray->pos.x].type == WALL)
 			hit = 1;
 	}
-	if (side == 0)
-		dist = (ray->pos.x - env->player.pos.x + (1 - ray->step_dir.x) / 2) / ray->dir.x;
-	else
-		dist = (ray->pos.y - env->player.pos.y + (1 - ray->step_dir.y) / 2) / ray->dir.y;
-	return (dist);
+	obs.distance = (obs.face == WEST || obs.face == EAST)
+	? (ray->pos.x - env->player.pos.x + (1 - ray->step_dir.x) / 2) / ray->dir.x
+	: (ray->pos.y - env->player.pos.y + (1 - ray->step_dir.y) / 2) / ray->dir.y;
+	return (obs);
 }
 
-double				cast_ray(t_env *env, unsigned x)
+t_obstacle			cast_ray(t_env *env, unsigned x)
 {
 	t_ray	ray;
 
@@ -83,5 +81,5 @@ double				cast_ray(t_env *env, unsigned x)
 		ray.step_dir.y = 1;
 		ray.side_dist.y = (ray.pos.y + 1.0 - env->player.pos.y) * ray.step_dist.y;
 	}
-	return (distance(env, &ray));
+	return (get_obstacle(env, &ray));
 }
