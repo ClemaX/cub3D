@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 00:24:53 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 00:25:27 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -65,7 +65,7 @@ static int	load_image(t_env *env, t_image *img, char *path)
 	}
 	else
 		return (0);
-	return (1);
+	return (img->img != NULL);
 }
 
 static int	load_images(t_env *env)
