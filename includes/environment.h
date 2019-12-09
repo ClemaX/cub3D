@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 14:00:16 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 18:23:16 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,6 +14,9 @@
 #ifndef ENVIRONMENT_H
 # define ENVIRONMENT_H
 
+# include <libft.h>
+# include <mlx.h>
+# include <X.h>
 # include <settings.h>
 # include <cell.h>
 # include <vector.h>
@@ -64,10 +67,12 @@ typedef struct	s_env
 
 void			setup_env(t_env *env, int ac, char **av);
 void			destroy_env(t_env *env);
-void			clear_settings(t_settings *settings);
 int				read_map(t_env *env, char *line);
 int				init_canvas(t_env *env);
 void			put_canvas(t_env *env, int x, int y, unsigned int color);
 void			refresh(t_env *env);
+int				mouse_hook(int button, int x, int y, t_env *param);
+int				key_hook(int key, t_env *param);
+int				destroy_hook(t_env *param);
 
 #endif

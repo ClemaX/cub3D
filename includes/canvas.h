@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   hooks.h                                          .::    .:/ .      .::   */
+/*   canvas.h                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/11/29 08:20:01 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/29 08:27:16 by chamada     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/12/05 15:05:34 by chamada      #+#   ##    ##    #+#       */
+/*   Updated: 2019/12/09 17:30:34 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef HOOKS_H
-# define HOOKS_H
+#ifndef CANVAS_H
+# define CANVAS_H
 
 # include <environment.h>
 
-int	mouse_hook(int button, int x, int y, void *param);
-int	key_hook(int key, t_env *param);
-int	destroy_hook(void *param);
+int		init_canvas(t_env *env);
+void	put_canvas(t_env *env, int x, int y, unsigned int color);
 
 #endif

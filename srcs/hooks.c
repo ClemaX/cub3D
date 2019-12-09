@@ -6,23 +6,21 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:19:11 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 14:00:41 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 17:38:17 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <environment.h>
-#include <mlx.h>
 #include <stdlib.h>
-#include <libftprintf.h>
 #include <math.h>
 
-int	mouse_hook(int button, int x, int y, void *param)
+int	mouse_hook(int button, int x, int y, t_env *env)
 {
 	(void)button;
 	(void)x;
 	(void)y;
-	(void)param;
+	(void)env;
 	return (0);
 }
 

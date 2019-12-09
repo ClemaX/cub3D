@@ -6,14 +6,14 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 07:56:47 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 00:38:08 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 18:16:36 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
+#include <libft.h>
 #include <settings.h>
 #include <stdlib.h>
-#include <ft_sscanf.h>
 #include <errno.h>
 
 static int	parse_res(t_settings *settings, char *line)
@@ -28,11 +28,11 @@ static int	parse_imgs(t_settings *settings, char *line)
 {
 	int	match;
 
-	if (!((match = ft_sscanf(line, "NO %m", &settings->tex.no))
-	|| (match = ft_sscanf(line, "SO %m", &settings->tex.so))
-	|| (match = ft_sscanf(line, "WE %m", &settings->tex.we))
-	|| (match = ft_sscanf(line, "EA %m", &settings->tex.ea))))
-		match = ft_sscanf(line, "S %m", &settings->tex.s);
+	if (!((match = ft_sscanf(line, "NO %ms", &settings->tex.no))
+	|| (match = ft_sscanf(line, "SO %ms", &settings->tex.so))
+	|| (match = ft_sscanf(line, "WE %ms", &settings->tex.we))
+	|| (match = ft_sscanf(line, "EA %ms", &settings->tex.ea))))
+		match = ft_sscanf(line, "S %ms", &settings->tex.s);
 	return (match == 1);
 }
 

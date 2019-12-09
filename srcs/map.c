@@ -6,13 +6,12 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 11:06:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 13:56:37 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 17:33:06 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <environment.h>
-#include <libft.h>
 #include <stdlib.h>
 
 static int	init_map(t_env *env, int size_x, int size_y)

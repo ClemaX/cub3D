@@ -6,13 +6,12 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 02:51:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 13:30:25 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 18:23:51 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <environment.h>
-#include <mlx.h>
 #include <ray.h>
 #include <stdio.h>
 

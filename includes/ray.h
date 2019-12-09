@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/07 15:56:59 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/08 16:56:50 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 18:23:00 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,6 @@
 # define RAY_H
 
 # include <environment.h>
-# include <vector.h>
 
 typedef struct	s_ray
 {

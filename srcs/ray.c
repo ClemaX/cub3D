@@ -6,14 +6,13 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/07 15:56:06 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 13:46:30 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 18:23:34 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <ray.h>
 #include <environment.h>
-#include <vector.h>
+#include <ray.h>
 #include <math.h>
 
 static t_vector		ray_dir(t_env *env, unsigned x)
