@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 17:32:55 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 22:15:12 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -61,12 +61,15 @@ void	setup_env(t_env *env, int ac, char **av)
 		error();
 	if (!parse_cub(env, av[1]))
 		error();
+	env->player.input = 0;
 	env->win =
 	mlx_new_window(env->mlx, env->settings.width, env->settings.height, TITLE);
 	if (!env->win)
 		error();
+	mlx_loop_hook(env->mlx, &loop_hook, env);
 	mlx_hook(env->win, DestroyNotify, NoEventMask, &destroy_hook, env);
-	mlx_hook(env->win, KeyPress, KeyPressMask, &key_hook, env);
+	mlx_hook(env->win, KeyPress, KeyPressMask, &key_enable, env);
+	mlx_hook(env->win, KeyRelease, KeyReleaseMask, &key_disable, env);
 	mlx_mouse_hook(env->win, &mouse_hook, env);
 	if (!init_canvas(env))
 		error();
