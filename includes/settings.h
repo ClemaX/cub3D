@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 13:27:24 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/08 19:59:15 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 02:12:30 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,18 +16,12 @@
 
 # include <color.h>
 
+# define SPRITE_TEX	4
 typedef struct	s_settings
 {
 	int			width;
 	int			height;
-	struct		s_textures
-	{
-		char	*no;
-		char	*so;
-		char	*we;
-		char	*ea;
-		char	*s;
-	}			tex;
+	char		*tex[5];
 	t_color		color_f;
 	t_color		color_c;
 

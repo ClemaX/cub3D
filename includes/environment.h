@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 00:11:53 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 02:01:53 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -74,14 +74,7 @@ typedef struct		s_env
 	t_settings	settings;
 	t_map		map;
 	t_player	player;
-	struct		s_tex
-	{
-		t_image	no;
-		t_image	so;
-		t_image	we;
-		t_image	ea;
-		t_image	s;
-	}			tex;
+	t_image		tex[5];
 }					t_env;
 
 typedef struct	s_obstacle

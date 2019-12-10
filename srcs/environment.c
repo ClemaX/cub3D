@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 00:25:27 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 02:14:18 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -62,21 +62,28 @@ static int	load_image(t_env *env, t_image *img, char *path)
 		}
 		else
 			return (0);
+		if (!img->img)
+			return (0);
+		img->data = mlx_get_data_addr(img->img, &img->bpp, &img->ls, &img->e);
 	}
 	else
 		return (0);
-	return (img->img != NULL);
+	return (1);
 }
 
 static int	load_images(t_env *env)
 {
-	if (!(load_image(env, &env->tex.no, env->settings.tex.no)
-	&& load_image(env, &env->tex.so, env->settings.tex.so)
-	&& load_image(env, &env->tex.we, env->settings.tex.we)
-	&& load_image(env, &env->tex.ea, env->settings.tex.ea)))
+	int	i;
+
+	i = 0;
+	while (i < 5)
 	{
-		errno = EFTYPE;
-		return (0);
+		if (!load_image(env, &env->tex[i], env->settings.tex[i]))
+		{
+			errno = EFTYPE;
+			return (0);
+		}
+		i++;
 	}
 	return (1);
 }
@@ -106,10 +113,10 @@ void	setup_env(t_env *env, int ac, char **av)
 
 void		destroy_env(t_env *env)
 {
+	int	i;
+
 	free(env->map.cells);
-	free(env->settings.tex.ea);
-	free(env->settings.tex.no);
-	free(env->settings.tex.s);
-	free(env->settings.tex.so);
-	free(env->settings.tex.we);
+	i = 0;
+	while (i < 5)
+		free(env->settings.tex[i++]);
 }
