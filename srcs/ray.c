@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/07 15:56:06 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 23:40:13 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 03:05:48 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,7 @@
 #include <ray.h>
 #include <math.h>
 
-static t_vector		ray_dir(t_env *env, unsigned x)
+static t_vector			ray_dir(t_env *env, unsigned x)
 {
 	const double	camera_x = 2 * x / (double)env->settings.width - 1;
 	t_vector		dir;
@@ -25,7 +25,26 @@ static t_vector		ray_dir(t_env *env, unsigned x)
 	return (dir);
 }
 
-static t_obstacle	get_obstacle(t_env *env, t_ray *ray)
+static t_cardinal		step_ray(t_ray *ray)
+{
+	t_cardinal	face;
+
+	if (ray->side_dist.x < ray->side_dist.y)
+	{
+		ray->side_dist.x += ray->step_dist.x;
+		ray->pos.x += ray->step_dir.x;
+		face = (ray->dir.x < 0) ? WEST : EAST;
+	}
+	else
+	{
+		ray->side_dist.y += ray->step_dist.y;
+		ray->pos.y += ray->step_dir.y;
+		face = (ray->dir.y < 0) ? NORTH : SOUTH;
+	}
+	return (face);
+}
+
+static t_obstacle		get_obstacle(t_env *env, t_ray *ray)
 {
 	t_obstacle	obs;
 	int			hit;
@@ -33,24 +52,17 @@ static t_obstacle	get_obstacle(t_env *env, t_ray *ray)
 	hit = 0;
 	while (!hit)
 	{
-		if (ray->side_dist.x < ray->side_dist.y)
-		{
-			ray->side_dist.x += ray->step_dist.x;
-			ray->pos.x += ray->step_dir.x;
-			obs.face = (ray->dir.x < 0) ? WEST : EAST;
-		}
-		else
-		{
-			ray->side_dist.y += ray->step_dist.y;
-			ray->pos.y += ray->step_dir.y;
-			obs.face = (ray->dir.y < 0) ? NORTH : SOUTH;
-		}
+		obs.face = step_ray(ray);
 		if (env->map.cells[ray->pos.y * env->map.size_x + ray->pos.x].type == WALL)
 			hit = 1;
 	}
 	obs.distance = (obs.face == WEST || obs.face == EAST)
 	? (ray->pos.x - env->player.pos.x + (1 - ray->step_dir.x) / 2) / ray->dir.x
 	: (ray->pos.y - env->player.pos.y + (1 - ray->step_dir.y) / 2) / ray->dir.y;
+	obs.offset = (obs.face == WEST || obs.face == EAST)
+	? ray->pos.y + obs.distance * ray->dir.y
+	: ray->pos.x + obs.distance * ray->dir.x;
+	obs.offset -= floor(obs.offset);
 	return (obs);
 }
 
