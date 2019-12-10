@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 02:01:53 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 03:48:33 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -81,7 +81,7 @@ typedef struct	s_obstacle
 {
 	t_cell		*cell;
 	t_cardinal	face;
-	double		offset;
+	int			offset;
 	double		distance;
 }				t_obstacle;
 

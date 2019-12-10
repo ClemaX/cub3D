@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/07 15:56:06 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 03:05:48 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 03:59:34 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -48,6 +48,7 @@ static t_obstacle		get_obstacle(t_env *env, t_ray *ray)
 {
 	t_obstacle	obs;
 	int			hit;
+	double		offset;
 
 	hit = 0;
 	while (!hit)
@@ -59,10 +60,14 @@ static t_obstacle		get_obstacle(t_env *env, t_ray *ray)
 	obs.distance = (obs.face == WEST || obs.face == EAST)
 	? (ray->pos.x - env->player.pos.x + (1 - ray->step_dir.x) / 2) / ray->dir.x
 	: (ray->pos.y - env->player.pos.y + (1 - ray->step_dir.y) / 2) / ray->dir.y;
-	obs.offset = (obs.face == WEST || obs.face == EAST)
-	? ray->pos.y + obs.distance * ray->dir.y
-	: ray->pos.x + obs.distance * ray->dir.x;
-	obs.offset -= floor(obs.offset);
+	offset = (obs.face == WEST || obs.face == EAST)
+	? env->player.pos.y + obs.distance * ray->dir.y
+	: env->player.pos.x + obs.distance * ray->dir.x;
+	offset -= floor(offset);
+	obs.offset = (int)(offset * (double)env->tex[obs.face].width);
+	if (((obs.face == WEST || obs.face == EAST) && ray->dir.x > 0)
+	|| ray->dir.y < 0)
+		obs.offset = env->tex[obs.face].width - obs.offset - 1;
 	return (obs);
 }
 
