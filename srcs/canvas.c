@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/05 15:04:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 04:42:23 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 12:52:31 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,8 +35,10 @@ void	put_canvas(t_env *env, int x, int y, unsigned int color)
 
 static inline t_color	get_color(t_image img, int x, int y)
 {
-	t_color	color;
-	ft_memcpy(&color.c, &img.data[(img.bpp / 8) * (y * img.width) + (img.bpp / 8) * x], img.bpp / 8);
+	t_color		color;
+	const int	ps = (img.bpp / 8);
+
+	ft_memcpy(&color.c, &img.data[ps * (y * img.width) + ps * x], ps);
 	return (color);
 }
 
@@ -55,9 +57,9 @@ void	draw_column(t_env *env, int x, t_obstacle obs)
 	if (end >= env->settings.height)
 		end = env->settings.height - 1;
 	y = 0;
-	while (y < env->settings.height && y <= start)
+	while (y < env->settings.height && y < start)
 		put_canvas(env, x, y++, env->settings.color_f.c);
-	while (y <= end)
+	while (y < end)
 	{
 		int d = y * 256 - env->settings.height * 128 + height * 128;
 		int index_y = ((d * env->tex[obs.face].height) / height) / 256;
