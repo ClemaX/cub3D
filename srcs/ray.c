@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/07 15:56:06 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 03:59:34 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 12:34:44 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -57,16 +57,20 @@ static t_obstacle		get_obstacle(t_env *env, t_ray *ray)
 		if (env->map.cells[ray->pos.y * env->map.size_x + ray->pos.x].type == WALL)
 			hit = 1;
 	}
-	obs.distance = (obs.face == WEST || obs.face == EAST)
-	? (ray->pos.x - env->player.pos.x + (1 - ray->step_dir.x) / 2) / ray->dir.x
-	: (ray->pos.y - env->player.pos.y + (1 - ray->step_dir.y) / 2) / ray->dir.y;
-	offset = (obs.face == WEST || obs.face == EAST)
-	? env->player.pos.y + obs.distance * ray->dir.y
-	: env->player.pos.x + obs.distance * ray->dir.x;
+	if (obs.face == WEST || obs.face == EAST)
+	{
+		obs.distance = (ray->pos.x - env->player.pos.x + (1 - ray->step_dir.x) / 2) / ray->dir.x;
+		offset = env->player.pos.y + obs.distance * ray->dir.y;
+	}
+	else
+	{
+		obs.distance = (ray->pos.y - env->player.pos.y + (1 - ray->step_dir.y) / 2) / ray->dir.y;
+		offset = env->player.pos.x + obs.distance * ray->dir.x;
+	}
 	offset -= floor(offset);
 	obs.offset = (int)(offset * (double)env->tex[obs.face].width);
 	if (((obs.face == WEST || obs.face == EAST) && ray->dir.x > 0)
-	|| ray->dir.y < 0)
+	|| ((obs.face == NORTH || obs.face == SOUTH) && ray->dir.y < 0))
 		obs.offset = env->tex[obs.face].width - obs.offset - 1;
 	return (obs);
 }
