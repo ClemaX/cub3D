@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:19:11 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 22:37:27 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 18:48:52 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,15 +29,23 @@ int	loop_hook(t_env *env)
 	if (env->player.input == 0)
 		return (0);
 	if (env->player.input & UP)
-		move_player(env, S_MOVEMENT);
+		move_player(env, env->player.dir, S_MOVEMENT);
 	if (env->player.input & DOWN)
-		move_player(env, -S_MOVEMENT);
+		move_player(env, env->player.dir, -S_MOVEMENT);
 	if (env->player.input & LEFT)
+	{
+		move_player(env, env->player.plane, -S_MOVEMENT);
+	}
+	if (env->player.input & RIGHT)
+	{
+		move_player(env, env->player.plane, S_MOVEMENT);
+	}
+	if (env->player.input & ROT_LEFT && !(env->player.input & ROT_RIGHT))
 	{
 		vrotate(&env->player.dir, -S_ROTATION);
 		vrotate(&env->player.plane, -S_ROTATION);
 	}
-	if (env->player.input & RIGHT)
+	if (env->player.input & ROT_RIGHT && !(env->player.input & ROT_LEFT))
 	{
 		vrotate(&env->player.dir, S_ROTATION);
 		vrotate(&env->player.plane, S_ROTATION);
@@ -62,6 +70,10 @@ int	key_enable(int key, t_env *env)
 		env->player.input ^= LEFT;
 	if (key == KEY_RIGHT)
 		env->player.input ^= RIGHT;
+	if (key == KEY_ROT_L)
+		env->player.input ^= ROT_LEFT;
+	if (key == KEY_ROT_R)
+		env->player.input ^= ROT_RIGHT;
 	return (0);
 }
 
@@ -75,6 +87,10 @@ int	key_disable(int key, t_env *env)
 		env->player.input &= ~LEFT;
 	if (key == KEY_RIGHT)
 		env->player.input &= ~RIGHT;
+	if (key == KEY_ROT_L)
+		env->player.input &= ~ROT_LEFT;
+	if (key == KEY_ROT_R)
+		env->player.input &= ~ROT_RIGHT;
 	return (0);
 }
 

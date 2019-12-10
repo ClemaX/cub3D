@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 03:48:33 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 18:44:23 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,6 +28,8 @@
 # define KEY_DOWN	1
 # define KEY_LEFT	0
 # define KEY_RIGHT	2
+# define KEY_ROT_L	123
+# define KEY_ROT_R	124
 
 # define S_MOVEMENT	0.1
 # define S_ROTATION	0.05
@@ -37,6 +39,8 @@
 # define DOWN		(1 << 2)
 # define LEFT		(1 << 3)
 # define RIGHT		(1 << 4)
+# define ROT_LEFT	(1 << 5)
+# define ROT_RIGHT	(1 << 6)
 
 typedef struct		s_image
 {
@@ -97,7 +101,7 @@ int					key_enable(int key, t_env *env);
 int					key_disable(int key, t_env *env);
 int					loop_hook(t_env *env);
 int					destroy_hook(t_env *param);
-void				move_player(t_env *env, double factor);
+void				move_player(t_env *env, t_vector movement, double factor);
 void				error();
 
 #endif

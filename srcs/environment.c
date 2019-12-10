@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 02:14:18 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/10 18:41:33 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,7 +17,6 @@
 # include <strings.h>
 # include <unistd.h>
 # include <stdlib.h>
-
 
 static int	parse_cub(t_env *env, char *path)
 {
