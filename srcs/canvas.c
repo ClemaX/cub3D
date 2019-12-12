@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/05 15:04:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 12:52:31 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/12 18:37:44 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -65,6 +65,6 @@ void	draw_column(t_env *env, int x, t_obstacle obs)
 		int index_y = ((d * env->tex[obs.face].height) / height) / 256;
 		put_canvas(env, x, y++, get_color(env->tex[obs.face], obs.offset, index_y).c);
 	}
-	while (y < env->settings.height)
+	while (y < env->settings.height - 1)
 		put_canvas(env, x, y++, env->settings.color_c.c);
 }
