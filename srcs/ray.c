@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/07 15:56:06 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 12:34:44 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/15 15:39:58 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,16 +14,6 @@
 #include <environment.h>
 #include <ray.h>
 #include <math.h>
-
-static t_vector			ray_dir(t_env *env, unsigned x)
-{
-	const double	camera_x = 2 * x / (double)env->settings.width - 1;
-	t_vector		dir;
-
-	dir.x = env->player.dir.x + env->player.plane.x * camera_x;
-	dir.y = env->player.dir.y + env->player.plane.y * camera_x;
-	return (dir);
-}
 
 static t_cardinal		step_ray(t_ray *ray)
 {
@@ -44,7 +34,37 @@ static t_cardinal		step_ray(t_ray *ray)
 	return (face);
 }
 
-static t_obstacle		get_obstacle(t_env *env, t_ray *ray)
+void				init_ray(t_env *env, t_ray *ray, int x)
+{
+	const double	camera_x = 2 * x / (double)env->settings.width - 1;
+
+	ray->pos = vtoiv(env->player.pos);
+	ray->dir.x = env->player.dir.x + env->player.plane.x * 0.66 * camera_x;
+	ray->dir.y = env->player.dir.y + env->player.plane.y * 0.66 * camera_x;
+	ray->step_dist = vector(fabs(1 / ray->dir.x), fabs(1 / ray->dir.y));
+	if (ray->dir.x < 0)
+	{
+		ray->step_dir.x = -1;
+		ray->side_dist.x = (env->player.pos.x - ray->pos.x) * ray->step_dist.x;
+	}
+	else
+	{
+		ray->step_dir.x = 1;
+		ray->side_dist.x = (ray->pos.x + 1.0 - env->player.pos.x) * ray->step_dist.x;
+	}
+	if (ray->dir.y < 0)
+	{
+		ray->step_dir.y = -1;
+		ray->side_dist.y = (env->player.pos.y - ray->pos.y) * ray->step_dist.y;
+	}
+	else
+	{
+		ray->step_dir.y = 1;
+		ray->side_dist.y = (ray->pos.y + 1.0 - env->player.pos.y) * ray->step_dist.y;
+	}
+}
+
+t_obstacle			cast_ray(t_env *env, t_ray *ray)
 {
 	t_obstacle	obs;
 	int			hit;
@@ -73,34 +93,4 @@ static t_obstacle		get_obstacle(t_env *env, t_ray *ray)
 	|| ((obs.face == NORTH || obs.face == SOUTH) && ray->dir.y < 0))
 		obs.offset = env->tex[obs.face].width - obs.offset - 1;
 	return (obs);
-}
-
-t_obstacle			cast_ray(t_env *env, unsigned x)
-{
-	t_ray	ray;
-
-	ray.pos = vtoiv(env->player.pos);
-	ray.dir = ray_dir(env, x);
-	ray.step_dist = vector(fabs(1 / ray.dir.x), fabs(1 / ray.dir.y));
-	if (ray.dir.x < 0)
-	{
-		ray.step_dir.x = -1;
-		ray.side_dist.x = (env->player.pos.x - ray.pos.x) * ray.step_dist.x;
-	}
-	else
-	{
-		ray.step_dir.x = 1;
-		ray.side_dist.x = (ray.pos.x + 1.0 - env->player.pos.x) * ray.step_dist.x;
-	}
-	if (ray.dir.y < 0)
-	{
-		ray.step_dir.y = -1;
-		ray.side_dist.y = (env->player.pos.y - ray.pos.y) * ray.step_dist.y;
-	}
-	else
-	{
-		ray.step_dir.y = 1;
-		ray.side_dist.y = (ray.pos.y + 1.0 - env->player.pos.y) * ray.step_dist.y;
-	}
-	return (get_obstacle(env, &ray));
 }
