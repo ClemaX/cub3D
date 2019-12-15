@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 18:41:33 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/12 16:16:12 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -94,7 +94,7 @@ void	setup_env(t_env *env, int ac, char **av)
 		errno = EINVAL;
 		error();
 	}
-	if (!((env->mlx = mlx_init()) && parse_cub(env, av[1]) && load_images(env)))
+	if (!(parse_cub(env, av[1]) && (env->mlx = mlx_init()) && load_images(env)))
 		error();
 	env->player.input = 0;
 	env->win =

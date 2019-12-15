@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 18:44:23 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/15 15:46:48 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -55,12 +55,14 @@ typedef struct		s_image
 
 typedef struct		s_map
 {
-	unsigned	size_x;
-	unsigned	size_y;
+	int			size_x;
+	int			size_y;
 	t_cell		*cells;
 }				t_map;
 
 typedef unsigned	t_keys;
+
+# define HITBOX		0.2
 
 typedef struct		s_player
 {

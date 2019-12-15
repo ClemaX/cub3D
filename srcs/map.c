@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 11:06:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 17:33:06 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/12 11:21:46 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,10 +22,10 @@ static int	init_map(t_env *env, int size_x, int size_y)
 	return (env->map.cells != NULL);
 }
 
-static int	parse_line(t_env *env, t_list *line, unsigned row)
+static int	parse_line(t_env *env, t_list *line, int row)
 {
 	char		*s;
-	unsigned	count;
+	int			count;
 	int			pos;
 
 	s = line->content;
@@ -43,8 +43,6 @@ static int	parse_line(t_env *env, t_list *line, unsigned row)
 			env->player.pos = vector(count + 0.5, row + 0.5);
 			env->player.dir = cardinal(pos);
 			env->player.plane = cardinal(ft_strpos(CARDINALS, PLANES[pos]));
-			env->player.plane.x *= 0.66;
-			env->player.plane.y *= 0.66;
 		}
 		else if (!ft_isspace(*s))
 			return (0);
@@ -69,7 +67,7 @@ static int	count_cells(t_list *line)
 static int	parse_map(t_env *env, t_list *lines)
 {
 	t_list		*current;
-	unsigned	count;
+	int			count;
 
 	count = 0;
 	current = lines;
