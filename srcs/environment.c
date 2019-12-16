@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/12 16:16:12 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/16 22:19:44 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,21 +33,25 @@ static int	parse_cub(t_env *env, char *path)
 	if ((fd = open(path, O_RDONLY)) == -1)
 		return (0);
 	clear_settings(&env->settings);
-	while ((ret = get_next_line(fd, &line)) > 0 && *line != '1')
+	while ((ret = get_next_line(fd, &line)) == 1 && *line != '1')
 		if (!(parse_settings(&env->settings, line)))
-			return (0);
-	while (ret != -1 && read_map(env, line))
-		if ((ret = get_next_line(fd, &line)) == -1)
-			return (0);
+			ret = -1;
+	while (ret != -1 && (ret = read_map(env, line)) == 1)
+		ret = get_next_line(fd, &line);
 	close(fd);
-	return (1);
+	if (env->player.pos.x == -1)
+	{
+		errno = EFTYPE;
+		return (0);
+	}
+	return (ret != -1);
 }
 
 static int	load_image(t_env *env, t_image *img, char *path)
 {
 	const char *ext;
 
-	if ((ext = ft_strrchr(path, '.')))
+	if (path && (ext = ft_strrchr(path, '.')))
 	{
 		if (!ft_strncmp(ext, ".png", 4))
 		{
@@ -92,22 +96,22 @@ void	setup_env(t_env *env, int ac, char **av)
 	if (ac != 2)
 	{
 		errno = EINVAL;
-		error();
+		error(env);
 	}
 	if (!(parse_cub(env, av[1]) && (env->mlx = mlx_init()) && load_images(env)))
-		error();
+		error(env);
 	env->player.input = 0;
 	env->win =
 	mlx_new_window(env->mlx, env->settings.width, env->settings.height, TITLE);
 	if (!env->win)
-		error();
+		error(env);
 	mlx_loop_hook(env->mlx, &loop_hook, env);
 	mlx_hook(env->win, DestroyNotify, NoEventMask, &destroy_hook, env);
 	mlx_hook(env->win, KeyPress, KeyPressMask, &key_enable, env);
 	mlx_hook(env->win, KeyRelease, KeyReleaseMask, &key_disable, env);
 	mlx_mouse_hook(env->win, &mouse_hook, env);
 	if (!init_canvas(env))
-		error();
+		error(env);
 }
 
 void		destroy_env(t_env *env)
