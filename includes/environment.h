@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/16 21:58:08 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/17 14:36:51 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,7 +16,7 @@
 
 # include <libft.h>
 # include <mlx.h>
-# include <X.h>
+# include <X11/X.h>
 # include <settings.h>
 # include <cell.h>
 # include <vector.h>

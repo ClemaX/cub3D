@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/16 22:19:44 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/17 17:03:43 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,6 +17,7 @@
 # include <strings.h>
 # include <unistd.h>
 # include <stdlib.h>
+#include <X11/Xlib.h>
 
 static int	parse_cub(t_env *env, char *path)
 {
@@ -93,6 +94,7 @@ static int	load_images(t_env *env)
 
 void	setup_env(t_env *env, int ac, char **av)
 {
+	const Screen	*screen = DefaultScreenOfDisplay(XOpenDisplay(NULL));
 	if (ac != 2)
 	{
 		errno = EINVAL;
@@ -101,6 +103,10 @@ void	setup_env(t_env *env, int ac, char **av)
 	if (!(parse_cub(env, av[1]) && (env->mlx = mlx_init()) && load_images(env)))
 		error(env);
 	env->player.input = 0;
+	if (env->settings.width > screen->width)
+		env->settings.width = screen->width;
+	if (env->settings.height > screen->height)
+		env->settings.height = screen->height;
 	env->win =
 	mlx_new_window(env->mlx, env->settings.width, env->settings.height, TITLE);
 	if (!env->win)
