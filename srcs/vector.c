@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/04 12:49:55 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/08 18:31:21 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/17 18:06:46 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,7 +14,7 @@
 #include <vector.h>
 #include <math.h>
 
-t_vector	vector(double x, double y)
+t_vector	vector(float x, float y)
 {
 	t_vector	vector;
 
@@ -23,9 +23,9 @@ t_vector	vector(double x, double y)
 	return (vector);
 }
 
-void		vrotate(t_vector *vector, double alpha)
+void		vrotate(t_vector *vector, float alpha)
 {
-	const double old_x = vector->x;
+	const float old_x = vector->x;
 
 	vector->x = vector->x * cos(alpha) - vector->y * sin(alpha);
 	vector->y = old_x * sin(alpha) + vector->y * cos(alpha);

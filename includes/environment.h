@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/17 14:36:51 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/17 20:05:17 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,8 +31,8 @@
 # define KEY_ROT_L	123
 # define KEY_ROT_R	124
 
-# define S_MOVEMENT	0.1
-# define S_ROTATION	0.05
+# define S_MOVEMENT	5.0
+# define S_ROTATION	2.0
 
 # define ESCAPE		(1 << 0)
 # define UP			(1 << 1)
@@ -88,7 +88,7 @@ typedef struct	s_obstacle
 	t_cell		*cell;
 	t_cardinal	face;
 	int			offset;
-	double		distance;
+	float		distance;
 }				t_obstacle;
 
 void				setup_env(t_env *env, int ac, char **av);
@@ -102,7 +102,7 @@ int					key_enable(int key, t_env *env);
 int					key_disable(int key, t_env *env);
 int					loop_hook(t_env *env);
 int					destroy_hook(t_env *param);
-void				move_player(t_env *env, t_vector movement, double factor);
+void				move_player(t_env *env, t_vector movement, float factor);
 void				error(t_env *env);
 
 #endif

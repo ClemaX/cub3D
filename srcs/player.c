@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/09 22:31:20 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/15 15:29:13 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/17 18:06:43 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,9 +15,9 @@
 #include <stdlib.h>
 #include <ray.h>
 
-void	move_player(t_env *env, t_vector movement, double factor)
+void	move_player(t_env *env, t_vector movement, float factor)
 {
-	static const double	half_hitbox = HITBOX / 2;
+	static const float	half_hitbox = HITBOX / 2;
 	t_vector			check[5];
 	int					i;
 

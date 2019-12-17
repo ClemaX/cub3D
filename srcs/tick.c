@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   error.c                                          .::    .:/ .      .::   */
+/*   tick.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/12/09 23:57:32 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/17 17:40:26 by chamada     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/12/17 17:42:59 by chamada      #+#   ##    ##    #+#       */
+/*   Updated: 2019/12/17 21:32:08 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <environment.h>
-#include <errno.h>
-#include <strings.h>
-#include <stdlib.h>
+#include <tick.h>
+#include <unistd.h>
 
-void	error(t_env *env)
+void	start_tick(t_tick *tick)
 {
-	ft_putendl_fd("Error", 2);
-	ft_putendl_fd(strerror(errno), 2);
-	destroy_env(env);
-	exit(1);
+	struct timeval	now;
+
+	gettimeofday(&now, NULL);
+	tick->start = (now.tv_sec) + (now.tv_usec) / 1000000.0;
+}
+
+void	end_tick(t_tick *tick)
+{
+	static const float	limit = 1.0 / 60;
+	struct timeval		now;
+
+	if (tick->delta < limit)
+		usleep((limit - tick->delta) * 1000);
+	gettimeofday(&now, NULL);
+	tick->delta = ((now.tv_sec) + (now.tv_usec) / 1000000.0) - tick->start;
 }

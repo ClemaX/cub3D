@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/07 15:56:06 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/15 15:39:58 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/17 18:06:33 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,7 @@
 #include <ray.h>
 #include <math.h>
 
-static t_cardinal		step_ray(t_ray *ray)
+static t_cardinal	step_ray(t_ray *ray)
 {
 	t_cardinal	face;
 
@@ -36,7 +36,7 @@ static t_cardinal		step_ray(t_ray *ray)
 
 void				init_ray(t_env *env, t_ray *ray, int x)
 {
-	const double	camera_x = 2 * x / (double)env->settings.width - 1;
+	const float	camera_x = 2 * x / (float)env->settings.width - 1;
 
 	ray->pos = vtoiv(env->player.pos);
 	ray->dir.x = env->player.dir.x + env->player.plane.x * 0.66 * camera_x;
@@ -68,7 +68,7 @@ t_obstacle			cast_ray(t_env *env, t_ray *ray)
 {
 	t_obstacle	obs;
 	int			hit;
-	double		offset;
+	float		offset;
 
 	hit = 0;
 	while (!hit)
@@ -88,7 +88,7 @@ t_obstacle			cast_ray(t_env *env, t_ray *ray)
 		offset = env->player.pos.x + obs.distance * ray->dir.x;
 	}
 	offset -= floor(offset);
-	obs.offset = (int)(offset * (double)env->tex[obs.face].width);
+	obs.offset = (int)(offset * (float)env->tex[obs.face].width);
 	if (((obs.face == WEST || obs.face == EAST) && ray->dir.x > 0)
 	|| ((obs.face == NORTH || obs.face == SOUTH) && ray->dir.y < 0))
 		obs.offset = env->tex[obs.face].width - obs.offset - 1;

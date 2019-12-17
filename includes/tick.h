@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   error.c                                          .::    .:/ .      .::   */
+/*   tick.h                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/12/09 23:57:32 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/17 17:40:26 by chamada     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/12/17 19:52:42 by chamada      #+#   ##    ##    #+#       */
+/*   Updated: 2019/12/17 20:06:17 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <environment.h>
-#include <errno.h>
-#include <strings.h>
-#include <stdlib.h>
+#ifndef TICK_H
+# define TICK_H
 
-void	error(t_env *env)
+# include <sys/time.h>
+
+typedef struct	s_tick
 {
-	ft_putendl_fd("Error", 2);
-	ft_putendl_fd(strerror(errno), 2);
-	destroy_env(env);
-	exit(1);
-}
+	double	delta;
+	double	start;
+}				t_tick;
+
+void			start_tick(t_tick *tick);
+void			end_tick(t_tick *tick);
+
+#endif

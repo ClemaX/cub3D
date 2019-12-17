@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 11:06:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/16 21:49:24 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/17 17:52:55 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,16 +40,16 @@ static int	count_cells(t_list *line)
 
 static int	parse_line(t_env *env, t_list *line, int row)
 {
-	char		*s;
-	int			count;
-	int			pos;
+	char	*s;
+	int		count;
+	int		pos;
 
 	s = line->content;
 	if (row == env->map.size_y - 1 && count_cells(line) != env->map.size_x)
 		return (0);
 	if (row >= env->map.size_y || *s++ != '1')
 		return (0);
-	env->map.cells[row * env->map.size_x].type = WALL; 
+	env->map.cells[row * env->map.size_x].type = WALL;
 	count = 1;
 	while (*s)
 	{
@@ -71,8 +71,8 @@ static int	parse_line(t_env *env, t_list *line, int row)
 
 static int	parse_map(t_env *env, t_list *lines)
 {
-	t_list		*current;
-	int			count;
+	t_list	*current;
+	int		count;
 
 	count = 0;
 	current = lines;
@@ -91,7 +91,7 @@ static int	parse_map(t_env *env, t_list *lines)
 	return (1);
 }
 
-int		read_map(t_env *env, char *line)
+int			read_map(t_env *env, char *line)
 {
 	static t_list	*lines;
 	t_list			*new;

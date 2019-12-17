@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:19:11 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 18:48:52 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/17 20:17:37 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,40 +24,46 @@ int	mouse_hook(int button, int x, int y, t_env *env)
 	return (0);
 }
 
+#include <tick.h>
+
 int	loop_hook(t_env *env)
 {
+	static t_tick	tick;
+
 	if (env->player.input == 0)
 		return (0);
+	start_tick(&tick);
 	if (env->player.input & UP)
-		move_player(env, env->player.dir, S_MOVEMENT);
+		move_player(env, env->player.dir, tick.delta * S_MOVEMENT);
 	if (env->player.input & DOWN)
-		move_player(env, env->player.dir, -S_MOVEMENT);
+		move_player(env, env->player.dir, tick.delta * -S_MOVEMENT);
 	if (env->player.input & LEFT)
 	{
-		move_player(env, env->player.plane, -S_MOVEMENT);
+		move_player(env, env->player.plane, tick.delta * -S_MOVEMENT);
 	}
 	if (env->player.input & RIGHT)
 	{
-		move_player(env, env->player.plane, S_MOVEMENT);
+		move_player(env, env->player.plane, tick.delta * S_MOVEMENT);
 	}
 	if (env->player.input & ROT_LEFT && !(env->player.input & ROT_RIGHT))
 	{
-		vrotate(&env->player.dir, -S_ROTATION);
-		vrotate(&env->player.plane, -S_ROTATION);
+		vrotate(&env->player.dir, tick.delta * -S_ROTATION);
+		vrotate(&env->player.plane, tick.delta * -S_ROTATION);
 	}
 	if (env->player.input & ROT_RIGHT && !(env->player.input & ROT_LEFT))
 	{
-		vrotate(&env->player.dir, S_ROTATION);
-		vrotate(&env->player.plane, S_ROTATION);
+		vrotate(&env->player.dir, tick.delta * S_ROTATION);
+		vrotate(&env->player.plane, tick.delta * S_ROTATION);
 	}
 	refresh(env);
+	end_tick(&tick);
 	return (1);
 }
 
 int	key_enable(int key, t_env *env)
 {
 	if (key == KEY_ESCAPE)
-	{	
+	{
 		mlx_destroy_window(env->mlx, env->win);
 		destroy_env(env);
 		exit(0);

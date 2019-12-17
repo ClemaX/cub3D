@@ -6,17 +6,17 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/17 17:03:43 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/17 20:17:17 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-# include <environment.h>
-# include <fcntl.h>
-# include <errno.h>
-# include <strings.h>
-# include <unistd.h>
-# include <stdlib.h>
+#include <environment.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <strings.h>
+#include <unistd.h>
+#include <stdlib.h>
 #include <X11/Xlib.h>
 
 static int	parse_cub(t_env *env, char *path)
@@ -92,9 +92,10 @@ static int	load_images(t_env *env)
 	return (1);
 }
 
-void	setup_env(t_env *env, int ac, char **av)
+void		setup_env(t_env *env, int ac, char **av)
 {
 	const Screen	*screen = DefaultScreenOfDisplay(XOpenDisplay(NULL));
+
 	if (ac != 2)
 	{
 		errno = EINVAL;

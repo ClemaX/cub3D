@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/05 15:04:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/15 17:28:49 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/17 17:45:57 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,10 +38,11 @@ static inline t_color	get_color(t_image img, int x, int y)
 
 void					draw_column(t_env *env, int x, t_obstacle obs)
 {
-	int			height;
-	int			start;
-	int			end;
-	int			y;
+	int	height;
+	int	start;
+	int	end;
+	int	y;
+	int index_y;
 
 	height = env->settings.height / obs.distance;
 	start = -height / 2 + env->settings.height / 2;
@@ -55,8 +56,7 @@ void					draw_column(t_env *env, int x, t_obstacle obs)
 		put_canvas(env, x, y++, env->settings.color_f);
 	while (y < end)
 	{
-		int d = y * 256 - env->settings.height * 128 + height * 128;
-		int index_y = ((d * env->tex[obs.face].height) / height) / 256;
+		index_y = (((y * 256 - env->settings.height * 128 + height * 128) * env->tex[obs.face].height) / height) / 256;
 		put_canvas(env, x, y++, get_color(env->tex[obs.face], obs.offset, index_y));
 	}
 	while (y < env->settings.height - 1)
