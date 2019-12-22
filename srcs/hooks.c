@@ -64,7 +64,6 @@ int	key_enable(int key, t_env *env)
 {
 	if (key == KEY_ESCAPE)
 	{
-		mlx_destroy_window(env->mlx, env->win);
 		destroy_env(env);
 		exit(0);
 	}

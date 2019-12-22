@@ -128,5 +128,14 @@ void		destroy_env(t_env *env)
 	free(env->map.cells);
 	i = 0;
 	while (i < 5)
-		free(env->settings.tex[i++]);
+	{
+		if (env->tex[i].img)
+			mlx_destroy_image(env->mlx, env->tex[i].img);
+		free(env->settings.tex[i]);
+		i++;
+	}
+	if (env->canvas.img)
+		mlx_destroy_image(env->mlx, env->canvas.img);
+	if (env->win)
+		mlx_destroy_window(env->mlx, env->win);
 }
