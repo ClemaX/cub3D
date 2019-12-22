@@ -25,7 +25,7 @@ $(LIBFT)/libft.a: libft
 $(LIBMLX)/libmlx.a: libmlx
 
 $(NAME):		$(OBJDIR) $(OBJS) $(LIBFT)/libft.a $(LIBMLX)/libmlx.a
-	$(CC) $(OBJS) $(LFLAGS) $(FFLAGS) -o $@
+	$(CC) $(OBJS) $(CFLAGS) $(LFLAGS) $(FFLAGS) -o $@
 
 $(OBJDIR):
 	mkdir -p $@
