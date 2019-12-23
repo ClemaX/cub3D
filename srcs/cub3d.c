@@ -35,6 +35,12 @@ int		main(int ac, char **av)
 
 	setup_env(&env, ac, av);
 	refresh(&env);
+	if (ac == 3)
+	{
+		write_bmp("frame.bmp", env.canvas.data, env.canvas.w, env.canvas.h);
+		destroy_env(&env);
+		return (0);
+	}
 	mlx_put_image_to_window(env.mlx, env.win, env.canvas.ptr, 0, 0);
 	mlx_do_key_autorepeatoff(env.mlx);
 	mlx_loop(env.mlx);

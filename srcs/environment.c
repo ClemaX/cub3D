@@ -96,7 +96,7 @@ void		setup_env(t_env *env, int ac, char **av)
 {
 	const Screen	*screen = DefaultScreenOfDisplay(XOpenDisplay(NULL));
 
-	if (ac != 2)
+	if (!(ac == 3 && !ft_strncmp(av[2], "--save", 7)) && ac != 2)
 	{
 		errno = EINVAL;
 		error(env);
