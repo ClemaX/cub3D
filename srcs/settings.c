@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 07:56:47 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/10 02:13:26 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/23 22:53:22 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,7 +21,7 @@ static int	parse_res(t_settings *settings, char *line)
 {
 	int match;
 
-	match = ft_sscanf(line, "R %d %d", &settings->width, &settings->height);
+	match = ft_sscanf(line, "R %d %d", &settings->w, &settings->h);
 	return (match == 2);
 }
 
@@ -57,8 +57,8 @@ void		clear_settings(t_settings *settings)
 
 	settings->color_c.c = 0;
 	settings->color_f.c = 0;
-	settings->height = 0;
-	settings->width = 0;
+	settings->h = 0;
+	settings->w = 0;
 	i = 0;
 	while (i < 5)
 		settings->tex[i++] = NULL;

@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/17 20:17:17 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/23 22:38:01 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,7 +40,7 @@ static int	parse_cub(t_env *env, char *path)
 	while (ret != -1 && (ret = read_map(env, line)) == 1)
 		ret = get_next_line(fd, &line);
 	close(fd);
-	if (env->player.pos.x == -1)
+	if (env->player.x == -1)
 	{
 		errno = EFTYPE;
 		return (0);
@@ -56,19 +56,19 @@ static int	load_image(t_env *env, t_image *img, char *path)
 	{
 		if (!ft_strncmp(ext, ".png", 4))
 		{
-			img->img =
-			mlx_png_file_to_image(env->mlx, path, &img->width, &img->height);
+			img->ptr =
+			mlx_png_file_to_image(env->mlx, path, &img->w, &img->h);
 		}
 		else if (!ft_strncmp(ext, ".xpm", 4))
 		{
-			img->img =
-			mlx_xpm_file_to_image(env->mlx, path, &img->width, &img->height);
+			img->ptr =
+			mlx_xpm_file_to_image(env->mlx, path, &img->w, &img->h);
 		}
 		else
 			return (0);
-		if (!img->img)
+		if (!img->ptr)
 			return (0);
-		img->data = mlx_get_data_addr(img->img, &img->bpp, &img->ls, &img->e);
+		img->data = mlx_get_data_addr(img->ptr, &img->bpp, &img->ls, &img->e);
 	}
 	else
 		return (0);
@@ -104,21 +104,19 @@ void		setup_env(t_env *env, int ac, char **av)
 	if (!(parse_cub(env, av[1]) && (env->mlx = mlx_init()) && load_images(env)))
 		error(env);
 	env->player.input = 0;
-	if (env->settings.width > screen->width)
-		env->settings.width = screen->width;
-	if (env->settings.height > screen->height)
-		env->settings.height = screen->height;
+	if (env->settings.w > screen->width)
+		env->settings.w = screen->width;
+	if (env->settings.h > screen->height)
+		env->settings.h = screen->height;
 	env->win =
-	mlx_new_window(env->mlx, env->settings.width, env->settings.height, TITLE);
-	if (!env->win)
+	mlx_new_window(env->mlx, env->settings.w, env->settings.h, TITLE);
+	if (!env->win || !init_canvas(env))
 		error(env);
 	mlx_loop_hook(env->mlx, &loop_hook, env);
 	mlx_hook(env->win, DestroyNotify, NoEventMask, &destroy_hook, env);
 	mlx_hook(env->win, KeyPress, KeyPressMask, &key_enable, env);
 	mlx_hook(env->win, KeyRelease, KeyReleaseMask, &key_disable, env);
 	mlx_mouse_hook(env->win, &mouse_hook, env);
-	if (!init_canvas(env))
-		error(env);
 }
 
 void		destroy_env(t_env *env)
@@ -129,13 +127,13 @@ void		destroy_env(t_env *env)
 	i = 0;
 	while (i < 5)
 	{
-		if (env->tex[i].img)
-			mlx_destroy_image(env->mlx, env->tex[i].img);
+		if (env->tex[i].ptr)
+			mlx_destroy_image(env->mlx, env->tex[i].ptr);
 		free(env->settings.tex[i]);
 		i++;
 	}
-	if (env->canvas.img)
-		mlx_destroy_image(env->mlx, env->canvas.img);
+	if (env->canvas.ptr)
+		mlx_destroy_image(env->mlx, env->canvas.ptr);
 	if (env->win)
 		mlx_destroy_window(env->mlx, env->win);
 }

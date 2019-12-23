@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 21:20:12 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/08 19:48:17 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/23 22:15:43 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,12 +15,6 @@
 # define CELL_H
 
 # include <vector.h>
-
-typedef struct	s_edge
-{
-	t_vector	a;
-	t_vector	b;
-}				t_edge;
 
 # define TYPES "012"
 

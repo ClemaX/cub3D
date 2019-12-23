@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 11:06:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/17 17:52:55 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/23 22:40:39 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,13 +15,13 @@
 #include <stdlib.h>
 #include <errno.h>
 
-static int	init_map(t_env *env, int size_x, int size_y)
+static int	init_map(t_env *env, int width, int height)
 {
-	env->player.pos.x = -1;
-	env->player.pos.y = -1;
-	env->map.size_x = size_x;
-	env->map.size_y = size_y;
-	env->map.cells = malloc(sizeof(*env->map.cells) * size_x * size_y);
+	env->player.x = -1;
+	env->player.y = -1;
+	env->map.w = width;
+	env->map.h = height;
+	env->map.cells = malloc(sizeof(*env->map.cells) * width * height);
 	return (env->map.cells != NULL);
 }
 
@@ -45,20 +45,21 @@ static int	parse_line(t_env *env, t_list *line, int row)
 	int		pos;
 
 	s = line->content;
-	if (row == env->map.size_y - 1 && count_cells(line) != env->map.size_x)
+	if (row == env->map.h - 1 && count_cells(line) != env->map.w)
 		return (0);
-	if (row >= env->map.size_y || *s++ != '1')
+	if (row >= env->map.h || *s++ != '1')
 		return (0);
-	env->map.cells[row * env->map.size_x].type = WALL;
+	env->map.cells[row * env->map.w].type = WALL;
 	count = 1;
 	while (*s)
 	{
 		if ((pos = ft_strpos(TYPES, *s)) != -1)
-			env->map.cells[row * env->map.size_x + count++].type = pos;
-		else if ((pos = ft_strpos(CARDINALS, *s)) != -1 && env->player.pos.x == -1)
+			env->map.cells[row * env->map.w + count++].type = pos;
+		else if ((pos = ft_strpos(CARDINALS, *s)) != -1 && env->player.x == -1)
 		{
-			env->map.cells[row * env->map.size_x + count++].type = SPACE;
-			env->player.pos = vector(count + 0.5, row + 0.5);
+			env->map.cells[row * env->map.w + count++].type = SPACE;
+			env->player.x = count + 0.5;
+			env->player.y = row + 0.5;
 			env->player.dir = cardinal(pos);
 			env->player.plane = cardinal(ft_strpos(CARDINALS, PLANES[pos]));
 		}
@@ -66,7 +67,7 @@ static int	parse_line(t_env *env, t_list *line, int row)
 			return (0);
 		s++;
 	}
-	return (s[-1] == '1' && count == env->map.size_x);
+	return (s[-1] == '1' && count == env->map.w);
 }
 
 static int	parse_map(t_env *env, t_list *lines)

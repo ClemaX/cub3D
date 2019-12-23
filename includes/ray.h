@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/07 15:56:59 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/15 15:37:44 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/23 22:28:49 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,7 +18,8 @@
 
 typedef struct	s_ray
 {
-	t_ivector	pos;
+	int			x;
+	int			y;
 	t_vector	dir;
 	t_vector	step_dist;
 	t_ivector	step_dir;

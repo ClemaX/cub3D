@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/17 20:05:17 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/23 22:35:33 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -44,9 +44,9 @@
 
 typedef struct		s_image
 {
-	void		*img;
-	int			width;
-	int			height;
+	void		*ptr;
+	int			w;
+	int			h;
 	char		*data;
 	int			bpp;
 	int			ls;
@@ -55,8 +55,8 @@ typedef struct		s_image
 
 typedef struct		s_map
 {
-	int			size_x;
-	int			size_y;
+	int			w;
+	int			h;
 	t_cell		*cells;
 }				t_map;
 
@@ -66,7 +66,8 @@ typedef unsigned	t_keys;
 
 typedef struct		s_player
 {
-	t_vector	pos;
+	float		x;
+	float		y;
 	t_vector	dir;
 	t_vector	plane;
 	t_keys		input;
