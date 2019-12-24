@@ -12,7 +12,7 @@ LFLAGS	= -L$(LIBFT) -L$(LIBMLX) -L$(X11)/lib -L. -lft -lmlx -lXext -lX11 -lz
 FFLAGS	= -framework CoreFoundation -framework AppKit -framework OpenGL
 SRCS	= $(addprefix $(SRCDIR)/, cub3d.c environment.c ray.c canvas.c color.c map.c vector.c settings.c hooks.c player.c error.c tick.c)
 OBJS	= $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
-HDRS	= $(addprefix $(INCDIR)/, environment.h ray.h canvas.h color.h vector.h settings.h)
+HDRS	= $(addprefix $(INCDIR)/, environment.h ray.h canvas.h color.h vector.h settings.h map.h)
 
 all:			libft libmlx $(NAME)
 

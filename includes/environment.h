@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/24 19:26:05 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/24 19:41:10 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,6 +19,7 @@
 # include <X11/X.h>
 # include <settings.h>
 # include <vector.h>
+# include <map.h>
 
 # define TITLE		"cub3d"
 
@@ -30,6 +31,7 @@
 # define KEY_ROT_L	123
 # define KEY_ROT_R	124
 
+# define HITBOX		0.2
 # define S_MOVEMENT	5.0
 # define S_ROTATION	2.0
 
@@ -43,33 +45,16 @@
 
 typedef struct		s_image
 {
-	void		*ptr;
-	int			w;
-	int			h;
-	char		*data;
-	int			bpp;
-	int			ls;
-	int			e;
+	void	*ptr;
+	char	*data;
+	int		w;
+	int		h;
+	int		bpp;
+	int		ls;
+	int		e;
 }					t_image;
 
-
-# define CELLS "012"
-
-typedef enum	e_cell
-{
-	SPACE, WALL, SPRITE
-}				t_cell;
-
-typedef struct		s_map
-{
-	int			w;
-	int			h;
-	t_cell		*cells;
-}				t_map;
-
 typedef unsigned	t_keys;
-
-# define HITBOX		0.2
 
 typedef struct		s_player
 {

@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   settings.h                                       .::    .:/ .      .::   */
+/*   map.h                                            .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/12/02 13:27:24 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/24 19:40:45 by chamada     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/12/24 19:35:05 by chamada      #+#   ##    ##    #+#       */
+/*   Updated: 2019/12/24 19:40:14 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef SETTINGS_H
-# define SETTINGS_H
+#ifndef MAP_H
+# define MAP_H
 
-# include <color.h>
+# define CELLS "012"
 
-# define SPRITE_TEX	4
-typedef struct	s_settings
+typedef enum	e_cell
+{
+	SPACE, WALL, SPRITE
+}				t_cell;
+
+typedef struct	s_map
 {
 	int		w;
 	int		h;
-	char	*tex[5];
-	t_color	color_f;
-	t_color	color_c;
-}				t_settings;
-
-void			clear_settings(t_settings *settings);
-int				parse_settings(t_settings *settings, char *line);
+	t_cell	*cells;
+}				t_map;
 
 #endif

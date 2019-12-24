@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 13:22:33 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/17 18:05:59 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/24 19:41:47 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,8 +24,8 @@ typedef enum		e_cardinal
 
 typedef struct		s_vector
 {
-	float		x;
-	float		y;
+	float	x;
+	float	y;
 }					t_vector;
 
 typedef struct		s_ivector
