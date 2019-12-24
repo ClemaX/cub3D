@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/07 15:56:06 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/23 22:52:33 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/24 19:29:04 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,21 +17,18 @@
 
 static t_cardinal	step_ray(t_ray *ray)
 {
-	t_cardinal	face;
-
 	if (ray->side_dist.x < ray->side_dist.y)
 	{
 		ray->side_dist.x += ray->step_dist.x;
 		ray->x += ray->step_dir.x;
-		face = (ray->dir.x < 0) ? WEST : EAST;
+		return ((ray->dir.x < 0) ? WEST : EAST);
 	}
 	else
 	{
 		ray->side_dist.y += ray->step_dist.y;
 		ray->y += ray->step_dir.y;
-		face = (ray->dir.y < 0) ? NORTH : SOUTH;
+		return ((ray->dir.y < 0) ? NORTH : SOUTH);
 	}
-	return (face);
 }
 
 void				init_ray(t_env *env, t_ray *ray, int x)
@@ -70,7 +67,7 @@ t_obstacle			cast_ray(t_env *env, t_ray *ray)
 	t_obstacle	obs;
 	float		offset;
 
-	while (env->map.cells[ray->y * env->map.w + ray->x].type != WALL)
+	while (env->map.cells[ray->y * env->map.w + ray->x] != WALL)
 		obs.face = step_ray(ray);
 	if (obs.face == WEST || obs.face == EAST)
 	{

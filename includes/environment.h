@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/24 18:45:02 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/24 19:26:05 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,7 +18,6 @@
 # include <mlx.h>
 # include <X11/X.h>
 # include <settings.h>
-# include <cell.h>
 # include <vector.h>
 
 # define TITLE		"cub3d"
@@ -52,6 +51,14 @@ typedef struct		s_image
 	int			ls;
 	int			e;
 }					t_image;
+
+
+# define CELLS "012"
+
+typedef enum	e_cell
+{
+	SPACE, WALL, SPRITE
+}				t_cell;
 
 typedef struct		s_map
 {

@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/09 22:31:20 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/23 23:01:23 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/24 19:15:37 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,7 +32,8 @@ void	move_player(t_env *env, t_vector movement, float factor)
 	check[4].x = check[0].x - half_hitbox;
 	check[4].y = check[0].y + half_hitbox;
 	i = 0;
-	while (i < 5 && env->map.cells[(int)check[i].y * env->map.w + (int)check[i].x].type != WALL)
+	while (i < 5
+	&& env->map.cells[(int)check[i].y * env->map.w + (int)check[i].x] != WALL)
 		i++;
 	if (i == 5)
 	{

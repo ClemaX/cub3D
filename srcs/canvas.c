@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/05 15:04:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/24 18:44:55 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/24 19:10:30 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -37,13 +37,12 @@ static inline t_color	get_color(t_image img, int x, int y)
 
 void					draw_column(t_env *env, int x, t_obstacle obs)
 {
-	int	height;
+	const int	height = env->settings.h / obs.distance;
 	int	start;
 	int	end;
 	int	y;
 	int tex_y;
 
-	height = env->settings.h / obs.distance;
 	start = -height / 2 + env->settings.h / 2;
 	end = height / 2 + env->settings.h / 2;
 	if (start < 0)
@@ -52,12 +51,12 @@ void					draw_column(t_env *env, int x, t_obstacle obs)
 		end = env->settings.h - 1;
 	y = 0;
 	while (y < env->settings.h && y < start)
-		put_canvas(env, x, y++, env->settings.color_f);
+		put_canvas(env, x, y++, env->settings.color_c);
 	while (y < end)
 	{
 		tex_y = (((y * 256 - env->settings.h * 128 + height * 128) * env->tex[obs.face].h) / height) / 256;
 		put_canvas(env, x, y++, get_color(env->tex[obs.face], obs.offset, tex_y));
 	}
 	while (y < env->settings.h - 1)
-		put_canvas(env, x, y++, env->settings.color_c);
+		put_canvas(env, x, y++, env->settings.color_f);
 }

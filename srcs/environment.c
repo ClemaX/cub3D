@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/23 22:38:01 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/24 19:05:53 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -55,15 +55,9 @@ static int	load_image(t_env *env, t_image *img, char *path)
 	if (path && (ext = ft_strrchr(path, '.')))
 	{
 		if (!ft_strncmp(ext, ".png", 4))
-		{
-			img->ptr =
-			mlx_png_file_to_image(env->mlx, path, &img->w, &img->h);
-		}
+			img->ptr = mlx_png_file_to_image(env->mlx, path, &img->w, &img->h);
 		else if (!ft_strncmp(ext, ".xpm", 4))
-		{
-			img->ptr =
-			mlx_xpm_file_to_image(env->mlx, path, &img->w, &img->h);
-		}
+			img->ptr = mlx_xpm_file_to_image(env->mlx, path, &img->w, &img->h);
 		else
 			return (0);
 		if (!img->ptr)

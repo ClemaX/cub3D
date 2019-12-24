@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 11:06:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/23 22:40:39 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/24 19:26:14 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -49,15 +49,15 @@ static int	parse_line(t_env *env, t_list *line, int row)
 		return (0);
 	if (row >= env->map.h || *s++ != '1')
 		return (0);
-	env->map.cells[row * env->map.w].type = WALL;
+	env->map.cells[row * env->map.w] = WALL;
 	count = 1;
 	while (*s)
 	{
-		if ((pos = ft_strpos(TYPES, *s)) != -1)
-			env->map.cells[row * env->map.w + count++].type = pos;
+		if ((pos = ft_strpos(CELLS, *s)) != -1)
+			env->map.cells[row * env->map.w + count++] = pos;
 		else if ((pos = ft_strpos(CARDINALS, *s)) != -1 && env->player.x == -1)
 		{
-			env->map.cells[row * env->map.w + count++].type = SPACE;
+			env->map.cells[row * env->map.w + count++] = SPACE;
 			env->player.x = count + 0.5;
 			env->player.y = row + 0.5;
 			env->player.dir = cardinal(pos);
