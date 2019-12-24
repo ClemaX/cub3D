@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/23 22:35:33 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/24 18:45:02 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -84,13 +84,13 @@ typedef struct		s_env
 	t_image		tex[5];
 }					t_env;
 
-typedef struct	s_obstacle
+typedef struct		s_obstacle
 {
 	t_cell		*cell;
 	t_cardinal	face;
 	int			offset;
 	float		distance;
-}				t_obstacle;
+}					t_obstacle;
 
 void				setup_env(t_env *env, int ac, char **av);
 void				destroy_env(t_env *env);

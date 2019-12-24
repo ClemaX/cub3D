@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/17 19:52:42 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/23 22:06:19 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/24 18:27:05 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,7 +23,5 @@ typedef struct	s_tick
 }				t_tick;
 
 void			do_tick(t_env *env);
-void			start_tick(t_tick *tick);
-void			end_tick(t_tick *tick);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:19:11 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/23 22:07:48 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/24 18:35:22 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,6 +14,7 @@
 #include <environment.h>
 #include <stdlib.h>
 #include <math.h>
+#include <tick.h>
 
 int	mouse_hook(int button, int x, int y, t_env *env)
 {
@@ -23,8 +24,6 @@ int	mouse_hook(int button, int x, int y, t_env *env)
 	(void)env;
 	return (0);
 }
-
-#include <tick.h>
 
 int	loop_hook(t_env *env)
 {

@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/05 15:04:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/23 22:19:52 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/24 18:44:55 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,8 +15,7 @@
 
 int						init_canvas(t_env *env)
 {
-	env->canvas.ptr = mlx_new_image(env->mlx,
-		env->settings.w, env->settings.h);
+	env->canvas.ptr = mlx_new_image(env->mlx, env->settings.w, env->settings.h);
 	if (!env->canvas.ptr)
 		return (0);
 	env->canvas.data = mlx_get_data_addr(env->canvas.ptr,
@@ -42,7 +41,7 @@ void					draw_column(t_env *env, int x, t_obstacle obs)
 	int	start;
 	int	end;
 	int	y;
-	int index_y;
+	int tex_y;
 
 	height = env->settings.h / obs.distance;
 	start = -height / 2 + env->settings.h / 2;
@@ -56,8 +55,8 @@ void					draw_column(t_env *env, int x, t_obstacle obs)
 		put_canvas(env, x, y++, env->settings.color_f);
 	while (y < end)
 	{
-		index_y = (((y * 256 - env->settings.h * 128 + height * 128) * env->tex[obs.face].h) / height) / 256;
-		put_canvas(env, x, y++, get_color(env->tex[obs.face], obs.offset, index_y));
+		tex_y = (((y * 256 - env->settings.h * 128 + height * 128) * env->tex[obs.face].h) / height) / 256;
+		put_canvas(env, x, y++, get_color(env->tex[obs.face], obs.offset, tex_y));
 	}
 	while (y < env->settings.h - 1)
 		put_canvas(env, x, y++, env->settings.color_c);
