@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/04 12:49:55 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/17 18:06:46 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/25 21:33:38 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,7 +14,7 @@
 #include <vector.h>
 #include <math.h>
 
-t_vector	vector(float x, float y)
+inline t_vector	vector(float x, float y)
 {
 	t_vector	vector;
 
@@ -23,15 +23,15 @@ t_vector	vector(float x, float y)
 	return (vector);
 }
 
-void		vrotate(t_vector *vector, float alpha)
+void			vrotate(t_vector *vector, float alpha)
 {
 	const float old_x = vector->x;
 
-	vector->x = vector->x * cos(alpha) - vector->y * sin(alpha);
-	vector->y = old_x * sin(alpha) + vector->y * cos(alpha);
+	vector->x = vector->x * cosf(alpha) - vector->y * sinf(alpha);
+	vector->y = old_x * sinf(alpha) + vector->y * cosf(alpha);
 }
 
-t_vector	cardinal(t_cardinal direction)
+t_vector		cardinal(t_cardinal direction)
 {
 	if (direction == NORTH)
 		return (vector(0, -1));
@@ -45,7 +45,7 @@ t_vector	cardinal(t_cardinal direction)
 		return (vector(0, 0));
 }
 
-t_ivector	ivector(int x, int y)
+inline t_ivector	ivector(int x, int y)
 {
 	t_ivector	ivector;
 
@@ -54,7 +54,7 @@ t_ivector	ivector(int x, int y)
 	return (ivector);
 }
 
-t_ivector	vtoiv(t_vector vector)
+inline t_ivector	vtoiv(t_vector vector)
 {
 	return (ivector((int)vector.x, (int)vector.y));
 }

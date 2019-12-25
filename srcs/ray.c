@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/07 15:56:06 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/24 19:29:04 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/25 21:37:14 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -79,10 +79,10 @@ t_obstacle			cast_ray(t_env *env, t_ray *ray)
 		obs.distance = (ray->y - env->player.y + (1 - ray->step_dir.y) / 2) / ray->dir.y;
 		offset = env->player.x + obs.distance * ray->dir.x;
 	}
-	offset -= floor(offset);
+	offset -= floorf(offset);
 	obs.offset = (int)(offset * (float)env->tex[obs.face].w);
 	if (((obs.face == WEST || obs.face == EAST) && ray->dir.x > 0)
 	|| ((obs.face == NORTH || obs.face == SOUTH) && ray->dir.y < 0))
-		obs.offset = env->tex[obs.face].h - obs.offset - 1;
+		obs.offset = env->tex[obs.face].w - obs.offset - 1;
 	return (obs);
 }

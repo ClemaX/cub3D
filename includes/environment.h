@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/24 19:41:10 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/25 01:40:52 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -65,6 +65,11 @@ typedef struct		s_player
 	t_keys		input;
 }					t_player;
 
+typedef enum		e_mode
+{
+	INTERACT, SAVE, BENCH
+}					t_mode;
+
 typedef struct		s_env
 {
 	void		*mlx;
@@ -84,7 +89,9 @@ typedef struct		s_obstacle
 	float		distance;
 }					t_obstacle;
 
-void				setup_env(t_env *env, int ac, char **av);
+int					benchmark(t_env *env);
+t_mode				get_mode(int ac, const char **av);
+void				setup_env(t_env *env, t_mode mode, const char *path);
 void				destroy_env(t_env *env);
 int					read_map(t_env *env, char *line);
 int					init_canvas(t_env *env);

@@ -6,14 +6,13 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:19:11 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/24 18:35:22 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/25 21:32:05 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <environment.h>
 #include <stdlib.h>
-#include <math.h>
 #include <tick.h>
 
 int	mouse_hook(int button, int x, int y, t_env *env)
@@ -40,36 +39,40 @@ int	key_enable(int key, t_env *env)
 		destroy_env(env);
 		exit(0);
 	}
-	if (key == KEY_UP)
+	else if (key == KEY_UP)
 		env->player.input ^= UP;
-	if (key == KEY_DOWN)
+	else if (key == KEY_DOWN)
 		env->player.input ^= DOWN;
-	if (key == KEY_LEFT)
+	else if (key == KEY_LEFT)
 		env->player.input ^= LEFT;
-	if (key == KEY_RIGHT)
+	else if (key == KEY_RIGHT)
 		env->player.input ^= RIGHT;
-	if (key == KEY_ROT_L)
+	else if (key == KEY_ROT_L)
 		env->player.input ^= ROT_LEFT;
-	if (key == KEY_ROT_R)
+	else if (key == KEY_ROT_R)
 		env->player.input ^= ROT_RIGHT;
-	return (0);
+	else
+		return (0);
+	return (1);
 }
 
 int	key_disable(int key, t_env *env)
 {
 	if (key == KEY_UP)
 		env->player.input &= ~UP;
-	if (key == KEY_DOWN)
+	else if (key == KEY_DOWN)
 		env->player.input &= ~DOWN;
-	if (key == KEY_LEFT)
+	else if (key == KEY_LEFT)
 		env->player.input &= ~LEFT;
-	if (key == KEY_RIGHT)
+	else if (key == KEY_RIGHT)
 		env->player.input &= ~RIGHT;
-	if (key == KEY_ROT_L)
+	else if (key == KEY_ROT_L)
 		env->player.input &= ~ROT_LEFT;
-	if (key == KEY_ROT_R)
+	else if (key == KEY_ROT_R)
 		env->player.input &= ~ROT_RIGHT;
-	return (0);
+	else
+		return (0);
+	return (1);
 }
 
 int	destroy_hook(t_env *env)

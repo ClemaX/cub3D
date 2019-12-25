@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/17 17:42:59 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/24 18:30:31 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/25 02:03:35 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,6 +14,7 @@
 #include <environment.h>
 #include <tick.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 static inline void	start_tick(t_tick *tick)
 {
@@ -36,7 +37,7 @@ static inline void	end_tick(t_tick *tick)
 	else
 	{
 		gettimeofday(&now, NULL);
-		tick->delta = ((now.tv_sec) + (now.tv_usec) / 1000000.0) - tick->start;
+		tick->delta = (now.tv_sec + now.tv_usec / 1000000.0) - tick->start;
 	}
 }
 
