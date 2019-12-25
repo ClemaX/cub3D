@@ -67,3 +67,19 @@ void	do_tick(t_env *env)
 	mlx_put_image_to_window(env->mlx, env->win, env->canvas.ptr, 0, 0);
 	end_tick(&tick);
 }
+
+int		benchmark(t_env *env)
+{
+	static int		i;
+
+	if (i == 0)
+		env->player.input = UP | LEFT | ROT_LEFT;
+	do_tick(env);
+	if (i++ == 500)
+	{
+		ft_printf("%lu\n", clock());
+		destroy_env(env);
+		exit(0);
+	}
+	return (1);
+}

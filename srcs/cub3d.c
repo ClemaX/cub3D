@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 02:51:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/23 22:42:10 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/25 03:04:26 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,13 +29,14 @@ void	refresh(t_env *env)
 	}
 }
 
-int		main(int ac, char **av)
+int				main(int ac, const char **av)
 {
+	const t_mode	mode = get_mode(ac, av);
 	static t_env	env;
 
-	setup_env(&env, ac, av);
+	setup_env(&env, mode, av[1]);
 	refresh(&env);
-	if (ac == 3)
+	if (mode == SAVE)
 	{
 		write_bmp("frame.bmp", env.canvas.data, env.canvas.w, env.canvas.h);
 		destroy_env(&env);

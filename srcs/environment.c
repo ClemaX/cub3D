@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/24 19:05:53 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/25 01:40:36 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,7 +19,7 @@
 #include <stdlib.h>
 #include <X11/Xlib.h>
 
-static int	parse_cub(t_env *env, char *path)
+static int	parse_cub(t_env *env, const char *path)
 {
 	int		fd;
 	char	*ext;
@@ -86,16 +86,28 @@ static int	load_images(t_env *env)
 	return (1);
 }
 
-void		setup_env(t_env *env, int ac, char **av)
+t_mode	get_mode(int ac, const char **av)
+{
+	if (ac == 3)
+	{
+		if (!ft_strncmp(av[2], "--save", 7))
+			return (SAVE);
+		if (!ft_strncmp(av[2], "--bench", 8))
+			return (BENCH);
+	}
+	if (ac != 2)
+	{
+		errno = EINVAL;
+		error(0);
+	}
+	return (INTERACT);
+}
+
+void		setup_env(t_env *env, t_mode mode, const char *path)
 {
 	const Screen	*screen = DefaultScreenOfDisplay(XOpenDisplay(NULL));
 
-	if (!(ac == 3 && !ft_strncmp(av[2], "--save", 7)) && ac != 2)
-	{
-		errno = EINVAL;
-		error(env);
-	}
-	if (!(parse_cub(env, av[1]) && (env->mlx = mlx_init()) && load_images(env)))
+	if (!(parse_cub(env, path) && (env->mlx = mlx_init()) && load_images(env)))
 		error(env);
 	env->player.input = 0;
 	if (env->settings.w > screen->width)
@@ -106,7 +118,7 @@ void		setup_env(t_env *env, int ac, char **av)
 	mlx_new_window(env->mlx, env->settings.w, env->settings.h, TITLE);
 	if (!env->win || !init_canvas(env))
 		error(env);
-	mlx_loop_hook(env->mlx, &loop_hook, env);
+	mlx_loop_hook(env->mlx, (mode == INTERACT) ? &loop_hook : &benchmark, env);
 	mlx_hook(env->win, DestroyNotify, NoEventMask, &destroy_hook, env);
 	mlx_hook(env->win, KeyPress, KeyPressMask, &key_enable, env);
 	mlx_hook(env->win, KeyRelease, KeyReleaseMask, &key_disable, env);
@@ -117,17 +129,20 @@ void		destroy_env(t_env *env)
 {
 	int	i;
 
-	free(env->map.cells);
-	i = 0;
-	while (i < 5)
+	if (env)
 	{
-		if (env->tex[i].ptr)
-			mlx_destroy_image(env->mlx, env->tex[i].ptr);
-		free(env->settings.tex[i]);
-		i++;
+		free(env->map.cells);
+		i = 0;
+		while (i < 5)
+		{
+			if (env->tex[i].ptr)
+				mlx_destroy_image(env->mlx, env->tex[i].ptr);
+			free(env->settings.tex[i]);
+			i++;
+		}
+		if (env->canvas.ptr)
+			mlx_destroy_image(env->mlx, env->canvas.ptr);
+		if (env->win)
+			mlx_destroy_window(env->mlx, env->win);
 	}
-	if (env->canvas.ptr)
-		mlx_destroy_image(env->mlx, env->canvas.ptr);
-	if (env->win)
-		mlx_destroy_window(env->mlx, env->win);
 }
