@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 11:06:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/24 19:26:14 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/27 00:58:43 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -101,17 +101,21 @@ int			read_map(t_env *env, char *line)
 	{
 		if (*line != '1')
 		{
+			free(line);
+			ft_lstclear(&lines, &free);
 			errno = EFTYPE;
 			return (-1);
 		}
 		if (!(new = ft_lstnew(line)))
 		{
+			free(line);
 			ft_lstclear(&lines, &free);
 			return (-1);
 		}
 		ft_lstadd_back(&lines, new);
 		return (1);
 	}
+	free(line);
 	if (!parse_map(env, lines))
 	{
 		errno = EFTYPE;

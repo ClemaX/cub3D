@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/25 01:40:36 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/27 01:06:43 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -105,8 +105,11 @@ t_mode	get_mode(int ac, const char **av)
 
 void		setup_env(t_env *env, t_mode mode, const char *path)
 {
-	const Screen	*screen = DefaultScreenOfDisplay(XOpenDisplay(NULL));
+	Display 		*display;
+	Screen			*screen;
 
+	display = XOpenDisplay(NULL);
+	screen = DefaultScreenOfDisplay(display);
 	if (!(parse_cub(env, path) && (env->mlx = mlx_init()) && load_images(env)))
 		error(env);
 	env->player.input = 0;
@@ -123,6 +126,7 @@ void		setup_env(t_env *env, t_mode mode, const char *path)
 	mlx_hook(env->win, KeyPress, KeyPressMask, &key_enable, env);
 	mlx_hook(env->win, KeyRelease, KeyReleaseMask, &key_disable, env);
 	mlx_mouse_hook(env->win, &mouse_hook, env);
+	XCloseDisplay(display);
 }
 
 void		destroy_env(t_env *env)
@@ -144,5 +148,6 @@ void		destroy_env(t_env *env)
 			mlx_destroy_image(env->mlx, env->canvas.ptr);
 		if (env->win)
 			mlx_destroy_window(env->mlx, env->win);
+		free(env->mlx);
 	}
 }
