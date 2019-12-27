@@ -208,15 +208,16 @@ int	mipng_data(mlx_img_list_t *img, unsigned char *dat, png_info_t *pi)
 	  b_pos += Z_CHUNK - z_strm.avail_out;
 	}
       dat += len + 4 + 4 + 4;
-    } 
+    }
   inflateEnd(&z_strm);
   if (b_pos != img->width*img->height*pi->bpp+img->height)
     {
+      free(buffer);
       //      printf("pb : bpos %d vs expected %d\n", b_pos, img->width*img->height*pi->bpp+img->height);
       return (ERR_DATA_MISMATCH);
     }
-  if ((ret = mipng_fill_img(img, buffer, pi)))
-    return (ret);
+  ret = mipng_fill_img(img, buffer, pi);
+  free(buffer);
   return (0);
 }
 
