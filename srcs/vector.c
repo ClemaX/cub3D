@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/04 12:49:55 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/25 21:33:38 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/26 02:10:41 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,7 +31,7 @@ void			vrotate(t_vector *vector, float alpha)
 	vector->y = old_x * sinf(alpha) + vector->y * cosf(alpha);
 }
 
-t_vector		cardinal(t_cardinal direction)
+inline t_vector		cardinal(t_cardinal direction)
 {
 	if (direction == NORTH)
 		return (vector(0, -1));

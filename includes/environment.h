@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/25 01:40:52 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/26 03:07:05 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -102,7 +102,7 @@ int					key_enable(int key, t_env *env);
 int					key_disable(int key, t_env *env);
 int					loop_hook(t_env *env);
 int					destroy_hook(t_env *param);
-void				move_player(t_env *env, t_vector movement, float factor);
+void				move_player(t_env *env, t_vector movement);
 void				error(t_env *env);
 
 #endif
