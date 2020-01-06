@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 11:06:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/27 00:58:43 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/01 04:30:43 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,6 +17,11 @@
 
 static int	init_map(t_env *env, int width, int height)
 {
+	if (!width || !height)
+	{
+		errno = EFTYPE;
+		return (0);
+	}
 	env->player.x = -1;
 	env->player.y = -1;
 	env->map.w = width;
@@ -38,36 +43,24 @@ static int	count_cells(t_list *line)
 	return (count);
 }
 
-static int	parse_line(t_env *env, t_list *line, int row)
+static int	parse_line(t_env *env, t_list *line, int y)
 {
 	char	*s;
-	int		count;
+	int		x;
 	int		pos;
 
 	s = line->content;
-	if (row == env->map.h - 1 && count_cells(line) != env->map.w)
+	if (y == env->map.h - 1 && count_cells(line) != env->map.w)
 		return (0);
-	if (row >= env->map.h || *s++ != '1')
+	if (y >= env->map.h || *s++ != '1')
 		return (0);
-	env->map.cells[row * env->map.w] = WALL;
-	count = 1;
+	env->map.cells[y * env->map.w] = WALL;
+	x = 1;
 	while (*s)
 	{
-		if ((pos = ft_strpos(CELLS, *s)) != -1)
-			env->map.cells[row * env->map.w + count++] = pos;
-		else if ((pos = ft_strpos(CARDINALS, *s)) != -1 && env->player.x == -1)
-		{
-			env->map.cells[row * env->map.w + count++] = SPACE;
-			env->player.x = count + 0.5;
-			env->player.y = row + 0.5;
-			env->player.dir = cardinal(pos);
-			env->player.plane = cardinal(ft_strpos(CARDINALS, PLANES[pos]));
-		}
-		else if (!ft_isspace(*s))
-			return (0);
-		s++;
+		
 	}
-	return (s[-1] == '1' && count == env->map.w);
+	return (s[-1] == '1' && x == env->map.w);
 }
 
 static int	parse_map(t_env *env, t_list *lines)
@@ -79,17 +72,15 @@ static int	parse_map(t_env *env, t_list *lines)
 	current = lines;
 	if (!(init_map(env, count_cells(current), ft_lstsize(lines))))
 		return (0);
-	while (current)
-	{
-		if (!parse_line(env, current, count++))
-		{
-			ft_lstclear(&lines, &free);
-			return (0);
-		}
+	while (current && parse_line(env, current, count++))
 		current = current->next;
-	}
 	ft_lstclear(&lines, &free);
-	return (1);
+	if (current)
+	{
+		errno = EFTYPE;
+		return (0);
+	}
+	return(1);
 }
 
 int			read_map(t_env *env, char *line)
@@ -117,9 +108,6 @@ int			read_map(t_env *env, char *line)
 	}
 	free(line);
 	if (!parse_map(env, lines))
-	{
-		errno = EFTYPE;
 		return (-1);
-	}
 	return (0);
 }

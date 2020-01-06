@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 13:22:33 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/24 19:41:47 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/01 05:37:26 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,6 +38,5 @@ t_vector			vector(float x, float y) __attribute__((always_inline));
 t_vector			cardinal(t_cardinal direction);
 t_ivector			ivector(int x, int y) __attribute__((always_inline));
 t_ivector			vtoiv(t_vector vector) __attribute__((always_inline));
-void				vrotate(t_vector *vector, float alpha);
 
 #endif

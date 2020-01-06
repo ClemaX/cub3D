@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   color.c                                          .::    .:/ .      .::   */
+/*   sprite.h                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/11/29 11:10:50 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/01 04:53:23 by chamada     ###    #+. /#+    ###.fr     */
+/*   Created: 2020/01/01 05:00:35 by chamada      #+#   ##    ##    #+#       */
+/*   Updated: 2020/01/01 05:12:21 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <color.h>
+#ifndef SPRITE_H
+# define SPRITE_H
 
-int		set_color(t_color *color, unsigned r, unsigned g, unsigned b)
+#include <environment.h>
+
+typedef enum	e_sprite_id
 {
-	if (r > 255 || g > 255 || b > 255)
-		return (0);
-	color->rgb.a = 0;
-	color->rgb.r = (unsigned char)r;
-	color->rgb.g = (unsigned char)g;
-	color->rgb.b = (unsigned char)b;
-	return (1);
-}
+	SPRITE
+}				t_sprite_id;
 
-t_color	color(unsigned char r, unsigned char g, unsigned char b)
+typedef struct	s_sprite
 {
-	t_color c;
+	t_vector	pos;
+	t_sprite_id	id;
+}				t_sprite;
 
-	c.rgb.a = 0;
-	c.rgb.r = r;
-	c.rgb.g = g;
-	c.rgb.b = b;
-	return (c);
-}
+void	draw_sprites(t_env *env);
+
+#endif

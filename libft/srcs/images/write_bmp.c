@@ -35,7 +35,7 @@ static unsigned char	*get_dib_header(int w, int h)
 }
 
 int					write_bmp(const char *path, const char *buffer,
-	int16_t w, int16_t h)
+	short w, short h)
 {
 	int	fd;
 

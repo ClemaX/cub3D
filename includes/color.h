@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 06:51:12 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/05 15:39:18 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/01 04:52:36 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,7 +22,7 @@ typedef union	u_color
 		unsigned char	b;
 		unsigned char	g;
 		unsigned char	r;
-		char			set;
+		unsigned char	a;
 	}		rgb;
 }				t_color;
 

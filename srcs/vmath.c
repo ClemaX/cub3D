@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   color.c                                          .::    .:/ .      .::   */
+/*   vmath.c                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/11/29 11:10:50 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/01 04:53:23 by chamada     ###    #+. /#+    ###.fr     */
+/*   Created: 2020/01/01 05:04:51 by chamada      #+#   ##    ##    #+#       */
+/*   Updated: 2020/01/01 05:44:48 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <color.h>
+#include <vector.h>
+#include <math.h>
 
-int		set_color(t_color *color, unsigned r, unsigned g, unsigned b)
+void			vrotate(t_vector *vector, float alpha)
 {
-	if (r > 255 || g > 255 || b > 255)
-		return (0);
-	color->rgb.a = 0;
-	color->rgb.r = (unsigned char)r;
-	color->rgb.g = (unsigned char)g;
-	color->rgb.b = (unsigned char)b;
-	return (1);
+	const float old_x = vector->x;
+
+	vector->x = vector->x * cosf(alpha) - vector->y * sinf(alpha);
+	vector->y = old_x * sinf(alpha) + vector->y * cosf(alpha);
 }
 
-t_color	color(unsigned char r, unsigned char g, unsigned char b)
+inline float	vdist(t_vector *a, t_vector *b)
 {
-	t_color c;
-
-	c.rgb.a = 0;
-	c.rgb.r = r;
-	c.rgb.g = g;
-	c.rgb.b = b;
-	return (c);
+	return (sqrtf(powf(b->x - a->x, 2), powf(b->y - a->y, 2)))
 }

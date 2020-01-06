@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/27 01:06:43 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/01 05:16:25 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -46,44 +46,6 @@ static int	parse_cub(t_env *env, const char *path)
 		return (0);
 	}
 	return (ret != -1);
-}
-
-static int	load_image(t_env *env, t_image *img, char *path)
-{
-	const char *ext;
-
-	if (path && (ext = ft_strrchr(path, '.')))
-	{
-		if (!ft_strncmp(ext, ".png", 4))
-			img->ptr = mlx_png_file_to_image(env->mlx, path, &img->w, &img->h);
-		else if (!ft_strncmp(ext, ".xpm", 4))
-			img->ptr = mlx_xpm_file_to_image(env->mlx, path, &img->w, &img->h);
-		else
-			return (0);
-		if (!img->ptr)
-			return (0);
-		img->data = mlx_get_data_addr(img->ptr, &img->bpp, &img->ls, &img->e);
-	}
-	else
-		return (0);
-	return (1);
-}
-
-static int	load_images(t_env *env)
-{
-	int	i;
-
-	i = 0;
-	while (i < 5)
-	{
-		if (!load_image(env, &env->tex[i], env->settings.tex[i]))
-		{
-			errno = EFTYPE;
-			return (0);
-		}
-		i++;
-	}
-	return (1);
 }
 
 t_mode	get_mode(int ac, const char **av)

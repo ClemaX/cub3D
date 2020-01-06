@@ -1,36 +1,40 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   color.c                                          .::    .:/ .      .::   */
+/*   sprite.c                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/11/29 11:10:50 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/01 04:53:23 by chamada     ###    #+. /#+    ###.fr     */
+/*   Created: 2020/01/01 01:25:46 by chamada      #+#   ##    ##    #+#       */
+/*   Updated: 2020/01/06 22:11:25 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <color.h>
+#include <environment.h>
+#include <libft.h>
+#include <map.h>
+#include <math.h>
+#include <sprite.h>
 
-int		set_color(t_color *color, unsigned r, unsigned g, unsigned b)
+t_sprite	*new_sprite(int x, int y)
 {
-	if (r > 255 || g > 255 || b > 255)
+	t_sprite	*sprite;
+
+	if (!(sprite = malloc(sizeof(sprite))))
 		return (0);
-	color->rgb.a = 0;
-	color->rgb.r = (unsigned char)r;
-	color->rgb.g = (unsigned char)g;
-	color->rgb.b = (unsigned char)b;
-	return (1);
+	sprite->pos.x = x;
+	sprite->pos.y = y;
+	return (sprite);
 }
 
-t_color	color(unsigned char r, unsigned char g, unsigned char b)
+static void	draw_sprite(t_env *env, t_sprite *sprite)
 {
-	t_color c;
 
-	c.rgb.a = 0;
-	c.rgb.r = r;
-	c.rgb.g = g;
-	c.rgb.b = b;
-	return (c);
+}
+
+void		draw_sprites(t_env *env)
+{
+	sprites_dist(env, env->sprites);
+	ft_lstcmpsort(&env->sprites, );
 }

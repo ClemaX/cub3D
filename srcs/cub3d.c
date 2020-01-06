@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 02:51:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/25 03:04:26 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/01 04:46:46 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,6 +14,8 @@
 #include <environment.h>
 #include <ray.h>
 #include <stdio.h>
+#include <libft.h>
+#include <canvas.h>
 
 void	refresh(t_env *env)
 {
@@ -21,12 +23,16 @@ void	refresh(t_env *env)
 	int		x;
 
 	x = 0;
-	while (x < env->settings.w)
+	while (x < env->canvas.w)
 	{
 		init_ray(env, &ray, x);
-		draw_column(env, x, cast_ray(env, &ray));
+		env->zbuffer[x] = cast_ray(env, &ray);
 		x++;
 	}
+	while (x > 0)
+		draw_column(env, x--);
+	if (env->sprites)
+		draw_sprites(env);
 }
 
 int				main(int ac, const char **av)
@@ -38,7 +44,8 @@ int				main(int ac, const char **av)
 	refresh(&env);
 	if (mode == SAVE)
 	{
-		write_bmp("frame.bmp", env.canvas.data, env.canvas.w, env.canvas.h);
+		if (write_bmp("frame.bmp", env.canvas.data, env.canvas.w, env.canvas.h) != 1)
+			error(&env);
 		destroy_env(&env);
 		return (0);
 	}
