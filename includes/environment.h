@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/01 05:47:07 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/08 23:39:29 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -50,6 +50,14 @@ typedef enum		e_mode
 	INTERACT, SAVE, BENCH
 }					t_mode;
 
+typedef struct		s_obstacle
+{
+	t_cell		*cell;
+	t_cardinal	face;
+	int			offset;
+	float		distance;
+}					t_obstacle;
+
 typedef struct		s_env
 {
 	void		*mlx;
@@ -62,14 +70,6 @@ typedef struct		s_env
 	t_image		tex[5];
 	t_list		*sprites;
 }					t_env;
-
-typedef struct		s_obstacle
-{
-	t_cell		*cell;
-	t_cardinal	face;
-	int			offset;
-	float		distance;
-}					t_obstacle;
 
 int					benchmark(t_env *env);
 t_mode				get_mode(int ac, const char **av);
@@ -86,5 +86,8 @@ int					loop_hook(t_env *env);
 int					destroy_hook(t_env *param);
 void				move_player(t_env *env, t_vector movement);
 void				error(t_env *env);
+int					load_images(t_env *env);
+int 				parse_cell(t_env *env, char c, int *x, int y);
+t_vector			camera_transform(t_env *env, t_vector vector);
 
 #endif

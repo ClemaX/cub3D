@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 11:06:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/01 04:30:43 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/08 23:39:41 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -47,7 +47,6 @@ static int	parse_line(t_env *env, t_list *line, int y)
 {
 	char	*s;
 	int		x;
-	int		pos;
 
 	s = line->content;
 	if (y == env->map.h - 1 && count_cells(line) != env->map.w)
@@ -57,9 +56,8 @@ static int	parse_line(t_env *env, t_list *line, int y)
 	env->map.cells[y * env->map.w] = WALL;
 	x = 1;
 	while (*s)
-	{
-		
-	}
+		if (parse_cell(env, *s++, &x, y) != 1)
+			return (0);
 	return (s[-1] == '1' && x == env->map.w);
 }
 

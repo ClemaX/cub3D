@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/01 05:04:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/01 05:44:48 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/08 20:52:34 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,5 +24,10 @@ void			vrotate(t_vector *vector, float alpha)
 
 inline float	vdist(t_vector *a, t_vector *b)
 {
-	return (sqrtf(powf(b->x - a->x, 2), powf(b->y - a->y, 2)))
+	return (sqrtf(powf(b->x - a->x, 2) + powf(b->y - a->y, 2)));
+}
+
+inline float	vmag(t_vector *vector)
+{
+	return (sqrtf(powf(vector->x, 2) + powf(vector->y, 2)));
 }

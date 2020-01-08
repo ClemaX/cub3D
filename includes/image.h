@@ -6,13 +6,15 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/01 05:19:25 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/01 05:20:37 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/08 20:13:18 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #ifndef IMAGE_H
 # define IMAGE_H
+
+#include <environment.h>
 
 typedef struct	s_image
 {

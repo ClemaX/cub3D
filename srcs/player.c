@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/09 22:31:20 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/26 03:07:23 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/08 23:11:23 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,7 +30,8 @@ static int collision(t_map *map, float x, float y)
 	check[3].x = x - half_hitbox;
 	check[3].y = y + half_hitbox;
 	i = 0;
-	while (i < 4 && map->cells[(int)check[i].y * map->w + (int)check[i].x] != WALL)
+	while (i < 4
+	&& map->cells[(int)check[i].y * map->w + (int)check[i].x] != WALL)
 		i++;
 	return (i != 4);
 }
@@ -45,4 +46,15 @@ void	move_player(t_env *env, t_vector movement)
 		env->player.x = new_pos.x;
 	if (!collision(&env->map, env->player.x, new_pos.y))
 		env->player.y = new_pos.y;
+}
+
+t_vector	camera_transform(t_env *env, t_vector vector)
+{
+	const double	factor = 1.0 / (env->player.plane.x * env->player.dir.x
+		- env->player.dir.y * env->player.plane.y);
+	t_vector		transform;
+
+	transform.x = factor * (env->player.dir.y * vector.x - env->player.dir.x * vector.y);
+	transform.y = factor * (-env->player.plane.y * vector.x + env->player.plane.x * vector.y);
+	return (transform);
 }

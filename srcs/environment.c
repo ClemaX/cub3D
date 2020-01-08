@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/01 05:16:25 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/09 00:25:21 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -67,18 +67,18 @@ t_mode	get_mode(int ac, const char **av)
 
 void		setup_env(t_env *env, t_mode mode, const char *path)
 {
-	Display 		*display;
-	Screen			*screen;
+//	Display 		*display;
+//	Screen			*screen;
 
-	display = XOpenDisplay(NULL);
-	screen = DefaultScreenOfDisplay(display);
+//	display = XOpenDisplay(NULL);
+//	screen = DefaultScreenOfDisplay(display);
 	if (!(parse_cub(env, path) && (env->mlx = mlx_init()) && load_images(env)))
 		error(env);
 	env->player.input = 0;
-	if (env->settings.w > screen->width)
-		env->settings.w = screen->width;
-	if (env->settings.h > screen->height)
-		env->settings.h = screen->height;
+//	if (env->settings.w > screen->width)
+//		env->settings.w = screen->width;
+//	if (env->settings.h > screen->height)
+//		env->settings.h = screen->height;
 	env->win =
 	mlx_new_window(env->mlx, env->settings.w, env->settings.h, TITLE);
 	if (!env->win || !init_canvas(env))
@@ -88,7 +88,7 @@ void		setup_env(t_env *env, t_mode mode, const char *path)
 	mlx_hook(env->win, KeyPress, KeyPressMask, &key_enable, env);
 	mlx_hook(env->win, KeyRelease, KeyReleaseMask, &key_disable, env);
 	mlx_mouse_hook(env->win, &mouse_hook, env);
-	XCloseDisplay(display);
+//	XCloseDisplay(display);
 }
 
 void		destroy_env(t_env *env)

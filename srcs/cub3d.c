@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 02:51:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/01 04:46:46 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/09 00:06:14 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <libft.h>
 #include <canvas.h>
+#include <sprite.h>
 
 void	refresh(t_env *env)
 {
@@ -29,13 +30,13 @@ void	refresh(t_env *env)
 		env->zbuffer[x] = cast_ray(env, &ray);
 		x++;
 	}
+	x--;
 	while (x > 0)
 		draw_column(env, x--);
-	if (env->sprites)
-		draw_sprites(env);
+	draw_sprites(env);
 }
 
-int				main(int ac, const char **av)
+int		main(int ac, const char **av)
 {
 	const t_mode	mode = get_mode(ac, av);
 	static t_env	env;

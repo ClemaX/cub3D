@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/06 19:54:04 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/06 22:08:04 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/09 00:42:55 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,17 +20,17 @@ static void	lstsplit(t_list *lst, t_list **a, t_list **b)
 	t_list	*fast;
 
 	slow = lst;
-	fast = lst;
+	fast = lst->next;
 	while (fast)
 	{
-		if (fast = fast->next)
+		if ((fast = fast->next))
 		{
-			slow = fast;
+			slow = slow->next;
 			fast = fast->next;
 		}
 	}
-	a = lst;
-	b = slow->next;
+	*a = lst;
+	*b = slow->next;
 	slow->next = NULL;
 }
 
@@ -42,15 +42,15 @@ static void	*lstmergecmp(t_list *a, t_list *b, int (*cmp)(void*, void*))
 		return (b);
 	if (b == NULL)
 		return (a);
-	if (cmp(a, b) > 0)
+	if (cmp(a->content, b->content) > 0)
 	{
-		a->next = lstmergecmp(a->next, b, cmp);
 		lst = a;
+		lst->next = lstmergecmp(a->next, b, cmp);
 	}
 	else
 	{
-		b->next = a;
-		lst = lstmergecmp(a, b->next, cmp);
+		lst = b;
+		lst->next = lstmergecmp(a, b->next, cmp);
 	}
 	return (lst);
 }
@@ -61,11 +61,11 @@ void		ft_lstcmpsort(t_list **lst, int (*cmp)(void*, void*))
 	t_list	*a;
 	t_list	*b;
 
-	if ((*lst) == NULL || (*lst)->next == NULL)
+	head = *lst;
+	if (head == NULL || head->next == NULL)
 		return ;
-	head = lst;
 	lstsplit(head, &a, &b);
-	ft_lstcmpsort(a, cmp);
-	ft_lstcmpsort(b, cmp);
-	lst = lstmergecmp(a, b, cmp);
+	ft_lstcmpsort(&a, cmp);
+	ft_lstcmpsort(&b, cmp);
+	*lst = lstmergecmp(a, b, cmp);
 }

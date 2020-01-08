@@ -6,12 +6,13 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/05 15:04:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/01 01:19:08 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/08 23:53:03 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <environment.h>
+#include <stdlib.h>
 
 int						init_canvas(t_env *env)
 {
@@ -22,8 +23,9 @@ int						init_canvas(t_env *env)
 		&env->canvas.bpp, &env->canvas.ls, &env->canvas.e);
 	env->canvas.w = env->settings.w;
 	env->canvas.h = env->settings.h;
-	env->zbuffer = malloc(sizeof(float) * env->canvas.w);
-	if (!env->zbuffer);
+	env->zbuffer = malloc(sizeof(*env->zbuffer) * env->canvas.w);
+	if (!env->zbuffer)
+		return (0);
 	return (1);
 }
 
@@ -56,8 +58,9 @@ void					draw_column(t_env *env, int x)
 		put_canvas(env, x, y++, env->settings.color_c);
 	while (y < end)
 	{
-		put_canvas(env, x, y++, get_color(env->tex[obs.face], obs.offset, 
+		put_canvas(env, x, y, get_color(env->tex[obs.face], obs.offset, 
 		(((y * 256 - env->settings.h * 128 + height * 128) * env->tex[obs.face].h) / height) / 256));
+		y++;
 	}
 	while (y < env->settings.h - 1)
 		put_canvas(env, x, y++, env->settings.color_f);

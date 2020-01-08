@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/17 17:42:59 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/26 13:31:27 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/08 20:20:41 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,6 +15,7 @@
 #include <tick.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <vmath.h>
 
 static inline void	start_tick(t_tick *tick)
 {
