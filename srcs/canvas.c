@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/05 15:04:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/09 23:35:26 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/09 23:53:07 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -97,30 +97,3 @@ void					draw_column(t_env *env, int x, t_obstacle obs)
 	while (y < env->settings.h - 1)
 		put_canvas(env, x, y++, env->settings.color_f);
 }
-
-/* void					draw_column(t_env *env, int x)
-{
-	const t_obstacle	obs = env->zbuffer[x];
-	const int			height = env->settings.h / obs.distance;
-	int					start;
-	int					end;
-	int					y;
-
-	start = -height / 2 + env->settings.h / 2;
-	end = height / 2 + env->settings.h / 2;
-	if (start < 0)
-		start = 0;
-	if (end >= env->settings.h)
-		end = env->settings.h - 1;
-	y = 0;
-	while (y < env->settings.h && y < start)
-		put_canvas(env, x, y++, env->settings.color_c);
-	while (y < end)
-	{
-		put_canvas(env, x, y, get_color(env->tex[obs.face], obs.offset, 
-		(((y * 256 - env->settings.h * 128 + height * 128) * env->tex[obs.face].h) / height) / 256));
-		y++;
-	}
-	while (y < env->settings.h - 1)
-		put_canvas(env, x, y++, env->settings.color_f);
-} */

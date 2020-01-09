@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/01 04:25:14 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/08 23:46:50 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/09 23:57:14 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,8 +30,8 @@ int parse_cell(t_env *env, char c, int *x, int y)
 	else if ((type = ft_strpos(CARDINALS, c)) != -1 && env->player.x == -1)
 	{
 		env->map.cells[y * env->map.w + (*x)++] = SPACE;
-		env->player.x = (*x) + 0.5;
-		env->player.y = y + 0.5;
+		env->player.x = *x + .5;
+		env->player.y = y + .5;
 		env->player.dir = cardinal(type);
 		env->player.plane = cardinal(ft_strpos(CARDINALS, PLANES[type]));
 	}
