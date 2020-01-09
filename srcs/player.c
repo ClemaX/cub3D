@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/09 22:31:20 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/09 04:57:48 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/09 23:08:03 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,7 +31,7 @@ static int collision(t_map *map, float x, float y)
 	check[3].y = y + half_hitbox;
 	i = 0;
 	while (i < 4
-	&& map->cells[(int)check[i].y * map->w + (int)check[i].x] != WALL)
+	&& map->cells[(int)check[i].y * map->w + (int)check[i].x] == SPACE)
 		i++;
 	return (i != 4);
 }
