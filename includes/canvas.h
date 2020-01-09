@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/05 15:05:34 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/01 05:11:22 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/09 05:19:01 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,7 +16,7 @@
 
 # include <environment.h>
 
-int		init_canvas(t_env *env);
-void	put_canvas(t_env *env, int x, int y, unsigned int color);
+int     init_canvas(t_env *env);
+void    draw_tex(t_env *env, int pos_x, int z, int size);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/07 15:56:06 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/01 00:53:34 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/09 04:56:28 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -37,8 +37,8 @@ void				init_ray(t_env *env, t_ray *ray, int x)
 
 	ray->x = (int) env->player.x;
 	ray->y = (int) env->player.y;
-	ray->dir.x = env->player.dir.x + env->player.plane.x * 0.66 * camera_x;
-	ray->dir.y = env->player.dir.y + env->player.plane.y * 0.66 * camera_x;
+	ray->dir.x = env->player.dir.x + env->player.plane.x * FOV * camera_x;
+	ray->dir.y = env->player.dir.y + env->player.plane.y * FOV * camera_x;
 	ray->step_dist = vector(fabs(1 / ray->dir.x), fabs(1 / ray->dir.y));
 	if (ray->dir.x < 0)
 	{

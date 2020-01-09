@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/09 22:31:20 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/08 23:11:23 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/09 04:57:48 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -50,11 +50,11 @@ void	move_player(t_env *env, t_vector movement)
 
 t_vector	camera_transform(t_env *env, t_vector vector)
 {
-	const double	factor = 1.0 / (env->player.plane.x * env->player.dir.x
-		- env->player.dir.y * env->player.plane.y);
+	const double	factor = 1.0 / (env->player.plane.x * FOV * env->player.dir.y
+		- env->player.dir.x * env->player.plane.y * FOV);
 	t_vector		transform;
 
 	transform.x = factor * (env->player.dir.y * vector.x - env->player.dir.x * vector.y);
-	transform.y = factor * (-env->player.plane.y * vector.x + env->player.plane.x * vector.y);
+	transform.y = factor * (-env->player.plane.y * FOV * vector.x + env->player.plane.x * FOV * vector.y);
 	return (transform);
 }

@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/08 20:35:22 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/09 00:36:36 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/09 05:02:34 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,20 +31,9 @@ void	sprites_dist(t_env *env, t_list *sprites)
 	}
 }
 
-#include <stdio.h>
-
-void    print_sprite(void *sprite)
-{
-	if (!sprite)
-		dprintf(1, "(null)");
-	else
-		dprintf(1, "%f, ", ((t_sprite*)sprite)->dist);
-}
-
-
 int 	sprite_cmp(void *a, void *b)
 {
-    const float diff = ((t_sprite*)b)->dist - ((t_sprite*)a)->dist;
+    const float diff = ((t_sprite*)a)->dist - ((t_sprite*)b)->dist;
 
 	return ((diff > 0) - (diff < 0));
 }

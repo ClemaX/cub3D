@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/01 05:17:15 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/08 20:12:30 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/09 05:22:20 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,7 +14,7 @@
 #include <environment.h>
 #include <errno.h>
 
-int	load_image(t_env *env, t_image *img, char *path)
+int				load_image(t_env *env, t_image *img, char *path)
 {
 	const char *ext;
 
@@ -35,7 +35,7 @@ int	load_image(t_env *env, t_image *img, char *path)
 	return (1);
 }
 
-int	load_images(t_env *env)
+int				load_images(t_env *env)
 {
 	int	i;
 
