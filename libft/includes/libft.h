@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/14 23:24:01 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/06 22:08:09 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/09 05:53:57 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -76,11 +76,10 @@ int						ft_lstsize(t_list *lst);
 void					ft_lstadd_back(t_list **alst, t_list *new);
 void					ft_lstdelone(t_list *lst, void (*del)(void*));
 void					ft_lstiter(t_list *lst, void (*f)(void *));
-void					ft_lstsort(t_list *lst, int (*cmp)());
 void					ft_lstclear(t_list **lst, void (*del)(void*));
 t_list					*ft_lstmap
 	(t_list *lst, void *(*f)(void*), void (*del)(void*));
-void					ft_lstcmpsort(t_list **lst, int (*cmp)(void*, void*));
+void					ft_lstsort(t_list **lst, int (*cmp)(void*, void*));
 int						get_next_line(int fd, char **line);
 int						ft_printf
 	(const char *fmt, ...) __attribute__((format(printf,1,2)));

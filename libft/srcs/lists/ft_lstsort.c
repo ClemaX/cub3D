@@ -5,35 +5,67 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/01 01:28:32 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/01 01:36:43 by chamada     ###    #+. /#+    ###.fr     */
+/*   Created: 2020/01/06 19:54:04 by chamada      #+#   ##    ##    #+#       */
+/*   Updated: 2020/01/09 05:53:33 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <libft.h>
+#include <stdlib.h>
 
-void	ft_lstsort(t_list **begin_list, int (*cmp)())
+static void	lstsplit(t_list *lst, t_list **a, t_list **b)
 {
-	char	swapped;
-	t_list	*current;
-	void	*temp;
+	t_list	*slow;
+	t_list	*fast;
 
-	swapped = 1;
-	while (swapped)
+	slow = lst;
+	fast = lst->next;
+	while (fast)
 	{
-		swapped = 0;
-		while (current->next)
+		if ((fast = fast->next))
 		{
-			if ((*cmp)(current->content, current->next->content) > 0)
-			{
-				temp = current->next->content;
-				current->next->content = current->content;
-				current->content = temp;
-				swapped = 1;
-			}
-			current = current->next;
+			slow = slow->next;
+			fast = fast->next;
 		}
-		current = *begin_list;
 	}
+	*a = lst;
+	*b = slow->next;
+	slow->next = NULL;
+}
+
+static void	*lstmergecmp(t_list *a, t_list *b, int (*cmp)(void*, void*))
+{
+	t_list	*lst;
+
+	if (a == NULL)
+		return (b);
+	if (b == NULL)
+		return (a);
+	if (cmp(a->content, b->content) > 0)
+	{
+		lst = a;
+		lst->next = lstmergecmp(a->next, b, cmp);
+	}
+	else
+	{
+		lst = b;
+		lst->next = lstmergecmp(a, b->next, cmp);
+	}
+	return (lst);
+}
+
+void		ft_lstsort(t_list **lst, int (*cmp)(void*, void*))
+{
+	t_list	*head;
+	t_list	*a;
+	t_list	*b;
+
+	head = *lst;
+	if (head == NULL || head->next == NULL)
+		return ;
+	lstsplit(head, &a, &b);
+	ft_lstsort(&a, cmp);
+	ft_lstsort(&b, cmp);
+	*lst = lstmergecmp(a, b, cmp);
 }
