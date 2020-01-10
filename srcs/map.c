@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 11:06:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/08 23:39:41 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/10 00:15:37 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,19 +15,19 @@
 #include <stdlib.h>
 #include <errno.h>
 
-static int	init_map(t_env *env, int width, int height)
+static int	init_map(t_map *map, int width, int height)
 {
 	if (!width || !height)
 	{
 		errno = EFTYPE;
 		return (0);
 	}
-	env->player.x = -1;
-	env->player.y = -1;
-	env->map.w = width;
-	env->map.h = height;
-	env->map.cells = malloc(sizeof(*env->map.cells) * width * height);
-	return (env->map.cells != NULL);
+	map->player.x = -1;
+	map->player.y = -1;
+	map->w = width;
+	map->h = height;
+	map->cells = malloc(sizeof(*map->cells) * width * height);
+	return (map->cells != NULL);
 }
 
 static int	count_cells(t_list *line)
@@ -43,34 +43,34 @@ static int	count_cells(t_list *line)
 	return (count);
 }
 
-static int	parse_line(t_env *env, t_list *line, int y)
+static int	parse_line(t_map *map, t_list *line, int y)
 {
 	char	*s;
 	int		x;
 
 	s = line->content;
-	if (y == env->map.h - 1 && count_cells(line) != env->map.w)
+	if (y == map->h - 1 && count_cells(line) != map->w)
 		return (0);
-	if (y >= env->map.h || *s++ != '1')
+	if (y >= map->h || *s++ != '1')
 		return (0);
-	env->map.cells[y * env->map.w] = WALL;
+	map->cells[y * map->w] = WALL;
 	x = 1;
 	while (*s)
-		if (parse_cell(env, *s++, &x, y) != 1)
+		if (parse_cell(map, *s++, &x, y) != 1)
 			return (0);
-	return (s[-1] == '1' && x == env->map.w);
+	return (s[-1] == '1' && x == map->w);
 }
 
-static int	parse_map(t_env *env, t_list *lines)
+static int	parse_map(t_map *map, t_list *lines)
 {
 	t_list	*current;
 	int		count;
 
 	count = 0;
 	current = lines;
-	if (!(init_map(env, count_cells(current), ft_lstsize(lines))))
+	if (!(init_map(map, count_cells(current), ft_lstsize(lines))))
 		return (0);
-	while (current && parse_line(env, current, count++))
+	while (current && parse_line(map, current, count++))
 		current = current->next;
 	ft_lstclear(&lines, &free);
 	if (current)
@@ -81,7 +81,7 @@ static int	parse_map(t_env *env, t_list *lines)
 	return(1);
 }
 
-int			read_map(t_env *env, char *line)
+int			read_map(t_map *map, char *line)
 {
 	static t_list	*lines;
 	t_list			*new;
@@ -105,7 +105,7 @@ int			read_map(t_env *env, char *line)
 		return (1);
 	}
 	free(line);
-	if (!parse_map(env, lines))
+	if (!parse_map(map, lines))
 		return (-1);
 	return (0);
 }

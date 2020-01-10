@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/09 22:31:20 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/09 23:08:03 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/10 05:14:17 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -36,25 +36,25 @@ static int collision(t_map *map, float x, float y)
 	return (i != 4);
 }
 
-void	move_player(t_env *env, t_vector movement)
+void	move_player(t_map *map, t_vector *movement)
 {
 	t_vector	new_pos;
 
-	new_pos.x = env->player.x + movement.x;
-	new_pos.y = env->player.y + movement.y;
-	if (!collision(&env->map, new_pos.x, env->player.y))
-		env->player.x = new_pos.x;
-	if (!collision(&env->map, env->player.x, new_pos.y))
-		env->player.y = new_pos.y;
+	new_pos.x = map->player.x + movement->x;
+	new_pos.y = map->player.y + movement->y;
+	if (!collision(map, new_pos.x, map->player.y))
+		map->player.x = new_pos.x;
+	if (!collision(map, map->player.x, new_pos.y))
+		map->player.y = new_pos.y;
 }
 
-t_vector	camera_transform(t_env *env, t_vector vector)
+t_vector	camera_transform(t_player *player, t_vector vector)
 {
-	const double	factor = 1.0 / (env->player.plane.x * FOV * env->player.dir.y
-		- env->player.dir.x * env->player.plane.y * FOV);
+	const double	factor = 1.0 / (player->plane.x * FOV * player->dir.y
+		- player->dir.x * player->plane.y * FOV);
 	t_vector		transform;
 
-	transform.x = factor * (env->player.dir.y * vector.x - env->player.dir.x * vector.y);
-	transform.y = factor * (-env->player.plane.y * FOV * vector.x + env->player.plane.x * FOV * vector.y);
+	transform.x = factor * (player->dir.y * vector.x - player->dir.x * vector.y);
+	transform.y = factor * (-player->plane.y * FOV * vector.x + player->plane.x * FOV * vector.y);
 	return (transform);
 }

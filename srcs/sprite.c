@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/01 01:25:46 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/09 05:54:52 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/10 05:13:27 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -36,13 +36,13 @@ t_list	*new_sprite(int x, int y, t_sprite_id id)
 
 void		draw_sprite(t_env *env, t_sprite *sprite)
 {
-	const t_vector	transform = camera_transform(env, sprite->rel);
-	const int		x = (env->settings.w / 2) * (1 + transform.x / transform.y);
+	const t_vector	transform = camera_transform(&env->map.player, sprite->rel);
+	const int		x = (env->canvas.w / 2) * (1 + transform.x / transform.y);
 	int				size;
 
 	if (transform.y > 0)
 	{
-		size = abs((int)(env->settings.h / transform.y));
+		size = abs((int)(env->canvas.h / transform.y));
 		draw_tex(env, x, transform.y, size);
 	}
 }
@@ -51,11 +51,11 @@ void		draw_sprites(t_env *env)
 {
 	t_list	*current;
 
-	if (!env->sprites)
+	if (!env->map.sprites)
 		return ;
-	sprites_dist(env, env->sprites);
-	ft_lstsort(&env->sprites, &sprite_cmp);
-	current = env->sprites;
+	sprites_dist(&env->map.player, env->map.sprites);
+	ft_lstsort(&env->map.sprites, &sprite_cmp);
+	current = env->map.sprites;
 	while (current)
 	{
 		draw_sprite(env, current->content);

@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/01 05:14:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/08 23:10:49 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/10 00:49:55 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,7 +24,11 @@ typedef struct		s_player
 	float		y;
 	t_vector	dir;
 	t_vector	plane;
-	t_keys		input;
 }					t_player;
+
+#include <map.h>
+
+void				move_player(t_map *map, t_vector *movement);
+t_vector			camera_transform(t_player *player, t_vector vector);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/01 05:00:35 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/09 05:02:51 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/10 00:55:24 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,7 +31,7 @@ typedef struct	s_sprite
 
 t_list			*new_sprite(int x, int y, t_sprite_id id);
 void			draw_sprites(t_env *env);
-void			sprites_dist(t_env *env, t_list *sprites);
+void			sprites_dist(t_player *player, t_list *sprites);
 int 			sprite_cmp(void *a, void *b);
 
 #endif

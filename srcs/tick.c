@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/17 17:42:59 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/08 20:20:41 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/10 05:54:55 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,7 +32,7 @@ static inline void	end_tick(t_tick *tick)
 
 	if (tick->delta < limit)
 	{
-		usleep((limit - tick->delta) * 1000.0);
+		usleep((limit - tick->delta) * 1000);
 		tick->delta = limit;
 	}
 	else
@@ -42,24 +42,24 @@ static inline void	end_tick(t_tick *tick)
 	}
 }
 
-static inline t_vector	get_movement(t_player *player)
+static inline t_vector	get_movement(t_player *player, t_keys input)
 {
 	t_vector	movement;
 
 	movement = vector(0, 0);
-	if ((player->input & (UP | DOWN)) == UP)
+	if ((input & (UP | DOWN)) == UP)
 		movement = player->dir;
-	else if ((player->input & (DOWN | UP)) == DOWN)
+	else if ((input & (DOWN | UP)) == DOWN)
 	{
 		movement.x -= player->dir.x;
 		movement.y -= player->dir.y;
 	}
-	if ((player->input & (LEFT | RIGHT)) == LEFT)
+	if ((input & (LEFT | RIGHT)) == LEFT)
 	{
 		movement.x -= player->plane.x;
 		movement.y -= player->plane.y;
 	}
-	else if ((player->input & (RIGHT | LEFT)) == RIGHT)
+	else if ((input & (RIGHT | LEFT)) == RIGHT)
 	{
 		movement.x += player->plane.x;
 		movement.y += player->plane.y;
@@ -73,19 +73,19 @@ void	do_tick(t_env *env)
 	t_vector		movement;
 
 	start_tick(&tick);
-	movement = get_movement(&env->player);
+	movement = get_movement(&env->map.player, env->input);
 	movement.x *= tick.delta * S_MOVEMENT;
 	movement.y *= tick.delta * S_MOVEMENT;
-	move_player(env, movement);
-	if (env->player.input & ROT_LEFT && !(env->player.input & ROT_RIGHT))
+	move_player(&env->map, &movement);
+	if (env->input & ROT_LEFT && !(env->input & ROT_RIGHT))
 	{
-		vrotate(&env->player.dir, tick.delta * -S_ROTATION);
-		vrotate(&env->player.plane, tick.delta * -S_ROTATION);
+		vrotate(&env->map.player.dir, tick.delta * -S_ROTATION);
+		vrotate(&env->map.player.plane, tick.delta * -S_ROTATION);
 	}
-	if (env->player.input & ROT_RIGHT && !(env->player.input & ROT_LEFT))
+	if (env->input & ROT_RIGHT && !(env->input & ROT_LEFT))
 	{
-		vrotate(&env->player.dir, tick.delta * S_ROTATION);
-		vrotate(&env->player.plane, tick.delta * S_ROTATION);
+		vrotate(&env->map.player.dir, tick.delta * S_ROTATION);
+		vrotate(&env->map.player.plane, tick.delta * S_ROTATION);
 	}
 	refresh(env);
 	mlx_put_image_to_window(env->mlx, env->win, env->canvas.ptr, 0, 0);
@@ -97,7 +97,7 @@ int		benchmark(t_env *env)
 	static int		i;
 
 	if (i == 0)
-		env->player.input = UP | LEFT | ROT_LEFT;
+		env->input = UP | LEFT | ROT_LEFT;
 	do_tick(env);
 	if (i++ == 500)
 	{

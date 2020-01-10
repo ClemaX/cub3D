@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/09 00:25:21 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/10 05:41:25 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,13 +34,14 @@ static int	parse_cub(t_env *env, const char *path)
 	if ((fd = open(path, O_RDONLY)) == -1)
 		return (0);
 	clear_settings(&env->settings);
-	while ((ret = get_next_line(fd, &line)) == 1 && *line != '1')
+	ret = 0;
+	while (ret != -1 && (ret = get_next_line(fd, &line)) == 1 && *line != '1')
 		if (!(parse_settings(&env->settings, line)))
 			ret = -1;
-	while (ret != -1 && (ret = read_map(env, line)) == 1)
+	while (ret != -1 && (ret = read_map(&env->map, line)) == 1)
 		ret = get_next_line(fd, &line);
 	close(fd);
-	if (env->player.x == -1)
+	if (env->map.player.x == -1)
 	{
 		errno = EFTYPE;
 		return (0);
@@ -74,7 +75,7 @@ void		setup_env(t_env *env, t_mode mode, const char *path)
 //	screen = DefaultScreenOfDisplay(display);
 	if (!(parse_cub(env, path) && (env->mlx = mlx_init()) && load_images(env)))
 		error(env);
-	env->player.input = 0;
+	env->input = 0;
 //	if (env->settings.w > screen->width)
 //		env->settings.w = screen->width;
 //	if (env->settings.h > screen->height)

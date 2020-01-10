@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 02:51:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/09 05:51:12 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/10 01:06:32 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,8 +27,8 @@ void	refresh(t_env *env)
 	x = 0;
 	while (x < env->canvas.w)
 	{
-		init_ray(env, &ray, x);
-		draw_column(env, x, (obs = cast_ray(env, &ray)));
+		init_ray(&env->map.player, &ray, 2 * x / (float)env->canvas.w - 1);
+		draw_column(env, x, (obs = cast_ray(&env->map, env->tex, &ray)));
 		env->zbuffer[x] = obs.distance;
 		x++;
 	}

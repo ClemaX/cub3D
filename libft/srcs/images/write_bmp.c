@@ -45,12 +45,8 @@ int					write_bmp(const char *path, const char *buffer,
 		return (-1);
 	}
 	if (write(fd, get_file_header(w, h), 14) == -1
-	|| write(fd, get_dib_header(w, h), 40) == -1)
-	{
-		close(fd);
-		return (-1);
-	}
-	if (write(fd, buffer, 4 * w * h) == -1)
+	|| write(fd, get_dib_header(w, h), 40) == -1
+	|| write(fd, buffer, 4 * w * h) == -1)
 	{
 		close(fd);
 		return (-1);

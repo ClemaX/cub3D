@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/07 15:56:59 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/23 22:28:49 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/10 01:05:39 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,7 +26,7 @@ typedef struct	s_ray
 	t_vector	side_dist;
 }				t_ray;
 
-void			init_ray(t_env *env, t_ray *ray, int x);
-t_obstacle		cast_ray(t_env *env, t_ray *ray);
+void			init_ray(t_player *player, t_ray *ray, float cam_x);
+t_obstacle		cast_ray(t_map *map, t_image *tex, t_ray *ray);
 
 #endif

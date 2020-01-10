@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/08 20:35:22 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/09 05:02:34 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/10 00:55:11 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,7 @@
 #include <vmath.h>
 #include <math.h>
 
-void	sprites_dist(t_env *env, t_list *sprites)
+void	sprites_dist(t_player *player, t_list *sprites)
 {
 	t_list	*current;
 	t_sprite *sprite;
@@ -24,8 +24,8 @@ void	sprites_dist(t_env *env, t_list *sprites)
 	while (current)
 	{
 		sprite = (t_sprite*)current->content;
-		sprite->rel.x = sprite->pos.x - env->player.x;
-		sprite->rel.y = sprite->pos.y - env->player.y;
+		sprite->rel.x = sprite->pos.x - player->x;
+		sprite->rel.y = sprite->pos.y - player->y;
 		sprite->dist = powf(sprite->rel.x, 2) + powf(sprite->rel.y, 2);
 		current = current->next;
 	}

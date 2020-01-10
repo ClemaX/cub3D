@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 07:56:47 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/23 22:53:22 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/10 06:01:01 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,13 +22,17 @@ static int	parse_res(t_settings *settings, char *line)
 	int match;
 
 	match = ft_sscanf(line, "R %d %d", &settings->w, &settings->h);
-	return (match == 2);
+	return (match == 2 && settings->w && settings->h);
 }
 
 static int	parse_imgs(t_settings *settings, char *line)
 {
-	int	match;
+	int		match;
+	char	*ext;
 
+	if (!(ext = ft_strrchr(line, '.'))
+	|| (ft_strncmp(ext, ".png", 5) && ft_strncmp(ext, ".xpm", 5)))
+		return (0);
 	if (!((match = ft_sscanf(line, "NO %ms", &settings->tex[NORTH]))
 	|| (match = ft_sscanf(line, "SO %ms", &settings->tex[SOUTH]))
 	|| (match = ft_sscanf(line, "WE %ms", &settings->tex[WEST]))

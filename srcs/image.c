@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/01 05:17:15 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/09 05:22:20 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/10 06:05:17 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -43,10 +43,7 @@ int				load_images(t_env *env)
 	while (i < 5)
 	{
 		if (!load_image(env, &env->tex[i], env->settings.tex[i]))
-		{
-			errno = EFTYPE;
 			return (0);
-		}
 		i++;
 	}
 	return (1);
