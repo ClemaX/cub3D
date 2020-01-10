@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/01 04:25:14 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/10 05:28:30 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/10 06:38:44 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,6 +23,7 @@ int parse_cell(t_map *map, char c, int *x, int y)
 		map->cells[y * map->w + (*x)++] = type;
 	else if ((type = ft_strpos(SPRITES, c)) != -1)
 	{
+		map->cells[y * map->w + *x] = SPRITE;
 		if (!(sprite = new_sprite((*x)++, y, type)))
 			return (0);
 		ft_lstadd_back(&map->sprites, sprite);

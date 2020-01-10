@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/01 05:00:35 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/10 00:55:24 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/10 06:34:52 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,7 +18,7 @@
 
 typedef enum	e_sprite_id
 {
-	SPRITE
+	S_0
 }				t_sprite_id;
 
 typedef struct	s_sprite

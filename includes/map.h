@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/24 19:35:05 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/10 00:48:20 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/10 06:29:00 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,7 +21,7 @@
 
 typedef enum	e_cell
 {
-	SPACE, WALL
+	SPACE, WALL, SPRITE
 }				t_cell;
 
 typedef struct	s_map
