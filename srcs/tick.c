@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/17 17:42:59 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/10 05:54:55 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/11 00:54:41 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,7 +27,7 @@ static inline void	start_tick(t_tick *tick)
 
 static inline void	end_tick(t_tick *tick)
 {
-	static const float	limit = 1.0 / 60;
+	static const float	limit = 1.0 / FRAMERATE;
 	struct timeval		now;
 
 	if (tick->delta < limit)

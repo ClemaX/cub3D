@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/10 05:41:25 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/11 03:44:47 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,7 +17,6 @@
 #include <strings.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <X11/Xlib.h>
 
 static int	parse_cub(t_env *env, const char *path)
 {
@@ -41,11 +40,8 @@ static int	parse_cub(t_env *env, const char *path)
 	while (ret != -1 && (ret = read_map(&env->map, line)) == 1)
 		ret = get_next_line(fd, &line);
 	close(fd);
-	if (env->map.player.x == -1)
-	{
+	if (ret != -1 && (ret = env->map.player.x) == -1)
 		errno = EFTYPE;
-		return (0);
-	}
 	return (ret != -1);
 }
 
@@ -61,25 +57,22 @@ t_mode	get_mode(int ac, const char **av)
 	if (ac != 2)
 	{
 		errno = EINVAL;
-		error(0);
+		error(NULL);
 	}
 	return (INTERACT);
 }
 
 void		setup_env(t_env *env, t_mode mode, const char *path)
 {
-//	Display 		*display;
-//	Screen			*screen;
-
-//	display = XOpenDisplay(NULL);
-//	screen = DefaultScreenOfDisplay(display);
+	env->display = XOpenDisplay(NULL);
+	env->screen = DefaultScreenOfDisplay(env->display);
 	if (!(parse_cub(env, path) && (env->mlx = mlx_init()) && load_images(env)))
 		error(env);
 	env->input = 0;
-//	if (env->settings.w > screen->width)
-//		env->settings.w = screen->width;
-//	if (env->settings.h > screen->height)
-//		env->settings.h = screen->height;
+	if (env->settings.w > env->screen->width)
+		env->settings.w = env->screen->width;
+	if (env->settings.h > env->screen->height)
+		env->settings.h = env->screen->height;
 	env->win =
 	mlx_new_window(env->mlx, env->settings.w, env->settings.h, TITLE);
 	if (!env->win || !init_canvas(env))
@@ -88,8 +81,9 @@ void		setup_env(t_env *env, t_mode mode, const char *path)
 	mlx_hook(env->win, DestroyNotify, NoEventMask, &destroy_hook, env);
 	mlx_hook(env->win, KeyPress, KeyPressMask, &key_enable, env);
 	mlx_hook(env->win, KeyRelease, KeyReleaseMask, &key_disable, env);
-	mlx_mouse_hook(env->win, &mouse_hook, env);
-//	XCloseDisplay(display);
+	mlx_mouse_hide();
+	mlx_mouse_move(env->win, env->canvas.w / 2, env->canvas.h / 2);
+	mlx_do_key_autorepeatoff(env->mlx);
 }
 
 void		destroy_env(t_env *env)
@@ -112,5 +106,6 @@ void		destroy_env(t_env *env)
 		if (env->win)
 			mlx_destroy_window(env->mlx, env->win);
 		free(env->mlx);
+		XCloseDisplay(env->display);
 	}
 }

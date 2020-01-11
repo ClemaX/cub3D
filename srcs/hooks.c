@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:19:11 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/10 00:49:43 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/11 03:35:12 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,19 +14,22 @@
 #include <environment.h>
 #include <stdlib.h>
 #include <tick.h>
-
-int	mouse_hook(int button, int x, int y, t_env *env)
-{
-	(void)button;
-	(void)x;
-	(void)y;
-	(void)env;
-	return (0);
-}
+#include <vmath.h>
+#include <limits.h>
 
 int	loop_hook(t_env *env)
 {
-	if (env->input == 0)
+	const int	half_w = env->canvas.w / 2;
+	const int	half_h = env->canvas.h / 2;
+	t_ivector	mouse;
+	float		delta;
+
+	mlx_mouse_get_pos(env->win, &mouse.x, &mouse.y);
+	mlx_mouse_move(env->win, half_w, half_h);
+	delta = (mouse.x - half_w) / (float)(MOUSE_SENS);
+	vrotate(&env->map.player.dir, delta);
+	vrotate(&env->map.player.plane, delta);
+	if (!(delta || env->input))
 		return (0);
 	do_tick(env);
 	return (1);

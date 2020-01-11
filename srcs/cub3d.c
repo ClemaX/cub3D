@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 02:51:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/10 01:06:32 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/11 03:38:30 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -50,7 +50,6 @@ int		main(int ac, const char **av)
 		return (0);
 	}
 	mlx_put_image_to_window(env.mlx, env.win, env.canvas.ptr, 0, 0);
-	mlx_do_key_autorepeatoff(env.mlx);
 	mlx_loop(env.mlx);
 	destroy_env(&env);
 	return (0);

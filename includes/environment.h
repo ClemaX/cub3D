@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/10 01:05:49 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/11 03:35:19 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,6 +17,7 @@
 # include <libft.h>
 # include <mlx.h>
 # include <X11/X.h>
+# include <X11/Xlib.h>
 # include <settings.h>
 # include <player.h>
 # include <image.h>
@@ -33,18 +34,20 @@
 # define KEY_ROT_L	123
 # define KEY_ROT_R	124
 
-# define FOV		.66
-# define HITBOX		.2
+# define FRAMERATE	60
+# define FOV		0.66
+# define HITBOX		0.2
 # define S_MOVEMENT	5.0
 # define S_ROTATION	2.0
+# define MOUSE_SENS	500.0
 
-# define ESCAPE		1
-# define UP			2
-# define DOWN		4
-# define LEFT		8
-# define RIGHT		16
-# define ROT_LEFT	32
-# define ROT_RIGHT	64
+# define ESCAPE		0b00000001
+# define UP			0b00000010
+# define DOWN		0b00000100
+# define LEFT		0b00001000
+# define RIGHT		0b00010000
+# define ROT_LEFT	0b00100000
+# define ROT_RIGHT	0b01000000
 
 typedef enum		e_mode
 {
@@ -61,6 +64,8 @@ typedef struct		s_obstacle
 
 typedef struct		s_env
 {
+	Display		*display;
+	Screen		*screen;
 	void		*mlx;
 	void		*win;
 	float		*zbuffer;

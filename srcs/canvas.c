@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/05 15:04:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/10 06:17:51 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/11 04:08:00 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -45,7 +45,7 @@ void					draw_tex(t_env *env, int pos_x, int z, int size)
 	t_ivector	start;
 	t_ivector	end;
 	t_ivector	tex;
-	t_color		c; 
+	t_color		c;
 
 	start = ivector(pos_x - size / 2, (env->canvas.h - size) / 2);
 	end = ivector(pos_x + size / 2, (env->canvas.h + size) / 2);
@@ -86,7 +86,7 @@ void					draw_column(t_env *env, int x, t_obstacle obs)
 	const int	height = env->canvas.h / obs.distance;
 	int			end;
 	int			y;
-	int 		tex_y;
+	int			tex_y;
 
 	end = -height / 2 + env->canvas.h / 2;
 	if (end < 0)
@@ -97,17 +97,18 @@ void					draw_column(t_env *env, int x, t_obstacle obs)
 	end += height;
 	if (end >= env->canvas.h)
 		end = env->canvas.h - 1;
+	if (obs.offset < 0)
+		obs.offset = 0;
+	else if (obs.offset >= env->tex[obs.face].w)
+		obs.offset = env->tex[obs.face].w - 1;
 	while (y < end)
 	{
-		tex_y = (((y * 256 - env->canvas.h * 128 + height * 128) * env->tex[obs.face].h) / height) / 256;
+		tex_y = (((y * 256 - env->canvas.h * 128 + height * 128)
+			* env->tex[obs.face].h) / height) / 256;
 		if (tex_y < 0)
 			tex_y = 0;
 		else if (tex_y >= env->tex[obs.face].h)
 			tex_y = env->tex[obs.face].h - 1;
-		if (obs.offset < 0)
-			obs.offset = 0;
-		else if (obs.offset >= env->tex[obs.face].w)
-			obs.offset = env->tex[obs.face].w - 1;
 		put_canvas(env, x, y++, get_color(env->tex[obs.face], obs.offset, tex_y));
 	}
 	while (y < env->canvas.h - 1)
