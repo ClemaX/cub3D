@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 07:56:47 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/10 06:01:01 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/11 07:42:10 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -55,19 +55,6 @@ static int	parse_colors(t_settings *settings, char *line)
 		return (0);
 }
 
-void		clear_settings(t_settings *settings)
-{
-	int	i;
-
-	settings->color_c.c = 0;
-	settings->color_f.c = 0;
-	settings->h = 0;
-	settings->w = 0;
-	i = 0;
-	while (i < 5)
-		settings->tex[i++] = NULL;
-}
-
 int			parse_settings(t_settings *settings, char *line)
 {
 	if (*line && !(parse_res(settings, line)
@@ -76,7 +63,7 @@ int			parse_settings(t_settings *settings, char *line)
 	{
 		free(line);
 		errno = EFTYPE;
-		return (0);
+		return (-1);
 	}
 	free(line);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/17 17:42:59 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/11 00:54:41 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/11 04:38:36 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,7 +17,7 @@
 #include <stdlib.h>
 #include <vmath.h>
 
-static inline void	start_tick(t_tick *tick)
+static inline void		start_tick(t_tick *tick)
 {
 	struct timeval	now;
 
@@ -25,7 +25,7 @@ static inline void	start_tick(t_tick *tick)
 	tick->start = now.tv_sec + now.tv_usec / 1000000.0;
 }
 
-static inline void	end_tick(t_tick *tick)
+static inline void		end_tick(t_tick *tick)
 {
 	static const float	limit = 1.0 / FRAMERATE;
 	struct timeval		now;
@@ -67,7 +67,7 @@ static inline t_vector	get_movement(t_player *player, t_keys input)
 	return (movement);
 }
 
-void	do_tick(t_env *env)
+void					do_tick(t_env *env)
 {
 	static t_tick	tick;
 	t_vector		movement;
@@ -87,12 +87,12 @@ void	do_tick(t_env *env)
 		vrotate(&env->map.player.dir, tick.delta * S_ROTATION);
 		vrotate(&env->map.player.plane, tick.delta * S_ROTATION);
 	}
-	refresh(env);
+	refresh_env(env);
 	mlx_put_image_to_window(env->mlx, env->win, env->canvas.ptr, 0, 0);
 	end_tick(&tick);
 }
 
-int		benchmark(t_env *env)
+int						benchmark(t_env *env)
 {
 	static int		i;
 

@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/08 20:35:22 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/10 00:55:11 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/11 04:18:21 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,8 +17,8 @@
 
 void	sprites_dist(t_player *player, t_list *sprites)
 {
-	t_list	*current;
-	t_sprite *sprite;
+	t_list		*current;
+	t_sprite	*sprite;
 
 	current = sprites;
 	while (current)
@@ -31,9 +31,9 @@ void	sprites_dist(t_player *player, t_list *sprites)
 	}
 }
 
-int 	sprite_cmp(void *a, void *b)
+int		sprite_cmp(void *a, void *b)
 {
-    const float diff = ((t_sprite*)a)->dist - ((t_sprite*)b)->dist;
+	const float	diff = ((t_sprite*)a)->dist - ((t_sprite*)b)->dist;
 
 	return ((diff > 0) - (diff < 0));
 }

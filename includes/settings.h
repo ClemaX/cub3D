@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/02 13:27:24 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/24 19:40:45 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/11 04:21:27 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,6 +17,7 @@
 # include <color.h>
 
 # define SPRITE_TEX	4
+
 typedef struct	s_settings
 {
 	int		w;

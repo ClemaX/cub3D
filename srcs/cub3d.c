@@ -6,34 +6,12 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 02:51:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/11 03:38:30 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/11 04:35:45 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <environment.h>
-#include <ray.h>
-#include <stdio.h>
-#include <libft.h>
-#include <canvas.h>
-#include <sprite.h>
-
-void	refresh(t_env *env)
-{
-	t_ray		ray;
-	int			x;
-	t_obstacle	obs;
-
-	x = 0;
-	while (x < env->canvas.w)
-	{
-		init_ray(&env->map.player, &ray, 2 * x / (float)env->canvas.w - 1);
-		draw_column(env, x, (obs = cast_ray(&env->map, env->tex, &ray)));
-		env->zbuffer[x] = obs.distance;
-		x++;
-	}
-	draw_sprites(env);
-}
 
 int		main(int ac, const char **av)
 {
@@ -41,10 +19,11 @@ int		main(int ac, const char **av)
 	static t_env	env;
 
 	setup_env(&env, mode, av[1]);
-	refresh(&env);
+	refresh_env(&env);
 	if (mode == SAVE)
 	{
-		if (write_bmp("frame.bmp", env.canvas.data, env.canvas.w, env.canvas.h) != 1)
+		if (write_bmp("frame.bmp", env.canvas.data, env.canvas.w, env.canvas.h)
+		!= 1)
 			error(&env);
 		destroy_env(&env);
 		return (0);

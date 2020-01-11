@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/01 01:25:46 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/10 05:13:27 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/11 04:32:28 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,7 +19,7 @@
 #include <stdlib.h>
 #include <canvas.h>
 
-t_list	*new_sprite(int x, int y, t_sprite_id id)
+t_list		*new_sprite(int x, int y, t_sprite_id id)
 {
 	t_list		*sprite;
 	t_sprite	*content;
@@ -34,7 +34,7 @@ t_list	*new_sprite(int x, int y, t_sprite_id id)
 	return (sprite);
 }
 
-void		draw_sprite(t_env *env, t_sprite *sprite)
+static void	draw_sprite(t_env *env, t_sprite *sprite)
 {
 	const t_vector	transform = camera_transform(&env->map.player, sprite->rel);
 	const int		x = (env->canvas.w / 2) * (1 + transform.x / transform.y);

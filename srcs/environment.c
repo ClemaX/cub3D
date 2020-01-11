@@ -6,12 +6,16 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/11 03:44:47 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/11 06:38:55 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <environment.h>
+#include <hooks.h>
+#include <ray.h>
+#include <sprite.h>
+#include <canvas.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <strings.h>
@@ -32,11 +36,9 @@ static int	parse_cub(t_env *env, const char *path)
 	}
 	if ((fd = open(path, O_RDONLY)) == -1)
 		return (0);
-	clear_settings(&env->settings);
 	ret = 0;
 	while (ret != -1 && (ret = get_next_line(fd, &line)) == 1 && *line != '1')
-		if (!(parse_settings(&env->settings, line)))
-			ret = -1;
+		ret = parse_settings(&env->settings, line);
 	while (ret != -1 && (ret = read_map(&env->map, line)) == 1)
 		ret = get_next_line(fd, &line);
 	close(fd);
@@ -45,7 +47,7 @@ static int	parse_cub(t_env *env, const char *path)
 	return (ret != -1);
 }
 
-t_mode	get_mode(int ac, const char **av)
+t_mode		get_mode(int ac, const char **av)
 {
 	if (ac == 3)
 	{
@@ -84,6 +86,23 @@ void		setup_env(t_env *env, t_mode mode, const char *path)
 	mlx_mouse_hide();
 	mlx_mouse_move(env->win, env->canvas.w / 2, env->canvas.h / 2);
 	mlx_do_key_autorepeatoff(env->mlx);
+}
+
+void		refresh_env(t_env *env)
+{
+	t_ray		ray;
+	int			x;
+	t_obstacle	obs;
+
+	x = 0;
+	while (x < env->canvas.w)
+	{
+		init_ray(&env->map.player, &ray, 2 * x / (float)env->canvas.w - 1);
+		draw_column(env, x, (obs = cast_ray(&env->map, env->tex, &ray)));
+		env->zbuffer[x] = obs.distance;
+		x++;
+	}
+	draw_sprites(env);
 }
 
 void		destroy_env(t_env *env)

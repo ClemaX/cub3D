@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/11 03:35:19 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/11 04:46:56 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,10 +19,8 @@
 # include <X11/X.h>
 # include <X11/Xlib.h>
 # include <settings.h>
-# include <player.h>
-# include <image.h>
-# include <vector.h>
 # include <map.h>
+# include <vector.h>
 
 # define TITLE		"cub3d"
 
@@ -62,6 +60,19 @@ typedef struct		s_obstacle
 	float		distance;
 }					t_obstacle;
 
+typedef unsigned	t_keys;
+
+typedef struct		s_image
+{
+	void	*ptr;
+	char	*data;
+	int		w;
+	int		h;
+	int		bpp;
+	int		ls;
+	int		e;
+}					t_image;
+
 typedef struct		s_env
 {
 	Display		*display;
@@ -76,19 +87,13 @@ typedef struct		s_env
 	t_keys		input;
 }					t_env;
 
-int					benchmark(t_env *env);
 t_mode				get_mode(int ac, const char **av);
+int					benchmark(t_env *env);
 void				setup_env(t_env *env, t_mode mode, const char *path);
-void				destroy_env(t_env *env);
-int					init_canvas(t_env *env);
-void				draw_column(t_env *env, int x, t_obstacle obs);
-void				refresh(t_env *env);
-int					mouse_hook(int button, int x, int y, t_env *param);
-int					key_enable(int key, t_env *env);
-int					key_disable(int key, t_env *env);
-int					loop_hook(t_env *env);
-int					destroy_hook(t_env *param);
-void				error(t_env *env);
 int					load_images(t_env *env);
+void				refresh_env(t_env *env);
+void				destroy_env(t_env *env);
+void				draw_column(t_env *env, int x, t_obstacle obs);
+void				error(t_env *env);
 
 #endif

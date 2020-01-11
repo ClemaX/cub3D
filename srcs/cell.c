@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/01 04:25:14 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/10 06:38:44 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/11 04:13:31 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,7 +14,7 @@
 #include <environment.h>
 #include <sprite.h>
 
-int parse_cell(t_map *map, char c, int *x, int y)
+int	parse_cell(t_map *map, char c, int *x, int y)
 {
 	int		type;
 	t_list	*sprite;

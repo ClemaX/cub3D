@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/10 20:34:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 14:41:00 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/11 06:42:39 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,5 +24,4 @@ void		ft_lstclear(t_list **lst, void (*del)(void*))
 		*lst = current->next;
 		free(current);
 	}
-	lst = NULL;
 }

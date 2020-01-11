@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   player.h                                         .::    .:/ .      .::   */
+/*   hooks.h                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/01 05:14:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/10 00:49:55 by chamada     ###    #+. /#+    ###.fr     */
+/*   Created: 2020/01/11 04:39:21 by chamada      #+#   ##    ##    #+#       */
+/*   Updated: 2020/01/11 04:47:08 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef PLAYER_H
-# define PLAYER_H
+#ifndef HOOKS_H
+# define HOOKS_H
 
-#include <vector.h>
+# include <environment.h>
 
-typedef unsigned	t_keys;
-
-typedef struct		s_player
-{
-	float		x;
-	float		y;
-	t_vector	dir;
-	t_vector	plane;
-}					t_player;
-
-#include <map.h>
-
-void				move_player(t_map *map, t_vector *movement);
-t_vector			camera_transform(t_player *player, t_vector vector);
+int	mouse_hook(int button, int x, int y, t_env *param);
+int	key_enable(int key, t_env *env);
+int	key_disable(int key, t_env *env);
+int	loop_hook(t_env *env);
+int	destroy_hook(t_env *param);
 
 #endif

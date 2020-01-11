@@ -5,107 +5,59 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/11/29 11:06:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/10 00:15:37 by chamada     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/12/09 22:31:20 by chamada      #+#   ##    ##    #+#       */
+/*   Updated: 2020/01/11 04:29:01 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <environment.h>
 #include <stdlib.h>
-#include <errno.h>
+#include <ray.h>
 
-static int	init_map(t_map *map, int width, int height)
+static int	collision(t_map *map, float x, float y)
 {
-	if (!width || !height)
-	{
-		errno = EFTYPE;
-		return (0);
-	}
-	map->player.x = -1;
-	map->player.y = -1;
-	map->w = width;
-	map->h = height;
-	map->cells = malloc(sizeof(*map->cells) * width * height);
-	return (map->cells != NULL);
+	static const float	half_hitbox = HITBOX / 2;
+	t_vector			check[4];
+	int					i;
+
+	check[0].x = x + half_hitbox;
+	check[0].y = y + half_hitbox;
+	check[1].x = x - half_hitbox;
+	check[1].y = y - half_hitbox;
+	check[2].x = x + half_hitbox;
+	check[2].y = y - half_hitbox;
+	check[3].x = x - half_hitbox;
+	check[3].y = y + half_hitbox;
+	i = 0;
+	while (i < 4
+	&& map->cells[(int)check[i].y * map->w + (int)check[i].x] == SPACE)
+		i++;
+	return (i != 4);
 }
 
-static int	count_cells(t_list *line)
+void		move_player(t_map *map, t_vector *movement)
 {
-	char	*pos;
-	int		count;
+	t_vector	new_pos;
 
-	pos = line->content;
-	count = 0;
-	while (*pos)
-		if (*pos++ == '1')
-			count++;
-	return (count);
+	new_pos.x = map->player.x + movement->x;
+	new_pos.y = map->player.y + movement->y;
+	if (!collision(map, new_pos.x, map->player.y))
+		map->player.x = new_pos.x;
+	if (!collision(map, map->player.x, new_pos.y))
+		map->player.y = new_pos.y;
 }
 
-static int	parse_line(t_map *map, t_list *line, int y)
+t_vector	camera_transform(t_player *player, t_vector vector)
 {
-	char	*s;
-	int		x;
+	double		factor;
+	t_vector	transform;
 
-	s = line->content;
-	if (y == map->h - 1 && count_cells(line) != map->w)
-		return (0);
-	if (y >= map->h || *s++ != '1')
-		return (0);
-	map->cells[y * map->w] = WALL;
-	x = 1;
-	while (*s)
-		if (parse_cell(map, *s++, &x, y) != 1)
-			return (0);
-	return (s[-1] == '1' && x == map->w);
-}
-
-static int	parse_map(t_map *map, t_list *lines)
-{
-	t_list	*current;
-	int		count;
-
-	count = 0;
-	current = lines;
-	if (!(init_map(map, count_cells(current), ft_lstsize(lines))))
-		return (0);
-	while (current && parse_line(map, current, count++))
-		current = current->next;
-	ft_lstclear(&lines, &free);
-	if (current)
-	{
-		errno = EFTYPE;
-		return (0);
-	}
-	return(1);
-}
-
-int			read_map(t_map *map, char *line)
-{
-	static t_list	*lines;
-	t_list			*new;
-
-	if (*line)
-	{
-		if (*line != '1')
-		{
-			free(line);
-			ft_lstclear(&lines, &free);
-			errno = EFTYPE;
-			return (-1);
-		}
-		if (!(new = ft_lstnew(line)))
-		{
-			free(line);
-			ft_lstclear(&lines, &free);
-			return (-1);
-		}
-		ft_lstadd_back(&lines, new);
-		return (1);
-	}
-	free(line);
-	if (!parse_map(map, lines))
-		return (-1);
-	return (0);
+	factor = 1.0 / (player->plane.x * FOV * player->dir.y
+		- player->dir.x * player->plane.y * FOV);
+	transform.x = factor *
+		(player->dir.y * vector.x - player->dir.x * vector.y);
+	transform.y = factor *
+		(-player->plane.y * FOV * vector.x + player->plane.x * FOV * vector.y);
+	return (transform);
 }
