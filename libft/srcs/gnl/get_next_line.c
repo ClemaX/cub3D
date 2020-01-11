@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/22 03:02:45 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/16 22:05:25 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/11 22:16:48 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -131,5 +131,5 @@ int			get_next_line(int fd, char **line)
 	}
 	if (state != 2)
 		fd_list = del_fd(fd_list, fd);
-	return (state == 2);
+	return (state == 2 || (state == 0 && !size));
 }

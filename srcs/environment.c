@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/11 06:38:55 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/11 22:22:31 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -41,6 +41,15 @@ static int	parse_cub(t_env *env, const char *path)
 		ret = parse_settings(&env->settings, line);
 	while (ret != -1 && (ret = read_map(&env->map, line)) == 1)
 		ret = get_next_line(fd, &line);
+	if (ret == 0)
+	{
+		if ((ret = get_next_line(fd, &line)) != 0)
+		{
+			ret = -1;
+			errno = EFTYPE;
+		}
+		free(line);
+	}
 	close(fd);
 	if (ret != -1 && (ret = env->map.player.x) == -1)
 		errno = EFTYPE;
