@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/21 21:47:21 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/11 07:23:46 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/11 20:41:55 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,14 +16,24 @@
 #include <libft.h>
 #include <scanf/specs.h>
 
+/*
+**	Warning: The WILDCARD/STAR flag does increment the match count!
+*/
+
 static int	cvt_char(const char **src, t_spec spec, va_list ap)
 {
+	char	c;
+
+	if (!**src)
+		return (0);
 	if (spec.type == PCNT)
 		return (*(*src)++ == '%');
 	if (spec.size == S_DEF)
-		*(va_arg(ap, char*)) = *(*src)++;
+		c = *(*src)++;
 	else
 		return (0);
+	if (!(spec.flags & STAR))
+		*(va_arg(ap, char*)) = c;
 	return (1);
 }
 
