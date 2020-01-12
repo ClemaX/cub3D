@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/11 04:46:56 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/12 02:27:02 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -73,6 +73,14 @@ typedef struct		s_image
 	int		e;
 }					t_image;
 
+typedef struct	s_stripe
+{
+	t_ivector	draw;
+	t_ivector	end;
+	t_ivector	tex;
+	int			size;
+}				t_stripe;
+
 typedef struct		s_env
 {
 	Display		*display;
@@ -91,6 +99,7 @@ t_mode				get_mode(int ac, const char **av);
 int					benchmark(t_env *env);
 void				setup_env(t_env *env, t_mode mode, const char *path);
 int					load_images(t_env *env);
+void				draw_stripe(t_env *env, t_stripe *stripe, t_image *tex);
 void				refresh_env(t_env *env);
 void				destroy_env(t_env *env);
 void				draw_column(t_env *env, int x, t_obstacle obs);
