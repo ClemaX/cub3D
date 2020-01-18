@@ -1,4 +1,4 @@
-NAME	= cub3d
+NAME	= cub3D
 LIBFT	= libft
 LIBMLX	= minilibx
 X11		= /usr/X11
