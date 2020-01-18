@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/12 02:27:02 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/12 02:31:29 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -73,13 +73,13 @@ typedef struct		s_image
 	int		e;
 }					t_image;
 
-typedef struct	s_stripe
+typedef struct		s_stripe
 {
 	t_ivector	draw;
 	t_ivector	end;
 	t_ivector	tex;
 	int			size;
-}				t_stripe;
+}					t_stripe;
 
 typedef struct		s_env
 {
