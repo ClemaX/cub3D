@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/11 22:22:31 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/18 18:24:18 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -43,7 +43,7 @@ static int	parse_cub(t_env *env, const char *path)
 		ret = get_next_line(fd, &line);
 	if (ret == 0)
 	{
-		if ((ret = get_next_line(fd, &line)) != 0)
+		if ((ret = get_next_line(fd, &line)) != 0 || *line)
 		{
 			ret = -1;
 			errno = EFTYPE;
