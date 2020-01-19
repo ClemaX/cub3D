@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/21 21:47:21 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/11 20:41:55 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/19 02:32:53 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -70,7 +70,7 @@ static int	cvt_num(const char **src, t_spec spec, va_list ap)
 	if (spec.size == S_DEF && (ft_isdigit(**src) || ft_issign(**src)))
 	{
 		i = ft_atoi(*src);
-		*src += ft_numlen(i, 10);
+		*src += ft_numlen((i < 0) ? -i : i, 10);
 	}
 	else
 		return (0);
