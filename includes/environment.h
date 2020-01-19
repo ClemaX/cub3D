@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/12 02:31:29 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/19 01:01:50 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -95,7 +95,6 @@ typedef struct		s_env
 	t_keys		input;
 }					t_env;
 
-t_mode				get_mode(int ac, const char **av);
 int					benchmark(t_env *env);
 void				setup_env(t_env *env, t_mode mode, const char *path);
 int					load_images(t_env *env);

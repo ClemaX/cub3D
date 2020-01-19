@@ -25,15 +25,9 @@
 static int	parse_cub(t_env *env, const char *path)
 {
 	int		fd;
-	char	*ext;
 	int		ret;
 	char	*line;
 
-	if (!(ext = ft_strrchr(path, '.')) || ft_strncmp(ext, ".cub", 4))
-	{
-		errno = EINVAL;
-		return (0);
-	}
 	if ((fd = open(path, O_RDONLY)) == -1)
 		return (0);
 	ret = 0;
@@ -54,23 +48,6 @@ static int	parse_cub(t_env *env, const char *path)
 	if (ret != -1 && (ret = env->map.player.x) == -1)
 		errno = EFTYPE;
 	return (ret != -1);
-}
-
-t_mode		get_mode(int ac, const char **av)
-{
-	if (ac == 3)
-	{
-		if (!ft_strncmp(av[2], "--save", 7))
-			return (SAVE);
-		if (!ft_strncmp(av[2], "--bench", 8))
-			return (BENCH);
-	}
-	if (ac != 2)
-	{
-		errno = EINVAL;
-		error(NULL);
-	}
-	return (INTERACT);
 }
 
 void		setup_env(t_env *env, t_mode mode, const char *path)
