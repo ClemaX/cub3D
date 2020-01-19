@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/11 22:22:31 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/19 01:42:40 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,6 +22,22 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+static int	check_eof(int fd)
+{
+	int		ret;
+	char	*line;
+
+	if ((ret = get_next_line(fd, &line)) != 0)
+	{
+		if (ret != -1)
+			errno = EFTYPE;
+		free(line);
+		return (-1);
+	}
+	free(line);
+	return (0);
+}
+
 static int	parse_cub(t_env *env, const char *path)
 {
 	int		fd;
@@ -36,14 +52,7 @@ static int	parse_cub(t_env *env, const char *path)
 	while (ret != -1 && (ret = read_map(&env->map, line)) == 1)
 		ret = get_next_line(fd, &line);
 	if (ret == 0)
-	{
-		if ((ret = get_next_line(fd, &line)) != 0)
-		{
-			ret = -1;
-			errno = EFTYPE;
-		}
-		free(line);
-	}
+		ret = check_eof(fd);
 	close(fd);
 	if (ret != -1 && (ret = env->map.player.x) == -1)
 		errno = EFTYPE;
