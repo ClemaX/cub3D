@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/05 15:04:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/19 01:42:30 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/31 01:14:44 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,8 +16,9 @@
 
 static inline void		put_canvas(t_env *env, int x, int y, t_color color)
 {
-	((t_color*)env->canvas.data)[y * env->canvas.w + x] = color;
+	*(t_color*)(env->canvas.data + (y * env->canvas.ls + x * (env->canvas.bpp / 8))) = color;
 }
+
 
 int						init_canvas(t_env *env)
 {

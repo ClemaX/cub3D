@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/17 17:42:59 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/11 04:38:36 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/31 01:20:27 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,31 +16,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <vmath.h>
-
-static inline void		start_tick(t_tick *tick)
-{
-	struct timeval	now;
-
-	gettimeofday(&now, NULL);
-	tick->start = now.tv_sec + now.tv_usec / 1000000.0;
-}
-
-static inline void		end_tick(t_tick *tick)
-{
-	static const float	limit = 1.0 / FRAMERATE;
-	struct timeval		now;
-
-	if (tick->delta < limit)
-	{
-		usleep((limit - tick->delta) * 1000);
-		tick->delta = limit;
-	}
-	else
-	{
-		gettimeofday(&now, NULL);
-		tick->delta = (now.tv_sec + now.tv_usec / 1000000.0) - tick->start;
-	}
-}
 
 static inline t_vector	get_movement(t_player *player, t_keys input)
 {
@@ -69,27 +44,24 @@ static inline t_vector	get_movement(t_player *player, t_keys input)
 
 void					do_tick(t_env *env)
 {
-	static t_tick	tick;
 	t_vector		movement;
 
-	start_tick(&tick);
 	movement = get_movement(&env->map.player, env->input);
-	movement.x *= tick.delta * S_MOVEMENT;
-	movement.y *= tick.delta * S_MOVEMENT;
+	movement.x *= 1 * S_MOVEMENT;
+	movement.y *= 1 * S_MOVEMENT;
 	move_player(&env->map, &movement);
 	if (env->input & ROT_LEFT && !(env->input & ROT_RIGHT))
 	{
-		vrotate(&env->map.player.dir, tick.delta * -S_ROTATION);
-		vrotate(&env->map.player.plane, tick.delta * -S_ROTATION);
+		vrotate(&env->map.player.dir, -S_ROTATION);
+		vrotate(&env->map.player.plane, -S_ROTATION);
 	}
 	if (env->input & ROT_RIGHT && !(env->input & ROT_LEFT))
 	{
-		vrotate(&env->map.player.dir, tick.delta * S_ROTATION);
-		vrotate(&env->map.player.plane, tick.delta * S_ROTATION);
+		vrotate(&env->map.player.dir, S_ROTATION);
+		vrotate(&env->map.player.plane, S_ROTATION);
 	}
 	refresh_env(env);
 	mlx_put_image_to_window(env->mlx, env->win, env->canvas.ptr, 0, 0);
-	end_tick(&tick);
 }
 
 int						benchmark(t_env *env)

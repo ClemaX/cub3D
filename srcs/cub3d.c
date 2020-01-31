@@ -6,13 +6,14 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 02:51:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/19 00:49:08 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/31 04:48:12 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <environment.h>
 #include <errno.h>
+#include <unistd.h>
 
 static t_mode	get_mode(int ac, const char **av)
 {

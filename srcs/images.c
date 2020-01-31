@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/01 05:17:15 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/12 02:28:38 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/31 01:13:56 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,12 +16,12 @@
 
 static inline void		put_canvas(t_env *env, int x, int y, t_color color)
 {
-	((t_color*)env->canvas.data)[y * env->canvas.w + x] = color;
+	*(t_color*)(env->canvas.data + (y * env->canvas.ls + x * (env->canvas.bpp / 8))) = color;
 }
 
 static inline t_color	get_color(t_image *img, int x, int y)
 {
-	return (((t_color*)img->data)[y * img->w + x]);
+	return *(t_color*)(img->data + (y * img->ls + x * (img->bpp / 8)));
 }
 
 void					draw_stripe(t_env *env, t_stripe *stripe, t_image *tex)

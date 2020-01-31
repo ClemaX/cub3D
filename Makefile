@@ -1,14 +1,13 @@
 NAME	= cub3D
 LIBFT	= libft
 LIBMLX	= minilibx
-X11		= /usr/X11
 CC		= /usr/bin/gcc
 SRCDIR	= srcs
 OBJDIR	= objs
 INCDIR	= includes
 CFLAGS	= -Wall -Wextra -Werror
-IFLAGS	= -I$(INCDIR) -I$(LIBFT)/includes -I$(LIBMLX) -I$(X11)/include
-LFLAGS	= -L$(LIBFT) -L$(LIBMLX) -L$(X11)/lib -L. -lft -lmlx -lXext -lX11 -lz
+IFLAGS	= -I$(INCDIR) -I$(LIBFT)/includes -I$(LIBMLX)
+LFLAGS	= -L$(LIBFT) -L$(LIBMLX) -L. -lft -lz -lmlx
 FFLAGS	= -framework CoreFoundation -framework AppKit -framework OpenGL
 SRCS	= $(addprefix $(SRCDIR)/, cub3d.c environment.c ray.c images.c canvas.c color.c map_read.c map.c cell.c vector.c vmath.c settings.c hooks.c error.c tick.c sprite.c sprite_utils.c)
 OBJS	= $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
@@ -21,7 +20,7 @@ all:			libft libmlx $(NAME)
 libft:
 	make -C $(LIBFT) libft.a
 libmlx:
-	make -C $(LIBMLX) libmlx.a
+	make -C $(LIBMLX) NAME=libmlx.a
 
 $(LIBFT)/libft.a: libft
 $(LIBMLX)/libmlx.a: libmlx

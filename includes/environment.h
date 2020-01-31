@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/19 01:01:50 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/31 05:02:07 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,36 +16,52 @@
 
 # include <libft.h>
 # include <mlx.h>
-# include <X11/X.h>
-# include <X11/Xlib.h>
 # include <settings.h>
 # include <map.h>
 # include <vector.h>
 
-# define TITLE		"cub3d"
+# define KEY_PRESS		2
+# define KEY_RELEASE	3
+# define DESTROY_NOTIFY	17
+# define FOCUS_IN		9
+# define FOCUS_OUT		10
 
-# define KEY_ESCAPE	53
-# define KEY_UP		13
-# define KEY_DOWN	1
-# define KEY_LEFT	0
-# define KEY_RIGHT	2
-# define KEY_ROT_L	123
-# define KEY_ROT_R	124
+# define NO_EVENT_M		0
+# define KEY_PRESS_M	1
+# define KEY_RELEASE_M	2
+# define FOCUS_CHANGE_M	2097152
 
-# define FRAMERATE	60
-# define FOV		0.66
-# define HITBOX		0.2
-# define S_MOVEMENT	5.0
-# define S_ROTATION	2.0
-# define MOUSE_SENS	500.0
+# define TITLE			"cub3d"
 
-# define ESCAPE		0b00000001
-# define UP			0b00000010
-# define DOWN		0b00000100
-# define LEFT		0b00001000
-# define RIGHT		0b00010000
-# define ROT_LEFT	0b00100000
-# define ROT_RIGHT	0b01000000
+# define KEY_ESCAPE		53
+# define KEY_UP			13
+# define KEY_DOWN		1
+# define KEY_LEFT		0
+# define KEY_RIGHT		2
+# define KEY_ROT_L		123
+# define KEY_ROT_R		124
+
+# define FRAMERATE		60
+# define FOV			0.66
+# define HITBOX			0.2
+# define S_MOVEMENT		0.1
+# define S_ROTATION		0.1
+# define MOUSE_SENS		500.0
+
+# define ESCAPE			0b00000001
+# define UP				0b00000010
+# define DOWN			0b00000100
+# define LEFT			0b00001000
+# define RIGHT			0b00010000
+# define ROT_LEFT		0b00100000
+# define ROT_RIGHT		0b01000000
+
+# ifndef MAX_WIDTH
+#  define MAX_WIDTH		2880
+# endif
+# ifndef MAX_HEIGHT
+#  define MAX_HEIGHT 	1800
+# endif
 
 typedef enum		e_mode
 {
@@ -83,8 +99,6 @@ typedef struct		s_stripe
 
 typedef struct		s_env
 {
-	Display		*display;
-	Screen		*screen;
 	void		*mlx;
 	void		*win;
 	float		*zbuffer;
@@ -93,6 +107,7 @@ typedef struct		s_env
 	t_map		map;
 	t_image		tex[5];
 	t_keys		input;
+	char		focus;
 }					t_env;
 
 int					benchmark(t_env *env);

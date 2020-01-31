@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/11 04:39:21 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/11 04:47:08 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/31 04:57:16 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,5 +21,7 @@ int	key_enable(int key, t_env *env);
 int	key_disable(int key, t_env *env);
 int	loop_hook(t_env *env);
 int	destroy_hook(t_env *param);
+int	focus_in_hook(t_env *env);
+int	focus_out_hook(t_env *env);
 
 #endif

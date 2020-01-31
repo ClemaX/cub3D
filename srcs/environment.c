@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/19 01:42:40 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/31 05:13:12 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -59,26 +59,27 @@ static int	parse_cub(t_env *env, const char *path)
 	return (ret != -1);
 }
 
+
+
 void		setup_env(t_env *env, t_mode mode, const char *path)
 {
-	env->display = XOpenDisplay(NULL);
-	env->screen = DefaultScreenOfDisplay(env->display);
 	if (!(parse_cub(env, path) && (env->mlx = mlx_init()) && load_images(env)))
 		error(env);
 	env->input = 0;
-	if (env->settings.w > env->screen->width)
-		env->settings.w = env->screen->width;
-	if (env->settings.h > env->screen->height)
-		env->settings.h = env->screen->height;
+	if (env->settings.w > MAX_WIDTH)
+		env->settings.w = MAX_WIDTH;
+	if (env->settings.h > MAX_HEIGHT)
+		env->settings.h = MAX_HEIGHT;
 	env->win =
 	mlx_new_window(env->mlx, env->settings.w, env->settings.h, TITLE);
 	if (!env->win || !init_canvas(env))
 		error(env);
 	mlx_loop_hook(env->mlx, (mode == INTERACT) ? &loop_hook : &benchmark, env);
-	mlx_hook(env->win, DestroyNotify, NoEventMask, &destroy_hook, env);
-	mlx_hook(env->win, KeyPress, KeyPressMask, &key_enable, env);
-	mlx_hook(env->win, KeyRelease, KeyReleaseMask, &key_disable, env);
-	mlx_mouse_hide();
+	mlx_hook(env->win, DESTROY_NOTIFY, NO_EVENT_M, &destroy_hook, env);
+	mlx_hook(env->win, KEY_PRESS, KEY_PRESS_M, &key_enable, env);
+	mlx_hook(env->win, KEY_RELEASE, KEY_RELEASE_M, &key_disable, env);
+	mlx_hook(env->win, FOCUS_IN, FOCUS_CHANGE_M, &focus_in_hook, env);
+	mlx_hook(env->win, FOCUS_OUT, FOCUS_CHANGE_M, &focus_out_hook, env);
 	mlx_mouse_move(env->win, env->canvas.w / 2, env->canvas.h / 2);
 	mlx_do_key_autorepeatoff(env->mlx);
 }
@@ -120,6 +121,5 @@ void		destroy_env(t_env *env)
 		if (env->win)
 			mlx_destroy_window(env->mlx, env->win);
 		free(env->mlx);
-		XCloseDisplay(env->display);
 	}
 }
