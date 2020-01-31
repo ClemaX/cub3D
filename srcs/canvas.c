@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/05 15:04:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/31 01:14:44 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 00:52:13 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,13 +14,13 @@
 #include <canvas.h>
 #include <stdlib.h>
 
-static inline void		put_canvas(t_env *env, int x, int y, t_color color)
+static inline void	put_canvas(t_env *env, int x, int y, t_color color)
 {
 	*(t_color*)(env->canvas.data + (y * env->canvas.ls + x * (env->canvas.bpp / 8))) = color;
 }
 
 
-int						init_canvas(t_env *env)
+int					init_canvas(t_env *env)
 {
 	env->canvas.ptr = mlx_new_image(env->mlx, env->settings.w, env->settings.h);
 	if (!env->canvas.ptr)
@@ -35,7 +35,7 @@ int						init_canvas(t_env *env)
 	return (1);
 }
 
-void					draw_tex(t_env *env, int pos_x, float z, int size)
+void				draw_tex(t_env *env, int pos_x, float z, int size)
 {
 	t_stripe	stripe;
 	t_ivector	start;
@@ -64,7 +64,7 @@ void					draw_tex(t_env *env, int pos_x, float z, int size)
 	}
 }
 
-void					draw_column(t_env *env, int x, t_obstacle obs)
+void				draw_column(t_env *env, int x, t_obstacle obs)
 {
 	t_stripe	stripe;
 

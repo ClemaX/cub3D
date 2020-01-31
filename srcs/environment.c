@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/31 05:13:12 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 00:43:57 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -59,8 +59,6 @@ static int	parse_cub(t_env *env, const char *path)
 	return (ret != -1);
 }
 
-
-
 void		setup_env(t_env *env, t_mode mode, const char *path)
 {
 	if (!(parse_cub(env, path) && (env->mlx = mlx_init()) && load_images(env)))
@@ -74,13 +72,8 @@ void		setup_env(t_env *env, t_mode mode, const char *path)
 	mlx_new_window(env->mlx, env->settings.w, env->settings.h, TITLE);
 	if (!env->win || !init_canvas(env))
 		error(env);
-	mlx_loop_hook(env->mlx, (mode == INTERACT) ? &loop_hook : &benchmark, env);
-	mlx_hook(env->win, DESTROY_NOTIFY, NO_EVENT_M, &destroy_hook, env);
-	mlx_hook(env->win, KEY_PRESS, KEY_PRESS_M, &key_enable, env);
-	mlx_hook(env->win, KEY_RELEASE, KEY_RELEASE_M, &key_disable, env);
-	mlx_hook(env->win, FOCUS_IN, FOCUS_CHANGE_M, &focus_in_hook, env);
-	mlx_hook(env->win, FOCUS_OUT, FOCUS_CHANGE_M, &focus_out_hook, env);
 	mlx_mouse_move(env->win, env->canvas.w / 2, env->canvas.h / 2);
+	hooks_init(env, mode);
 	mlx_do_key_autorepeatoff(env->mlx);
 }
 

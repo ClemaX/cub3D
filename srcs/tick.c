@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/17 17:42:59 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/31 01:20:27 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 00:51:46 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,7 +42,7 @@ static inline t_vector	get_movement(t_player *player, t_keys input)
 	return (movement);
 }
 
-void					do_tick(t_env *env)
+static void				do_tick(t_env *env)
 {
 	t_vector		movement;
 
@@ -64,9 +64,29 @@ void					do_tick(t_env *env)
 	mlx_put_image_to_window(env->mlx, env->win, env->canvas.ptr, 0, 0);
 }
 
+int						loop_hook(t_env *env)
+{
+	const int	half_w = env->canvas.w / 2;
+	const int	half_h = env->canvas.h / 2;
+	t_ivector	mouse;
+	float		delta;
+
+	if (!env->focus)
+		return (0);
+	mlx_mouse_get_pos(env->win, &mouse.x, &mouse.y);
+	mlx_mouse_move(env->win, half_w, half_h);
+	delta = (mouse.x - half_w) / (float)(MOUSE_SENS);
+	vrotate(&env->map.player.dir, delta);
+	vrotate(&env->map.player.plane, delta);
+	if (!(delta || env->input))
+		return (0);
+	do_tick(env);
+	return (1);
+}
+
 int						benchmark(t_env *env)
 {
-	static int		i;
+	static int	i;
 
 	if (i == 0)
 		env->input = UP | LEFT | ROT_LEFT;

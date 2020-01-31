@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/11 04:39:21 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/31 04:57:16 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 00:49:45 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,12 +16,13 @@
 
 # include <environment.h>
 
-int	mouse_hook(int button, int x, int y, t_env *param);
-int	key_enable(int key, t_env *env);
-int	key_disable(int key, t_env *env);
-int	loop_hook(t_env *env);
-int	destroy_hook(t_env *param);
-int	focus_in_hook(t_env *env);
-int	focus_out_hook(t_env *env);
+int	    mouse_hook(int button, int x, int y, t_env *param);
+int	    key_enable(int key, t_env *env);
+int	    key_disable(int key, t_env *env);
+int	    loop_hook(t_env *env);
+int	    destroy_hook(t_env *param);
+int	    focus_in_hook(t_env *env);
+int	    focus_out_hook(t_env *env);
+void	hooks_init(t_env *env, t_mode mode);
 
 #endif
