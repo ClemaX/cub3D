@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 01:58:15 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 02:02:15 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,6 +40,7 @@
 # define KEY_RIGHT		2
 # define KEY_ROT_L		123
 # define KEY_ROT_R		124
+# define KEY_MOUSE		46
 
 # define FRAMERATE		60
 # define FOV			0.66
@@ -67,6 +68,11 @@ typedef enum		e_mode
 {
 	INTERACT, SAVE, BENCH
 }					t_mode;
+
+typedef enum		e_focus
+{
+	BACKGROUND, FOREGROUND, MOUSE
+}					t_focus;
 
 typedef struct		s_obstacle
 {
@@ -107,7 +113,7 @@ typedef struct		s_env
 	t_map		map;
 	t_image		tex[5];
 	t_keys		input;
-	char		focus;
+	t_focus		focus;
 }					t_env;
 
 int					benchmark(t_env *env);

@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/17 17:42:59 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 01:18:33 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 02:40:26 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,49 +38,50 @@ static inline t_vector	get_movement(t_player *player, t_keys input)
 		movement.x += player->plane.x;
 		movement.y += player->plane.y;
 	}
+	movement.x *= S_MOVEMENT;
+	movement.y *= S_MOVEMENT;
 	return (movement);
 }
 
-static void				do_tick(t_env *env)
-{
-	t_vector		movement;
-
-	movement = get_movement(&env->map.player, env->input);
-	movement.x *= 1 * S_MOVEMENT;
-	movement.y *= 1 * S_MOVEMENT;
-	move_player(&env->map, &movement);
-	if (env->input & ROT_LEFT && !(env->input & ROT_RIGHT))
-	{
-		vrotate(&env->map.player.dir, -S_ROTATION);
-		vrotate(&env->map.player.plane, -S_ROTATION);
-	}
-	if (env->input & ROT_RIGHT && !(env->input & ROT_LEFT))
-	{
-		vrotate(&env->map.player.dir, S_ROTATION);
-		vrotate(&env->map.player.plane, S_ROTATION);
-	}
-	refresh_env(env);
-	mlx_put_image_to_window(env->mlx, env->win, env->canvas.ptr, 0, 0);
-}
-
-int						loop_hook(t_env *env)
+float	get_rotation(t_env *env)
 {
 	const int	half_w = env->canvas.w / 2;
 	const int	half_h = env->canvas.h / 2;
 	t_ivector	mouse;
 	float		delta;
 
-	if (!env->focus)
-		return (0);
-	mlx_mouse_get_pos(env->win, &mouse.x, &mouse.y);
-	mlx_mouse_move(env->win, half_w, half_h);
-	delta = (mouse.x - half_w) / (float)(MOUSE_SENS);
-	vrotate(&env->map.player.dir, delta);
-	vrotate(&env->map.player.plane, delta);
-	if (!(delta || env->input))
-		return (0);
-	do_tick(env);
-	return (1);
+	if (env->focus == MOUSE)
+	{
+		mlx_mouse_get_pos(env->win, &mouse.x, &mouse.y);
+		delta = (mouse.x - half_w) / (float)(MOUSE_SENS);
+		mlx_mouse_move(env->win, half_w, half_h);
+	}
+	else
+		delta = 0;	
+	if (env->input & ROT_LEFT && !(env->input & ROT_RIGHT))
+		return (-S_ROTATION + delta);
+	if (env->input & ROT_RIGHT && !(env->input & ROT_LEFT))
+		return (S_ROTATION + delta);
+	return (delta);
+}
+
+int						do_tick(t_env *env)
+{
+	t_vector	movement;
+	float		rotation;
+
+	if (env->focus == BACKGROUND)
+		return(0);
+	if ((rotation = get_rotation(env)))
+	{
+		vrotate(&env->map.player.plane, rotation);
+		vrotate(&env->map.player.dir, rotation);
+	}
+	movement = get_movement(&env->map.player, env->input);
+	move_player(&env->map, &movement);
+	refresh_env(env);
+	mlx_put_image_to_window(env->mlx, env->win, env->canvas.ptr, 0, 0);
+	return(1);
 }
 
 int						benchmark(t_env *env)

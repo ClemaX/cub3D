@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:19:11 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 01:18:33 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 02:23:38 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,22 +24,19 @@ int		destroy_hook(t_env *env)
 
 int		focus_in_hook(t_env *env)
 {
-	mlx_mouse_hide();
-	if (!env->focus)
-		env->focus = 1;
+	env->focus = FOREGROUND;
 	return (0);
 }
 
 int		focus_out_hook(t_env *env)
 {
-	mlx_mouse_show();
-	env->focus = 0;
+	env->focus = BACKGROUND;
 	return (0);
 }
 
 void	hooks_init(t_env *env, t_mode mode)
 {
-	mlx_loop_hook(env->mlx, (mode == INTERACT) ? &loop_hook : &benchmark, env);
+	mlx_loop_hook(env->mlx, (mode == INTERACT) ? &do_tick : &benchmark, env);
 	mlx_hook(env->win, DESTROY_NOTIFY, NO_EVENT_M, &destroy_hook, env);
 	mlx_hook(env->win, KEY_PRESS, KEY_PRESS_M, &key_enable, env);
 	mlx_hook(env->win, KEY_RELEASE, KEY_RELEASE_M, &key_disable, env);

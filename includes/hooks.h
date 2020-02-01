@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/11 04:39:21 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 00:49:45 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 02:19:59 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,6 +17,7 @@
 # include <environment.h>
 
 int	    mouse_hook(int button, int x, int y, t_env *param);
+float	mouse_delta(t_env *env);
 int	    key_enable(int key, t_env *env);
 int	    key_disable(int key, t_env *env);
 int	    loop_hook(t_env *env);
