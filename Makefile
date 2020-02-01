@@ -16,7 +16,7 @@ SRCS	=	$(addprefix $(SRCDIR)/,				\
 			$(addprefix hooks/,					\
 			hooks.c input.c tick.c)				\
 			$(addprefix images/,				\
-			canvas.c color.c images.c)			\
+			canvas.c color.c draw.c images.c)	\
 			$(addprefix map/,					\
 			cell.c map_read.c map.c)			\
 			$(addprefix sprites/,				\
