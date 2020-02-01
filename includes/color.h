@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 06:51:12 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/11 04:25:31 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 01:01:26 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,6 +28,5 @@ typedef union		u_color
 
 int					set_color(t_color *color,
 	unsigned r, unsigned g, unsigned b);
-t_color				color(unsigned char r, unsigned char g, unsigned char b);
 
 #endif

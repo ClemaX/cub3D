@@ -6,13 +6,13 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/08 20:35:22 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/11 04:18:21 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 01:15:59 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <sprite.h>
-#include <vmath.h>
+#include <vector.h>
 #include <math.h>
 
 void	sprites_dist(t_player *player, t_list *sprites)

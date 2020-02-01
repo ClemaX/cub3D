@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/04 12:49:55 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/01 05:05:13 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 01:13:43 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -49,4 +49,12 @@ inline t_ivector	ivector(int x, int y)
 inline t_ivector	vtoiv(t_vector vector)
 {
 	return (ivector((int)vector.x, (int)vector.y));
+}
+
+void				vrotate(t_vector *vector, float alpha)
+{
+	const float old_x = vector->x;
+
+	vector->x = vector->x * cosf(alpha) - vector->y * sinf(alpha);
+	vector->y = old_x * sinf(alpha) + vector->y * cosf(alpha);
 }

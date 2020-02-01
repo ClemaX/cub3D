@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/17 17:42:59 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 00:51:46 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 01:18:33 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,6 @@
 #include <tick.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <vmath.h>
 
 static inline t_vector	get_movement(t_player *player, t_keys input)
 {
@@ -94,7 +93,7 @@ int						benchmark(t_env *env)
 	if (i++ == 500)
 	{
 		ft_printf("%lu\n", clock());
-		destroy_env(env);
+		env_destroy(env);
 		exit(0);
 	}
 	return (1);

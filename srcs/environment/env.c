@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   environment.c                                    .::    .:/ .      .::   */
+/*   env.c                                            .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 00:43:57 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 01:52:09 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -59,10 +59,10 @@ static int	parse_cub(t_env *env, const char *path)
 	return (ret != -1);
 }
 
-void		setup_env(t_env *env, t_mode mode, const char *path)
+void		env_init(t_env *env, t_mode mode, const char *path)
 {
 	if (!(parse_cub(env, path) && (env->mlx = mlx_init()) && load_images(env)))
-		error(env);
+		env_error(env);
 	env->input = 0;
 	if (env->settings.w > MAX_WIDTH)
 		env->settings.w = MAX_WIDTH;
@@ -71,7 +71,7 @@ void		setup_env(t_env *env, t_mode mode, const char *path)
 	env->win =
 	mlx_new_window(env->mlx, env->settings.w, env->settings.h, TITLE);
 	if (!env->win || !init_canvas(env))
-		error(env);
+		env_error(env);
 	mlx_mouse_move(env->win, env->canvas.w / 2, env->canvas.h / 2);
 	hooks_init(env, mode);
 	mlx_do_key_autorepeatoff(env->mlx);
@@ -94,7 +94,7 @@ void		refresh_env(t_env *env)
 	draw_sprites(env);
 }
 
-void		destroy_env(t_env *env)
+void		env_destroy(t_env *env)
 {
 	int	i;
 

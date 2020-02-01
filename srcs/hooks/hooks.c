@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:19:11 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 00:49:33 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 01:18:33 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,7 +18,7 @@
 
 int		destroy_hook(t_env *env)
 {
-	destroy_env(env);
+	env_destroy(env);
 	exit(0);
 }
 

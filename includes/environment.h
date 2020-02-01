@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 00:48:23 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 01:58:15 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -111,12 +111,12 @@ typedef struct		s_env
 }					t_env;
 
 int					benchmark(t_env *env);
-void				setup_env(t_env *env, t_mode mode, const char *path);
+void				env_init(t_env *env, t_mode mode, const char *path);
 int					load_images(t_env *env);
 void				draw_stripe(t_env *env, t_stripe *stripe, t_image *tex);
 void				refresh_env(t_env *env);
-void				destroy_env(t_env *env);
+void				env_destroy(t_env *env);
 void				draw_column(t_env *env, int x, t_obstacle obs);
-void				error(t_env *env);
+void				env_error(t_env *env);
 
 #endif

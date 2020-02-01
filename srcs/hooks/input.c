@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/01 00:36:27 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 00:50:20 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 01:57:51 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,7 +18,7 @@ int	key_enable(int key, t_env *env)
 {
 	if (key == KEY_ESCAPE)
 	{
-		destroy_env(env);
+		env_destroy(env);
 		exit(0);
 	}
 	else if (key == KEY_UP)
@@ -55,4 +55,10 @@ int	key_disable(int key, t_env *env)
 	else
 		return (0);
 	return (1);
+}
+
+void	mouse_enable(t_env *env)
+{
+	mlx_mouse_hide();
+	env->focus = MOUSE;
 }
