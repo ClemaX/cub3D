@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/27 05:12:51 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 03:03:01 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 04:27:39 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -58,10 +58,10 @@
 # define ROT_RIGHT		0b01000000
 
 # ifndef MAX_WIDTH
-#  define MAX_WIDTH		2880
+#  define MAX_WIDTH		2560
 # endif
 # ifndef MAX_HEIGHT
-#  define MAX_HEIGHT 	1800
+#  define MAX_HEIGHT 	1440
 # endif
 
 typedef enum		e_mode
