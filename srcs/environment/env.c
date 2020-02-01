@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/29 08:28:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 01:52:09 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 03:23:41 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,6 @@
 #include <hooks.h>
 #include <ray.h>
 #include <sprite.h>
-#include <canvas.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <strings.h>
@@ -61,7 +60,7 @@ static int	parse_cub(t_env *env, const char *path)
 
 void		env_init(t_env *env, t_mode mode, const char *path)
 {
-	if (!(parse_cub(env, path) && (env->mlx = mlx_init()) && load_images(env)))
+	if (!(parse_cub(env, path) && (env->mlx = mlx_init()) && images_load(env)))
 		env_error(env);
 	env->input = 0;
 	if (env->settings.w > MAX_WIDTH)
@@ -70,23 +69,28 @@ void		env_init(t_env *env, t_mode mode, const char *path)
 		env->settings.h = MAX_HEIGHT;
 	env->win =
 	mlx_new_window(env->mlx, env->settings.w, env->settings.h, TITLE);
-	if (!env->win || !init_canvas(env))
+	if (!env->win || !canvas_init(env))
 		env_error(env);
 	mlx_mouse_move(env->win, env->canvas.w / 2, env->canvas.h / 2);
 	hooks_init(env, mode);
 	mlx_do_key_autorepeatoff(env->mlx);
 }
 
-void		refresh_env(t_env *env)
+void		env_refresh(t_env *env)
 {
 	t_ray		ray;
 	int			x;
+	float		cam_x;
 	t_obstacle	obs;
 
 	x = 0;
 	while (x < env->canvas.w)
 	{
-		init_ray(&env->map.player, &ray, 2 * x / (float)env->canvas.w - 1);
+		cam_x = 2 * x / (float)env->canvas.w - 1;
+		ray = (t_ray){.x=(int)env->map.player.x, .y=(int)env->map.player.y,
+		.dir.x=env->map.player.dir.x + env->map.player.plane.x * FOV * cam_x,
+		.dir.y=env->map.player.dir.y + env->map.player.plane.y * FOV * cam_x};
+		init_ray(&env->map.player, &ray);
 		draw_column(env, x, (obs = cast_ray(&env->map, env->tex, &ray)));
 		env->zbuffer[x] = obs.distance;
 		x++;

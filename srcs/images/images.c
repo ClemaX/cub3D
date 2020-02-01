@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/01 05:17:15 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 01:07:25 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 02:56:41 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,7 +35,7 @@ static int				load_image(t_env *env, t_image *img, char *path)
 	return (1);
 }
 
-int						load_images(t_env *env)
+int						images_load(t_env *env)
 {
 	int	i;
 

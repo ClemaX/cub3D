@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/24 19:35:05 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/11 22:02:01 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 03:03:23 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,8 +16,8 @@
 
 # include <vector.h>
 
-# define CELLS "01"
-# define SPRITES "2"
+# define CELLS		"01"
+# define SPRITES	"2"
 
 typedef struct	s_player
 {

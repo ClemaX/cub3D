@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/17 17:42:59 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 02:46:36 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 03:10:01 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,7 +20,7 @@ static inline t_vector	get_movement(t_player *player, t_keys input)
 {
 	t_vector	movement;
 
-	movement = vector(0, 0);
+	movement = (t_vector){.x=0, .y=0};
 	if ((input & (UP | DOWN)) == UP)
 		movement = player->dir;
 	else if ((input & (DOWN | UP)) == DOWN)
@@ -79,7 +79,7 @@ int						do_tick(t_env *env)
 	}
 	movement = get_movement(&env->map.player, env->input);
 	move_player(&env->map, &movement);
-	refresh_env(env);
+	env_refresh(env);
 	mlx_put_image_to_window(env->mlx, env->win, env->canvas.ptr, 0, 0);
 	return (1);
 }

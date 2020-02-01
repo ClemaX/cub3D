@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/07 15:56:06 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/11 04:17:46 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 03:14:22 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,13 +31,10 @@ static t_cardinal	step_ray(t_ray *ray)
 	}
 }
 
-void				init_ray(t_player *player, t_ray *ray, float cam_x)
+void				init_ray(t_player *player, t_ray *ray)
 {
-	ray->x = (int)player->x;
-	ray->y = (int)player->y;
-	ray->dir.x = player->dir.x + player->plane.x * FOV * cam_x;
-	ray->dir.y = player->dir.y + player->plane.y * FOV * cam_x;
-	ray->step_dist = vector(fabs(1 / ray->dir.x), fabs(1 / ray->dir.y));
+	ray->step_dist =
+		(t_vector){.x=fabs(1 / ray->dir.x), .y=fabs(1 / ray->dir.y)};
 	if (ray->dir.x < 0)
 	{
 		ray->step_dir.x = -1;

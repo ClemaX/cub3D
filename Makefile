@@ -16,14 +16,15 @@ SRCS	=	$(addprefix $(SRCDIR)/,				\
 			$(addprefix hooks/,					\
 			hooks.c input.c tick.c)				\
 			$(addprefix images/,				\
-			canvas.c color.c draw.c images.c)	\
+			canvas.c color.c images.c)			\
 			$(addprefix map/,					\
 			cell.c map_read.c map.c)			\
 			$(addprefix sprites/,				\
 			sprite_utils.c sprite.c))
 OBJDS	=	$(addprefix $(OBJDIR)/, environment hooks images map sprites)
 OBJS	=	$(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
-HDRS	=	$(addprefix $(INCDIR)/, canvas.h color.h environment.h hooks.h map.h ray.h settings.h sprite.h tick.h vector.h)
+HDRS	=	$(addprefix $(INCDIR)/,				\
+			color.h environment.h hooks.h map.h	ray.h settings.h sprite.h tick.h vector.h)
 
 all:				libft libmlx $(NAME)
 
